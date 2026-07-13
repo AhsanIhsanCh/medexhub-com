@@ -1,31 +1,15 @@
-<!-- Start about us -->
-    <div id="about" class="bg-light section_padding">
-      <div class="container">
-        <div class="row h-100 align-items-center">
-            
-            <div data-aos="fade-up" data-aos-duration="1200" class="col-lg-6">
-                <h1 class="display-4">Innovative features you would expect.</h1>
-                <p class="lead text-muted mb-0">Medexhub revision program is a powerful and affordable test preparation and simulation tool which include exam-based questions with comprehensive answers, peer-referenced performance analysis, user-defined exams selections, useful external links and much more...</p>
-            </div>
-            <div data-aos="fade-up" data-aos-duration="1600" class="col-lg-6 d-none d-lg-block">
-                <img src="../theme_files/images/about-2.png" alt="" class="img-fluid">
+<section class="section-soft">
+    <div class="container">
+        <div class="section-head">
+            <div>
+                <div class="section-kicker">How it works</div>
+                <h2 class="section-title">Start in three simple steps</h2>
             </div>
         </div>
-      </div>
-    </div>
-        <div id="about" class="bg-white section_padding">
-      <div class="container">
-        <div class="row h-100 align-items-center">
-            <div data-aos="fade-up" data-aos-duration="1600" class="col-lg-6 d-none d-lg-block">
-                <img src="../theme_files/images/about-3.png" alt="" class="img-fluid">
-            </div>
-            <div data-aos="fade-up" data-aos-duration="1200" class="col-lg-6">
-                <h1 class="display-4">Visually rich contents for better understanding.</h1>
-                <p class="lead text-muted mb-0">Difficult concepts are explained with illustrations from Gray's Anatomy and Wikipedia to maximize your exam preparation. Question banks test varying levels of knowledge to mirror the ACEM exam blueprint. Our realistic practice exam simulation fully prepares you for what you can expect during real examination.</p>
-            </div>
-            
+        <div class="steps-grid">
+            <div class="step-card"><span class="step-line"></span><h3>Select your exam</h3><p>Choose the question bank that matches your current training pathway and preferred access period.</p></div>
+            <div class="step-card"><span class="step-line"></span><h3>Build a revision session</h3><p>Select subjects, question volume and study or exam mode to create a focused session.</p></div>
+            <div class="step-card"><span class="step-line"></span><h3>Review and improve</h3><p>Use detailed explanations and performance data to identify gaps and plan your next study block.</p></div>
         </div>
-      </div>
     </div>
-
-    
+</section>

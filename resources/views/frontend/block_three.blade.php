@@ -1,54 +1,26 @@
-<!-- motivation part here -->
-    <section class="motivation section_bg">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5 col-md-6">
-                    <div class="motivation_content">
-                        <h2>Innovative features you would expect.</h2>
-                        <p>Medexhub revision program is a powerful and affordable test preparation and simulation tool which include exam-based questions with comprehensive answers, peer-referenced performance analysis, user-defined exams selections, useful external links and much more...</p>
-                        <ul class="nav nav-tabs" id="motivation_content_tab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active single_item" data-toggle="tab" href="#Design" role="tab" aria-selected="true" id="Design-tab" data-aos="fade-up" data-aos-duration="700">
-                                    <i class="icon_book_alt"></i>
-                                    <p>Graphics Design</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link single_item" data-toggle="tab" href="#Development" role="tab"  aria-selected="false" id="Development-tab" data-aos="fade-up" data-aos-duration="800">
-                                    <i class="icon_key"></i>
-                                    <p>Self Development</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link single_item" data-toggle="tab" href="#Software" role="tab" aria-selected="false" id="Software-tab" data-aos="fade-up" data-aos-duration="900">
-                                    <i class="icon_ribbon_alt"></i>
-                                    <p>IT & Software</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+<section id="features">
+    <div class="container feature-layout">
+        <div aria-hidden="true" class="feature-visual">
+            <div class="visual-card main">
+                <div class="visual-label">Study mode</div>
+                <h3>Review one concept at a time</h3>
+                <div class="mini-question">Which organism is the most common cause of croup in children?</div>
+                <div class="mini-option"><span class="mini-radio"></span>Haemophilus influenzae</div>
+                <div class="mini-option selected"><span class="mini-radio"></span>Parainfluenza virus</div>
+                <div class="mini-option"><span class="mini-radio"></span>Epstein–Barr virus</div>
+            </div>
+            <div class="visual-card note"><div class="note-row"><div class="note-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 4h14v16l-7-4-7 4z"></path></svg></div><div><div class="note-title">Save for review</div><div class="note-text">Build a focused revision list</div></div></div></div>
+            <div class="visual-card score"><div class="score-circle"></div><div class="note-title">Strong performance</div><div class="note-text">Above your recent average</div></div>
+        </div>
+        <div>
+            <div class="section-kicker">Designed for focused revision</div>
+            <h2 class="section-title">A calmer, more useful way to prepare</h2>
+            <p class="section-copy">The redesign gives every learning task a clear purpose, reduces visual clutter and keeps your progress visible without interrupting concentration.</p>
+            <div class="features-list">
+                <div class="feature-item"><div class="feature-item-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 5h16v14H4zM8 9h8M8 13h5"></path></svg></div><div><h3>Flexible study and exam modes</h3><p>Choose targeted practice for a single subject or run a timed mixed exam that mirrors real preparation conditions.</p></div></div>
+                <div class="feature-item"><div class="feature-item-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 19V9m6 10V5m6 14v-7m4 7H2"></path></svg></div><div><h3>Performance insights that guide revision</h3><p>See accuracy, completion and weaker topic areas at a glance, then continue directly into targeted practice.</p></div></div>
+                <div class="feature-item"><div class="feature-item-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 3 4 7v5c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"></path><path d="m9 12 2 2 4-5"></path></svg></div><div><h3>Clinician-written explanatory content</h3><p>Questions are supported by concise explanations and clinically relevant context to build understanding, not just recall.</p></div></div>
             </div>
         </div>
-        <div class="tab-content" id="motivation_content_tabcontent">
-            <div class="tab-pane fade show active" id="Design" role="tabpanel" aria-labelledby="Design-tab">
-                <div class="motivation_video">
-                    <a href="https://www.youtube.com/watch?v=f3NWvUV8MD8" class="animated_play_button popup_youtube">
-                    <span class="flaticon-play-button"></span></a>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="Development" role="tabpanel" aria-labelledby="Development-tab">
-                <div class="motivation_video bg_1">
-                    <a href="https://www.youtube.com/watch?v=x4q86IjJFag" class="animated_play_button popup_youtube">
-                    <span class="flaticon-play-button"></span></a>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="Software" role="tabpanel" aria-labelledby="Software-tab">
-                <div class="motivation_video bg_2">
-                    <a href="https://www.youtube.com/watch?v=XRCIzZHpFtY" class="animated_play_button popup_youtube">
-                    <span class="flaticon-play-button"></span></a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- motivation part end -->
+    </div>
+</section>

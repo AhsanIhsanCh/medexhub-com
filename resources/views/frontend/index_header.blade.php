@@ -1,15 +1,16 @@
 
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Medexhub</title>    
+    <meta content="MedExHub medical exam preparation platform redesign concept." name="description"/>
+    <title>MedExHub — Medical Exam Preparation</title>    
     <link rel="icon" href="../theme_files/images/favicon.png" type="image/png">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../theme_files/css/bootstrap.min.css"/>
+    <!-- <link rel="stylesheet" href="../theme_files/css/bootstrap.min.css"/> -->
+    <link rel="stylesheet" href="../packages/bootstrap538/css/bootstrap.min.css"/>
     <!-- animate CSS -->
     <link rel="stylesheet" href="../theme_files/css/animate.css"/>
     <!-- font awesome CSS -->
@@ -37,19 +38,19 @@
     <!-- table CSS -->
     <link href='../packages/bootstrap5/css/bootstrap-datatable.css' rel='stylesheet' >
     <!-- style CSS -->
-    <link rel="stylesheet" href="../theme_files/css/style.css"/>
-
-
+    <!-- <link rel="stylesheet" href="../theme_files/css/style.css"/> -->
+    <link rel="stylesheet" href="../theme_files/css/style_v1.css"/>
+    <!-- <link rel="stylesheet" href="../theme_files/css/style_v1BC.css"/> -->
+    
 </head>
-
 <body>
     <!-- start Preloader  -->
-    <div class="preloder_part">
+    <!-- <div class="preloder_part">
         <div class="spinner">
             <div class="dot1"></div>
             <div class="dot2"></div>
         </div>
-    </div>
+    </div> -->
     <!-- End Preloader  -->
 
     
