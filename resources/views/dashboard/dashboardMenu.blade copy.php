@@ -1,4 +1,3 @@
-<aside class="sidebar" aria-label="Dashboard menu">
 <div class="sidebar-user">
               <div class="avatar">M</div>
               <div>
@@ -22,6 +21,12 @@
                   <span class="chev">›</span>
                 </a>
               </li>
+
+
+
+
+
+              
               <li>
                 <a class="side-link" href="#">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Z"/><path d="M17 12h.01"/><path d="M7 7V5a3 3 0 0 1 6 0v2"/></svg>
@@ -71,7 +76,7 @@
       
       
       
-        </aside>
+      
       
             
         

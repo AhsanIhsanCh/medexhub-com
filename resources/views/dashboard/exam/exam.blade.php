@@ -7,14 +7,20 @@ use Carbon\Carbon;
 
 
       <section class="content-panel">
-        <div class="content-head">
+      <div class="title-row">
           <div>
-            <div class="eyebrow">My Exam</div>
-            <h2>Choose your exam</h2>
+            <span class="title-kicker">My Exam</span>
+            <h1>Choose your exam</h1>
+            <p class="title-subtitle">Prepare with structure, revise with purpose, and track every step of your exam journey.</p>
           </div>
-          
-        </div>
-
+          <div class="db-actions">
+            
+          </div>
+        </div>     
+      
+      
+      
+     
         <div class="quick-row" aria-label="Quick stats">
           <div class="quick-card">
             <div class="quick-icon">

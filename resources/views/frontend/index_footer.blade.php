@@ -99,5 +99,13 @@
       timerText.textContent = `${min}:${sec}`;
     }, 1000);
   </script>
+
+    <script src="/theme_files/js/jquery-3.4.1.min.js"></script>
+        <!-- bootstarp js -->
+    <script src="/packages/bootstrap5/js/bootstrap.bundle.js"></script>
+    <!-- table js -->
+    <script src='/packages/bootstrap538/datatables/js/jquery.dataTables.min.js'></script>
+    <script src='/packages/bootstrap538/datatables/js/dataTables.bootstrap4.min.js'></script>
+    <script src='/packages/bootstrap538/datatables/js/datatables-demo.js'></script>
 </body>
 </html>
