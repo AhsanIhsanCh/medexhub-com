@@ -6,6 +6,6 @@
 <div><div class="footer-title">Resources</div><div class="footer-links"><a href="#sample">Sample question</a><a href="https://www.medexhub.com/index.php?P=11">Blog</a><a href="https://www.medexhub.com/index.php?D=3&amp;P=4">FAQs</a><a href="https://www.isim.ai">iSim.ai</a></div></div>
 <div><div class="footer-title">Company</div><div class="footer-links"><a href="https://www.medexhub.com/index.php?D=2&amp;P=4">About us</a><a href="https://www.medexhub.com/index.php?D=4&amp;P=4">Contact</a><a href="https://www.medexhub.com/">Terms &amp; conditions</a><a href="https://www.medexhub.com/">Disclaimer</a></div></div>
 </div>
-<div class="footer-bottom"><span>© 2015–2026 MedExHub. Website redesign concept.</span><div class="footer-bottom-links"><a href="https://www.medexhub.com/">Privacy</a><a href="https://www.medexhub.com/">Terms</a></div></div>
+<div class="footer-bottom"><span>© 2015–{{ date('Y') }} MedExHub.</span><div class="footer-bottom-links"><a href="https://www.medexhub.com/">Privacy</a><a href="https://www.medexhub.com/">Terms</a></div></div>
 </div>
 </footer>

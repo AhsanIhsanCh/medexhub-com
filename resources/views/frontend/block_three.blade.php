@@ -8,6 +8,7 @@
                 <div class="mini-option"><span class="mini-radio"></span>Haemophilus influenzae</div>
                 <div class="mini-option selected"><span class="mini-radio"></span>Parainfluenza virus</div>
                 <div class="mini-option"><span class="mini-radio"></span>Epstein–Barr virus</div>
+                <div class="mini-option"><span class="mini-radio"></span>Influenza A</div>
             </div>
             <div class="visual-card note"><div class="note-row"><div class="note-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 4h14v16l-7-4-7 4z"></path></svg></div><div><div class="note-title">Save for review</div><div class="note-text">Build a focused revision list</div></div></div></div>
             <div class="visual-card score"><div class="score-circle"></div><div class="note-title">Strong performance</div><div class="note-text">Above your recent average</div></div>
