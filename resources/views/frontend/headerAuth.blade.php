@@ -32,10 +32,10 @@
             </a>
             <nav aria-label="Primary navigation" class="nav-links" id="navLinks">
                 <a class="active" href="/">Home</a>
-                <a href="#exams">Exams</a>
+                <a href="/exams">Exams</a>
                 <a href="#features">Features</a>
                 <a href="#sample">Sample question</a>
-                <a href="https://www.medexhub.com/index.php?D=2&amp;P=4">About</a>
+                <a href="/about">About</a>
             </nav>
             <div class="nav-actions">
                 <a class="btn btn-dashboard btn-sm" href="/dashboard">Dashboard</a>

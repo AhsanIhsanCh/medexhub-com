@@ -11,7 +11,7 @@
 
 
       <nav class="menu-list">
-        <details class="menu-item featured" name="member-menu">
+        <details class="menu-item " name="member-menu">
           <summary>
             <span class="menu-label">
               <svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -121,4 +121,34 @@
               <p>Have a question about MedExHub? We’re only a message away.</p>
               <button>Contact support</button>
             </div>
+
+
+
+
+
+
+
     </aside>
+
+    <script>
+
+      // JavaScript Logic
+// 1. Select all target elements
+const navItems = document.querySelectorAll('.menu-item');
+
+// 2. Loop through each item to attach a click event listener
+navItems.forEach(item => {
+  item.addEventListener('click', function() {
+    
+    // 3. Find the element that currently has the 'active' class and remove it
+    const currentActive = document.querySelector('.menu-item.active');
+    if (currentActive) {
+      currentActive.classList.remove('active');
+    }
+    
+    // 4. Add the 'active' class to the newly clicked element
+    this.classList.add('active');
+  });
+});
+
+    </script>

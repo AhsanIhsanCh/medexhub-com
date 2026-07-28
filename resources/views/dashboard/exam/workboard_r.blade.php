@@ -164,12 +164,12 @@ use Carbon\Carbon;
             <div class="brand-mark">A</div>
             <div class="ml-4">
                 <h1 class="h5 fw-bold mb-1">{{$CategoryName}}</h1>
-                <p class="brand-subtitle small text-secondary mb-0">{{$TestTypeValue}} Mode</p>
+                <p class="brand-subtitle small text-secondary mb-0">{{$TestTypeValue}}</p>
             </div>
         </div>
         <span class="badge rounded-pill text-bg-light border px-3 py-2 d-none d-md-inline-flex align-items-center gap-2">
             <span class="rounded-circle bg-success" style="width:8px;height:8px;box-shadow:0 0 0 4px rgba(22,163,74,.12)"></span>
-                &nbsp;&nbsp;&nbsp;Exam session active
+                &nbsp;&nbsp;&nbsp;Revision session active
         </span>
     </header>    
     <div class="row g-4 align-items-start">

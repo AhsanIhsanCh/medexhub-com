@@ -10,14 +10,13 @@ class SessionController extends Controller
 {
     function examhistorydata(){
         $userId = auth()->id();
-        // $Baskets = DB::table('baskets')->where('ba_u_id', $userId)->orderBy('ba_createdat', 'desc')->get();
-        $History = "a";
-        return view('dashboard/history/examhistory', compact('History'));
+        $Tests = DB::table('tests')->where([['t_u_id', $userId]])->orderBy('t_id', 'desc')->get();
+        return view('dashboard/history/examhistory',['u_id' => $userId, 'Tests' => $Tests]);
     }
+
     function loginhistorydata(){
         $userId = auth()->id();
-        // $Baskets = DB::table('baskets')->where('ba_u_id', $userId)->orderBy('ba_createdat', 'desc')->get();
-        $History = "a";
-        return view('dashboard/history/loginhistory', compact('History'));
+        $LoginHistory = DB::table('login_history')->where([['lh_u_id', $userId]])->orderBy('lh_id', 'desc')->get();
+        return view('dashboard/history/loginhistory',['u_id' => $userId, 'LHistorys' => $LoginHistory]);
     }
 }

@@ -160,7 +160,7 @@ use Carbon\Carbon;
             </div>
             <span class="badge rounded-pill text-bg-light border px-3 py-2 d-none d-md-inline-flex align-items-center gap-2">
                 <span class="rounded-circle bg-success" style="width:8px;height:8px;box-shadow:0 0 0 4px rgba(22,163,74,.12)"></span>
-                   &nbsp;&nbsp;&nbsp;Revision session active
+                   &nbsp;&nbsp;&nbsp;Exam session active
             </span>
         </header>
         <div class="row g-4 align-items-start">

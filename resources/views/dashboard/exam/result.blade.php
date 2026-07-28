@@ -153,7 +153,7 @@ use Carbon\Carbon;
             </div>
             <span class="badge rounded-pill text-bg-light border px-3 py-2 d-none d-md-inline-flex align-items-center gap-2 green">
                 <span class="rounded-circle bg-success" style="width:8px;height:8px;box-shadow:0 0 0 4px rgba(22,163,74,.12)"></span>
-                    <a href="../showexam/{{$e_id}}" bis_skin_checked="1">Back to Dashboard</a>
+                <a href="javascript:void(0);" onclick="window.close();">Back to Dashboard</a>
             </span>
         </header>
         <div class="row g-4 align-items-start">
@@ -779,7 +779,7 @@ use Carbon\Carbon;
         @if($QuestionQT != 3)
         <span class="badge rounded-pill text-bg-light border px-3 py-2 d-none d-md-inline-flex align-items-center gap-2 green mt-5">
             <span class="rounded-circle bg-success" style="width:8px;height:8px;box-shadow:0 0 0 4px rgba(22,163,74,.12)"></span>
-                <a href="../showexam/{{$e_id}}" bis_skin_checked="1">Back to Dashboard</a>
+                <a href="javascript:void(0);" onclick="window.close();">Back to Dashboard</a>
         </span>
         @endif
     </div>

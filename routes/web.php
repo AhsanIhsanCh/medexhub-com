@@ -33,8 +33,8 @@ Route::get('register', function () { return view('login/register');})->name('reg
 Route::post('loginRequest', [LoginController::class, 'loginRequest'])->name('loginRequest');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
-
-
+Route::get('exams', function () { return view('frontend/pages/exams');})->name('exams');
+Route::get('about', function () { return view('frontend/pages/about');})->name('about');
 
 //Dashboard Route
 // Route::get('dashboard', function () { return view('dashboard/dashboard');})->middleware(['auth']);
@@ -84,9 +84,15 @@ Route::post('makeexam', [ExamController::class, 'makeexam'])->name('makeexam')->
 
 
 
+
 Route::post('/contact', [FormController::class, 'store'])->name('contact.store');
 
+Route::get('buyexam/{e_id}', [BasketController::class, 'buyexam'])->middleware(['auth']);
 Route::get('basket', [BasketController::class, 'userbasketdata'])->middleware(['auth']);
+Route::get('basketremoveitem/{ba_id}', [BasketController::class, 'basketremoveitem'])->middleware(['auth']);
+Route::get('basketupdateitem', [BasketController::class, 'basketupdateitem'])->name('basketupdateitem')->middleware(['auth']);
+Route::post('basketaddcoupon', [BasketController::class, 'basketaddcoupon'])->name('basketaddcoupon')->middleware(['auth']);
+
 Route::get('subscriptions', [SubscribeController::class, 'usersubscribedata'])->middleware(['auth']);
 Route::get('invoice', [SubscribeController::class, 'userinvoicedata'])->middleware(['auth']);
 Route::get('examhistory', [SessionController::class, 'examhistorydata'])->middleware(['auth']);

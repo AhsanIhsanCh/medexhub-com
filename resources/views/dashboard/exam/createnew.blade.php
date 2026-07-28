@@ -3,28 +3,25 @@ use Carbon\Carbon;
 @endphp
 @extends('dashboard.layoutDashboard')
 @section('createnew')
-    @php
-        $Checkvalue = "0";
-        $Category = DB::table('exams')->select('e_name','e_qt_id')->where('e_id', $e_id)->get();
-        $CategoryName = $Category->first()->e_name ?? 'No Category Found';
-        $CQtId = $Category->first()->e_qt_id ?? 'No Qt Id Found';
-    @endphp
-
-
-<section class="content-panel">
+  @php
+      $Checkvalue = "0";
+      $Exam = DB::table('exams')->select('e_name','e_qt_id')->where('e_id', $e_id)->get();
+      $ExamName = $Exam->first()->e_name ?? 'No Category Found';
+      $ExamTypeId = $Exam->first()->e_qt_id ?? 'No Qt Id Found';
+  @endphp
+  <section class="content-panel">
     <div class="title-row">
-        <div>
-            <span class="title-kicker">Exam dashboard</span>
-            <h1>ACEM Primary Examination</h1>
-            <p class="title-subtitle">Prepare with structure, revise with purpose, and track every step of your exam journey.</p>
-        </div>
-        <div class="db-actions">
-            <a href="/createnew/2" class=" btn db-btn btn-sm">< Back</a>
-        </div>
+      <div>
+        <span class="title-kicker">Exam dashboard</span>
+        <h1>{{$ExamName}}</h1>
+        <p class="title-subtitle">Prepare with structure, revise with purpose, and track every step of your exam journey.</p>
+      </div>
+      <div class="db-actions">
+          <a href="/createnew/2" class=" btn db-btn btn-sm">< Back</a>
+      </div>
     </div>
-     
-
-
+    <form method="POST" action="{{ route('makeexam') }}">
+    @csrf
       <div class="exam-builder" aria-label="Exam setup">
         <div class="exam-builder-grid">
           <div class="curriculum-panel" aria-label="Select curriculum">
@@ -33,178 +30,163 @@ use Carbon\Carbon;
               To focus on a specific subsection, select that subsection only.<br />
               Selecting a parent curriculum area, such as Anatomy, will include questions from all of its subsections.
             </p>
-
-            <button
-              type="button"
-              class="curriculum-group-title"
-              id="acemPrimaryToggle"
-              aria-expanded="true"
-              aria-controls="acemPrimaryTree"
-              onclick="toggleAcemPrimarySection()"
-            >
-              <span>ACEM Primary Examination</span>
-              <span class="caret" id="acemPrimaryCaret" aria-hidden="true">▲</span>
-            </button>
-
-            <div class="tree-list" id="acemPrimaryTree">
-              <div class="tree-row parent">
-                <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Anatomy</span></label>
-                <button
-                  type="button"
-                  class="subsection-toggle"
-                  aria-expanded="true"
-                  aria-controls="anatomyChildren"
-                  onclick="toggleCurriculumSubsection(this, 'anatomyChildren', 'anatomyCaret')"
-                  aria-label="Open or close Anatomy subsections"
-                >
-                  <span class="caret" id="anatomyCaret" aria-hidden="true">▲</span>
-                </button>
-              </div>
-              <div class="subsection-list" id="anatomyChildren">
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Upper Limb</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Lower Limb</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Thorax</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Abdomen and Pelvis</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Head and Neck</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>General Anatomy</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-              </div>
-
-              <div class="tree-row parent">
-                <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Physiology</span></label>
-                <button
-                  type="button"
-                  class="subsection-toggle"
-                  aria-expanded="true"
-                  aria-controls="physiologyChildren"
-                  onclick="toggleCurriculumSubsection(this, 'physiologyChildren', 'physiologyCaret')"
-                  aria-label="Open or close Physiology subsections"
-                >
-                  <span class="caret" id="physiologyCaret" aria-hidden="true">▲</span>
-                </button>
-              </div>
-              <div class="subsection-list" id="physiologyChildren">
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Blood as a Circulatory Fluid &amp; Lymph Flow</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Cardiovascular Physiology</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Gastrointestinal Physiology</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Nerve, Muscle and Cellular Physiology</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Central &amp; Peripheral Neurophysiology</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Endocrine Physiology</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Respiratory Physiology</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Renal Physiology</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Acid Base Physiology</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-                <div class="tree-row child">
-                  <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Circulation and Homeostasis</span></label>
-                  <span class="caret" aria-hidden="true">▼</span>
-                </div>
-              </div>
-
-              <div class="tree-row parent">
-                <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Pathology</span></label>
-                <span class="caret" aria-hidden="true">▼</span>
-              </div>
-              <div class="tree-row parent">
-                <label class="tree-label"><input type="checkbox" class="curriculum-check" /> <span>Pharmacology</span></label>
-                <span class="caret" aria-hidden="true">▼</span>
-              </div>
-              <div class="tree-row plain">
-                <span>AMC MCQs</span>
-                <span class="caret" aria-hidden="true">▲</span>
-              </div>
-            </div>
+            @php
+            $Category = DB::table('exams')->select('e_id','e_name','e_inner_level')->where('e_id', $e_id)->get();
+            echo "<div class='examtree'>";
+              echo "<ul>";
+                echo "<li>";
+                  echo "<details>";
+                    echo "<summary class='bgone'><input type='checkbox' class='curriculum-check' name='TopicSelection[]' value='".$Category->first()->e_inner_level."' >&nbsp;&nbsp;".$Category->first()->e_name."</summary>";
+                    $CLevel1 = DB::table('exams')->select('e_id','e_name','e_inner_level')->where('e_level', $Category->first()->e_id)->where('e_status', '1')->get();
+                    foreach ($CLevel1 as $Level1) 
+                      {
+                        echo "<ul>";
+                          echo "<li>";
+                            echo "<details>";
+                              echo "<summary class='bgtwo'><input type='checkbox' class='curriculum-check' name='TopicSelection[]' value='".$Level1->e_inner_level."' >&nbsp;&nbsp;".$Level1->e_name."</summary>";
+                              $CLevel2 = DB::table('exams')->select('e_id','e_name','e_inner_level')->where('e_level', $Level1->e_id)->where('e_status', '1')->get();
+                              foreach ($CLevel2 as $Level2)
+                                {
+                                  echo "<ul>";
+                                    echo "<li>";
+                                      echo "<details>";
+                                        echo "<summary><input type='checkbox' class='curriculum-check' name='TopicSelection[]' value='".$Level2->e_inner_level."' >&nbsp;&nbsp;".$Level2->e_name."</summary>";
+                                        $CLevel3 = DB::table('exams')->select('e_id','e_name','e_inner_level')->where('e_level', $Level2->e_id)->where('e_status', '1')->get();
+                                        foreach ($CLevel3 as $Level3) 
+                                          {
+                                            echo "<ul>";
+                                              echo "<li>";
+                                                echo "<details>";
+                                                  echo "<summary><input type='checkbox' class='curriculum-check' name='TopicSelection[]' value='".$Level3->e_inner_level."' >&nbsp;&nbsp;".$Level3->e_name."</summary>";
+                                                  $CLevel4 = DB::table('exams')->select('e_id','e_name','e_inner_level')->where('e_level', $Level3->e_id)->where('e_status', '1')->get();
+                                                  foreach ($CLevel4 as $Level4) 
+                                                    {
+                                                      echo "<ul>";
+                                                        echo "<li>";
+                                                          echo "<details>";
+                                                            echo "<summary><input type='checkbox' class='curriculum-check' name='TopicSelection[]' value='".$Level4->e_inner_level."' >&nbsp;&nbsp;".$Level4->e_name."</summary>";
+                                                            $CLevel5 = DB::table('exams')->select('e_id','e_name','e_inner_level')->where('e_level', $Level4->e_id)->where('e_status', '1')->get();
+                                                            foreach ($CLevel5 as $Level5) 
+                                                              {
+                                                                echo "<ul>";
+                                                                  echo "<li>";
+                                                                    echo "<details>";
+                                                                      echo "<summary><input type='checkbox' class='curriculum-check' name='TopicSelection[]' value='".$Level5->e_inner_level."' >&nbsp;&nbsp;".$Level5->e_name."</summary>";
+                                                                      $CLevel6 = DB::table('exams')->select('e_id','e_name','e_inner_level')->where('e_level', $Level5->e_id)->where('e_status', '1')->get();
+                                                                      foreach ($CLevel6 as $Level6)
+                                                                        {
+                                                                          echo "<ul>";
+                                                                            echo "<li>";
+                                                                              echo "<details>";
+                                                                                echo "<summary><input type='checkbox' class='curriculum-check' name='TopicSelection[]' value='".$Level6->e_inner_level."' >&nbsp;&nbsp;".$Level6->e_name."</summary>";
+                                                                                $CLevel7 = DB::table('exams')->select('e_id','e_name','e_inner_level')->where('e_level', $Level6->e_id)->where('e_status', '1')->get();
+                                                                                foreach ($CLevel7 as $Level7)
+                                                                                  {
+                                                                                    echo "<ul>";
+                                                                                      echo "<li>";
+                                                                                        echo "<details>";
+                                                                                          echo "<summary><input type='checkbox' class='curriculum-check' name='TopicSelection[]' value='".$Level7->e_inner_level."' >&nbsp;&nbsp;".$Level7->e_name."</summary>";
+                                                                                        echo "</details>";
+                                                                                      echo "</li>";
+                                                                                    echo "</ul>";
+                                                                                  }
+                                                                              echo "</details>";
+                                                                            echo "</li>";
+                                                                          echo "</ul>";
+                                                                        }
+                                                                    echo "</details>";
+                                                                  echo "</li>";
+                                                                echo "</ul>";
+                                                              }
+                                                          echo "</details>";
+                                                        echo "</li>";
+                                                      echo "</ul>";
+                                                    }
+                                                echo "</details>";
+                                              echo "</li>";
+                                            echo "</ul>";
+                                          }
+                                      echo "</details>";
+                                    echo "</li>";
+                                  echo "</ul>";
+                                }
+                            echo "</details>";
+                          echo "</li>";
+                        echo "</ul>";
+                      }
+                  echo "</details>";
+                echo "</li>";
+              echo "</ul>";
+            echo "</div>";
+            @endphp
           </div>
-
           <div class="setup-stack" aria-label="Exam options">
-            
-          
             <div class="setup-panel">
               <h3>Select Mode</h3>
               <div class="option-row" role="radiogroup" aria-label="Select mode">
-                <label class="option-label"><input type="radio" name="examMode" value="exam" /> <span>Exam Mode</span></label>
-                <label class="option-label"><input type="radio" name="examMode" value="revision" /> <span>Revision Mode</span></label>
+                @if($ExamTypeId == 3)
+                  <input type="hidden" name="Mode" value="2"> 
+                @else
+                  <label class="option-label"><input type="radio" name="Mode" value="1" /> <span>Exam Mode</span></label>
+                  <label class="option-label"><input type="radio" name="Mode" value="2" /> <span>Revision Mode</span></label>
+                @endif
               </div>
             </div>
-
-            <div class="setup-panel compact">
+            <div class="setup-panel ">
               <h3>Select Question Type</h3>
               <div class="option-row" aria-label="Select question type">
-                <label class="option-label"><input type="checkbox" name="questionType" value="mcq" /> <span>MCQ's</span></label>
-                <label class="option-label"><input type="checkbox" name="questionType" value="emq" /> <span>EMQ's</span></label>
+                @if (!empty($ExamTypeId))
+                  @foreach(explode(';', $ExamTypeId) as $QTypeId)
+                    @php
+                      $QT = DB::table('question_type')->select('qt_name')->where('qt_id', $QTypeId)->get();
+                      $QTName = $QT->first()->qt_name ?? 'No Category Found';    
+                    @endphp
+                    @if($loop->first)
+                      <label class="option-label"><input type="checkbox" name="QueType[]" value="{{ $QTypeId }}" /> <span>{{ $QTName }}</span></label>
+                    @else
+                      <label class="option-label"><input type="checkbox" name="QueType[]" value="{{ $QTypeId }}" /> <span>{{ $QTName }}</span></label>
+                    @endif
+                  @endforeach
+                @endif
               </div>
             </div>
-
             <div class="setup-panel">
               <h3>Question Reviewed</h3>
               <div class="option-row" role="radiogroup" aria-label="Question reviewed">
-                <label class="option-label"><input type="radio" name="reviewStatus" value="reviewed" /> <span>Reviewed earlier</span></label>
-                <label class="option-label"><input type="radio" name="reviewStatus" value="not-reviewed" /> <span>Not reviewed yet</span></label>
+                <label class="option-label"><input type="radio" name="Reviewed" value="1" /> <span>Reviewed earlier</span></label>
+                <label class="option-label"><input type="radio" name="Reviewed" value="2" /> <span>Not reviewed yet</span></label>
               </div>
             </div>
-
-            <div class="setup-panel" id="questionCountPanel">
+            <div class="setup-panel">
               <h3>Select Number of Questions</h3>
               <p class="helper-text" id="questionCountHint">Please select curriculum first.</p>
               <div class="question-count-options" id="questionCountOptions" aria-label="Select number of questions">
-                <button class="count-choice" type="button">10</button>
-                <button class="count-choice" type="button">20</button>
-                <button class="count-choice" type="button">30</button>
-                <button class="count-choice" type="button">50</button>
-                <button class="count-choice" type="button">100</button>
+                <label class="option-label" style="max-width:70px;"><input type="radio" name="NoOfQue" value="10" /> <span>10</span></label>
+                <label class="option-label" style="max-width:70px;"><input type="radio" name="NoOfQue" value="20" /> <span>20</span></label>
+                <label class="option-label" style="max-width:70px;"><input type="radio" name="NoOfQue" value="30" /> <span>30</span></label>
+                <label class="option-label" style="max-width:70px;"><input type="radio" name="NoOfQue" value="40" /> <span>40</span></label>
+                <label class="option-label" style="max-width:70px;"><input type="radio" name="NoOfQue" value="50" /> <span>50</span></label>
+                <label class="option-label" style="max-width:70px;"><input type="radio" name="NoOfQue" value="60" /> <span>60</span></label>
               </div>
             </div>
           </div>
         </div>
+        <div class="row mt-4">
+          <div class="col-md-12" style="text-align: center;">
+            <input type="hidden" name="e_id" value="{{ $e_id }}">
+            
+            <button type="submit" class="btn btn-dashboard btn-sm">Generate</button>
+          </div>
+        </div>
       </div>
-    
-</section>
+    </form>
+  </section>
 
 
 
-  <script>
+
+
+    <script>
     const curriculumChecks = Array.from(document.querySelectorAll('.curriculum-check'));
     const questionCountHint = document.getElementById('questionCountHint');
     const questionCountOptions = document.getElementById('questionCountOptions');
@@ -244,5 +226,5 @@ use Carbon\Carbon;
         button.classList.add('selected');
       });
     });
-  </script>   
+  </script>
 @endsection

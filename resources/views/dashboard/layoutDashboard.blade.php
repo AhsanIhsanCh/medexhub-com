@@ -7,7 +7,7 @@
   <title>Sign In | MedExHub</title>
 <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="../theme_files/css/bootstrap.min.css"/> -->
-    <!-- <link rel="stylesheet" href="../packages/bootstrap538/css/bootstrap.min.css"/> -->
+    <link rel="stylesheet" href="../packages/bootstrap538/css/bootstrap.min.css"/>
 <!-- table CSS -->
     <link href='/packages/bootstrap538/datatables/css/dataTables.bootstrap4.css' rel='stylesheet' >
 
