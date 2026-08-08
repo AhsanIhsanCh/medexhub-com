@@ -35,30 +35,30 @@ use Carbon\Carbon;
   <div class="exam-grid">
     @foreach ($Subscribes as $Subscribe)
       @php
-        $Category = DB::table('exams')->select('e_name','e_info','e_color','e_count','e_short_description','e_bolt')->where('e_id', $Subscribe->su_c_id)->get();
-        $CategoryName = $Category->first()->e_name ?? 'No Category';
-        $CategoryInfo = $Category->first()->e_info ?? 'No Info';
-        $CategoryColor = $Category->first()->e_color ?? 'exam-card-blue';
-        $CategoryCount = $Category->first()->e_count ?? '-';
-        $CategoryShortDescription = $Category->first()->e_short_description ?? '-';
-        $CategoryBolt = $Category->first()->e_bolt ?? '-';
+        $Exam = DB::table('exams')->select('e_name','e_info','e_color','e_count','e_short_description','e_bolt')->where('e_id', $Subscribe->su_e_id)->get();
+        $ExamName = $Exam->first()->e_name ?? 'No Category';
+        $ExamInfo = $Exam->first()->e_info ?? 'No Info';
+        $ExamColor = $Exam->first()->e_color ?? 'exam-card-blue';
+        $ExamCount = $Exam->first()->e_count ?? '-';
+        $ExamShortDescription = $Exam->first()->e_short_description ?? '-';
+        $ExamBolt = $Exam->first()->e_bolt ?? '-';
       @endphp
-      <article class="exam-card {{$CategoryColor}}">
-        <a  href="showexam/{{$Subscribe->su_c_id}}">
+      <article class="exam-card {{$ExamColor}}">
+        <a  href="showexam/{{$Subscribe->su_e_id}}">
           <div class="exam-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 5h12v14H6z"/><path d="M9 9h6"/><path d="M9 13h4"/></svg>
           </div>
-          <span class="tile-badge">{{$CategoryBolt}}</span>
+          <span class="tile-badge">{{$ExamBolt}}</span>
           <div class="exam-body">
-            <h3>{{$CategoryName}}</h3>
-            <p>{{$CategoryShortDescription}}</p>
+            <h3>{{$ExamName}}</h3>
+            <p>{{$ExamShortDescription}}</p>
             <div class="tile-meta">
-              <span>{{$CategoryCount}}</span>
-              <span>{{$CategoryInfo}}</span>
+              <span>{{$ExamCount}}</span>
+              <span>{{$ExamInfo}}</span>
             </div>
           </div>
           <div class="tile-footer">
-            <a class="details-link" href="/showexam/{{$Subscribe->su_c_id}}">Start <span>→</span></a>
+            <a class="details-link" href="/showexam/{{$Subscribe->su_e_id}}">Start <span>→</span></a>
           </div>
         </a>
       </article>

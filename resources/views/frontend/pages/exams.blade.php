@@ -3,42 +3,64 @@
 	@else
 		@include('frontend.header')
 	@endif
+  @include('messages')
     <style>
-                :root {
-        --navy: #17243c;
-        --navy-deep: #111b30;
-        --green: #4b9b51;
-        --green-dark: #377a3d;
-        --green-pale: #edf7ee;
-        --gold: #f0b429;
-        --rose: #d93273;
-        --blue: #5067b2;
-        --text: #5d6575;
-        --heading: #1a2438;
-        --line: #e8ebf1;
-        --surface: #ffffff;
-        --surface-alt: #f7f9fc;
-        --shadow: 0 16px 45px rgba(25, 36, 56, .10);
-        --shadow-soft: 0 8px 28px rgba(25, 36, 56, .07);
-        --radius: 14px;
-        --container: 1180px;
+        :root {
+        --ink: #173047;
+      --ink-soft: #496276;
+      --primary: #147d70;
+      --primary-dark: #0b5b53;
+      --primary-soft: #e8f7f4;
+      --blue: #3778c2;
+      --blue-2: #145fe6;
+      --blue-dark: #2a5a9c;
+      --blue-soft: #edf5ff;
+      --green: #4f914a;
+      --green-soft: #eafff5;
+      --pink: #ef4f8f;
+      --purple: #6557ff;
+      --rose: #c83c72;
+      --gold: #dcae2a;
+      --surface: #ffffff;
+      --surface-soft: #f6faf9;
+      --line: #dce8e5;
+      --line-strong: #b8d9d3;
+      --panel: rgba(255, 255, 255, 0.86);
+      --danger: #bc3f4b;
+      --danger-dark: #9a353f;
+      --success: #2e7d59;
+      --shadow-sm: 0 8px 24px rgba(24, 70, 68, 0.08);
+      --shadow-md: 0 22px 60px rgba(20, 68, 66, 0.14);
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 30px;
+      --radius-xl: 28px;
+      --bg: #f6f9ff;
+      --shadow: 0 22px 60px rgba(33, 84, 170, 0.12);
+      --bs-border-radius-pill: 50rem;
+      --bs-danger-rgb: 220, 53, 69;
+      --bs-bg-opacity: 1;
+      --bs-border-radius: 0.375rem;
+      --navy: #17243c;
+      --navy-deep: #111b30;
+      --green-dark: #377a3d;
+      --green-pale: #edf7ee;
+      --text: #5d6575;
+      --heading: #1a2438;
+      --surface-alt: #f7f9fc;
+      --shadow-soft: 0 8px 28px rgba(25, 36, 56, .07);
+      --radius: 14px;
+      --container: 1380px;
         }
 
         *, *::before, *::after { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body {
-        margin: 0;
-        font-family: "Avenir Next", "Segoe UI", Arial, sans-serif;
-        color: var(--text);
-        background: #fff;
-        line-height: 1.65;
-        -webkit-font-smoothing: antialiased;
-        }
+        
         img { display: block; max-width: 100%; }
-        a { color: inherit; text-decoration: none; }
+        /* a { color: inherit; text-decoration: none; } */
         button, input, select, textarea { font: inherit; }
-        svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-        .container { width: min(calc(100% - 40px), var(--container)); margin: 0 auto; }
+       
+        /* .container { width: min(calc(100% - 40px), var(--container)); margin: 0 auto; } */
         .narrow-container { width: min(calc(100% - 40px), 980px); }
         .section { padding: 96px 0; }
 
@@ -55,18 +77,11 @@
         }
         .skip-link:focus { top: 16px; }
 
-        .topbar { background: var(--navy-deep); color: rgba(255,255,255,.82); font-size: 13px; }
-        .topbar-inner { min-height: 43px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-        .topbar a { transition: color .2s ease; }
-        .topbar a:hover { color: #fff; }
-        .topbar-email { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
-        .topbar-email svg { width: 16px; height: 16px; }
-        .topbar-promo { display: inline-flex; align-items: center; gap: 8px; text-align: right; }
+       
 
         .site-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.97); border-bottom: 1px solid transparent; transition: box-shadow .25s ease, border-color .25s ease; backdrop-filter: blur(12px); }
         .site-header.scrolled { border-color: var(--line); box-shadow: 0 10px 30px rgba(17,27,48,.07); }
-        .header-inner { min-height: 88px; display: grid; grid-template-columns: 210px 1fr auto; align-items: center; gap: 28px; }
-        .brand img { width: 180px; height: auto; }
+        
         .primary-nav { display: flex; justify-content: center; align-items: center; gap: 30px; }
         .primary-nav a { color: var(--heading); font-weight: 700; font-size: 15px; position: relative; padding: 31px 0; }
         .primary-nav a::after { content: ""; position: absolute; left: 0; bottom: 24px; width: 0; height: 2px; background: var(--green); transition: width .2s ease; }
@@ -270,6 +285,12 @@
         html { scroll-behavior: auto; }
         *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
         }
+
+ 
+
+
+
+
     </style>
 <section class="details-section section" id="course-details">
       <div class="container narrow-container">
@@ -475,8 +496,5 @@
         </div>
       </div>
     </section>
-
-
-
-    @include('frontend.footer')
-	@include('frontend.index_footer')
+@include('frontend.footer')
+@include('frontend.index_footer')

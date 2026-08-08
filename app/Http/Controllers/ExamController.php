@@ -65,7 +65,7 @@ class ExamController extends Controller
     public function purchasedexam()
     {
         $userId = auth()->id();
-        $Subscribes = DB::table('subscribes')->where('su_u_id', $userId)->orderBy('su_c_id', 'asc')->get();
+        $Subscribes = DB::table('subscribes')->where('su_u_id', $userId)->orderBy('su_e_id', 'asc')->get();
         return view('dashboard/exam/exam',['Subscribes' => $Subscribes]);
     }
 

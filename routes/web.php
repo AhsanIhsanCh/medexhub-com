@@ -18,7 +18,7 @@ use App\Http\Controllers\WorkboardController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\SessionController;
-use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\ConversationController;
 
 
 
@@ -34,7 +34,20 @@ Route::post('loginRequest', [LoginController::class, 'loginRequest'])->name('log
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('exams', function () { return view('frontend/pages/exams');})->name('exams');
+Route::get('faq', function () { return view('frontend/pages/faq');})->name('faq');
 Route::get('about', function () { return view('frontend/pages/about');})->name('about');
+
+Route::get('terms', function () { return view('frontend/pages/terms');})->name('terms');
+
+
+Route::get('disclaimer', function () { return view('frontend/pages/disclaimer');})->name('disclaimer');
+Route::get('privacy', function () { return view('frontend/pages/privacy');})->name('privacy');
+Route::get('contact', function () { return view('frontend/pages/contact');})->name('contact');
+
+
+
+
+
 
 //Dashboard Route
 // Route::get('dashboard', function () { return view('dashboard/dashboard');})->middleware(['auth']);
@@ -43,7 +56,7 @@ Route::get('myexam', [ExamController::class, 'purchasedexam'])->middleware(['aut
 
 
 Route::get('updatedbentry', [ExamController::class, 'updatedbentry'])->middleware(['auth']);
-//Route::get('resultshow', [WorkboardController::class, 'resultshow'])->name('resultshow')->middleware(['auth']);
+
 
 Route::get('showexam/{e_id}', [ExamController::class, 'showexam'])->middleware(['auth']);
 Route::get('createnew/{e_id}', [ExamController::class, 'createnew'])->middleware(['auth']);
@@ -93,12 +106,29 @@ Route::get('basketremoveitem/{ba_id}', [BasketController::class, 'basketremoveit
 Route::get('basketupdateitem', [BasketController::class, 'basketupdateitem'])->name('basketupdateitem')->middleware(['auth']);
 Route::post('basketaddcoupon', [BasketController::class, 'basketaddcoupon'])->name('basketaddcoupon')->middleware(['auth']);
 
-Route::get('subscriptions', [SubscribeController::class, 'usersubscribedata'])->middleware(['auth']);
-Route::get('invoice', [SubscribeController::class, 'userinvoicedata'])->middleware(['auth']);
+Route::post('basketdummypay', [BasketController::class, 'basketdummypay'])->name('basketdummypay')->middleware(['auth']);
+
+Route::get('subscriptions', [SubscribeController::class, 'subscriptions'])->middleware(['auth']);
+
+
+
+
+Route::get('invoice', [SubscribeController::class, 'invoiceindex'])->middleware(['auth']);
+
+
+Route::get('/ajaxinvoice/{in_id}', [SubscribeController::class, 'ajaxinvoice'])->name('ajaxinvoice')->middleware(['auth']);
+
+
+
+
 Route::get('examhistory', [SessionController::class, 'examhistorydata'])->middleware(['auth']);
 Route::get('loginhistory', [SessionController::class, 'loginhistorydata'])->middleware(['auth']);
-Route::get('betteranswer', [FeedbackController::class, 'betteranswerdata'])->middleware(['auth']);
-Route::get('correction', [FeedbackController::class, 'correctiondata'])->middleware(['auth']);
+
+
+Route::get('conversation', [ConversationController::class, 'conversation'])->middleware(['auth']);
+Route::get('/ajaxconversation/{co_id}', [ConversationController::class, 'ajaxconversation'])->name('ajaxconversation')->middleware(['auth']);
+Route::post('/addconversationmessage', [ConversationController::class, 'addconversationmessage'])->name('addconversationmessage')->middleware(['auth']);
+
 
 
 

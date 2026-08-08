@@ -20,8 +20,8 @@
 <div class="container topbar-inner">
 <div>Purpose-built revision resources for <strong>Australian medical exams</strong></div>
 <div class="topbar-links">
-<a href="https://www.medexhub.com/index.php?D=3&amp;P=4">Help &amp; FAQs</a>
-<a href="https://www.medexhub.com/index.php?D=4&amp;P=4">Contact</a>
+<a href="/faq">Help &amp; FAQs</a>
+<a href="/contact">Contact</a>
 </div>
 </div>
 </div>
@@ -35,12 +35,32 @@
             </a>
             <nav aria-label="Primary navigation" class="nav-links" id="navLinks">
                 <a class="active" href="/">Home</a>
-                <a href="#exams">Exams</a>
-                <a href="#features">Features</a>
+                <a href="/about">About</a>
+                <a href="/exams">Exams</a>
+                <a href="/faq">FAQ's</a>
                 <a href="#sample">Sample question</a>
-                <a href="https://www.medexhub.com/index.php?D=2&amp;P=4">About</a>
             </nav>
             <div class="nav-actions">
+                <style>
+                .top-0{margin-top: 10px;margin-left: -10px;}
+                </style>
+                <?php
+                    $userId = auth()->id();
+                    $Baskets = DB::table('baskets')->where('ba_u_id', $userId)->where('ba_status', '0')->orderBy('created_at', 'desc')->get();
+                    $Items = $Baskets->count();
+                ?>
+                @if($Items > 0)
+                    <a class="btn position-relative" href="/basket">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free v5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"/></svg>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{ $Items }}
+                        </span>
+                    </a>
+                @else
+                    <a class="btn position-relative" href="/">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free v5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"/></svg>
+                    </a>
+                @endif
                 <a class="btn btn-secondary btn-sm" href="/login">Sign in</a>
                 <a class="btn btn-primary btn-sm" href="#exams">Browse exams</a>
                 <button aria-controls="navLinks" aria-expanded="false" aria-label="Open navigation" class="mobile-toggle" id="mobileToggle">

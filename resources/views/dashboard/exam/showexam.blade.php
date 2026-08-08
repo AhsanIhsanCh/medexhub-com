@@ -104,17 +104,4 @@ use Carbon\Carbon;
         </div>
     </div>
 </section>
-<script>
-    $(document).ready(function() {
-        $('#dataTable').DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true
-        });
-    });
-</script>
 @endsection
