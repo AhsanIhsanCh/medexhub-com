@@ -18,8 +18,8 @@
 <div class="container topbar-inner">
 <div>Purpose-built revision resources for <strong>Australian medical exams</strong></div>
 <div class="topbar-links">
-<a href="https://www.medexhub.com/index.php?D=3&amp;P=4">Help &amp; FAQs</a>
-<a href="https://www.medexhub.com/index.php?D=4&amp;P=4">Contact</a>
+<a href="/faq">Help &amp; FAQs</a>
+<a href="/contact">Contact</a>
 </div>
 </div>
 </div>

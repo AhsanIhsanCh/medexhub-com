@@ -126,7 +126,11 @@ Route::get('loginhistory', [SessionController::class, 'loginhistorydata'])->midd
 
 
 Route::get('conversation', [ConversationController::class, 'conversation'])->middleware(['auth']);
-Route::get('/ajaxconversation/{co_id}', [ConversationController::class, 'ajaxconversation'])->name('ajaxconversation')->middleware(['auth']);
+Route::get('/ajaxconversation/{linkdata}', [ConversationController::class, 'ajaxconversation'])->name('ajaxconversation')->middleware(['auth']);
+
+
+
+
 Route::post('/addconversationmessage', [ConversationController::class, 'addconversationmessage'])->name('addconversationmessage')->middleware(['auth']);
 
 

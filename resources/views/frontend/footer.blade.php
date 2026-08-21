@@ -19,6 +19,7 @@
                     <a href="#sample">Sample question</a>
                     <a href="/faq">FAQs</a>
                     <a href="https://www.isim.ai" target="_blank">iSim.ai</a>
+                    <a href="https://www.notly.ai" target="_blank">notly.ai</a>
                 </div>
             </div>
             <div>

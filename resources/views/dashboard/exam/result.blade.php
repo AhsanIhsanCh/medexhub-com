@@ -127,6 +127,10 @@
     .simple-bar-chart2 > .item > * { position: absolute; text-align: center }
     .simple-bar-chart2 > .item > .label { inset: 100% 0 auto 0 }
     .simple-bar-chart2 > .item > .value { inset: auto 0 100% 0 }
+
+
+
+
 </style>
 @php
 use Carbon\Carbon;
@@ -365,42 +369,13 @@ use Carbon\Carbon;
                                                                         echo '<h6 style="color: #858181;font-style: italic;text-align:right;margin-top:10px;">--' . $CoUserName . '<br></h6>';
                                                                     echo '</div>';
                                                                 }
-                                                            echo '<div style="text-align:center;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter'.$QuestionSr.'">Start Conversation</button></div>';
-                                                            // Modal
-                                                            echo '<div class="modal fade" id="exampleModalCenter'.$QuestionSr.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">';
-                                                                echo '<div class="modal-dialog modal-dialog-centered" role="document">
-                                                                    <div class="modal-content" >
-                                                                        <div class="modal-header" > 
-                                                                            <h5 class="modal-title" id="exampleModalLongTitle">Conversation</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>';
-                                                                        echo '<div class="modal-body">';
-                                                                            $ConversationsModels = DB::table('conversation')->select('*')->where('co_q_id', $QuestionSr)->orderBy('co_id', 'asc')->get();
-                                                                            foreach ($ConversationsModels as $ConversationsModel)
-                                                                                {
-                                                                                    $MessageData = $ConversationsModel->co_message ?? 'No Question Found';
-                                                                                    $UserCoID = $ConversationsModel->co_u_id ?? 'No User Found';
-                                                                                    $CoUser = DB::table('users')->select('u_fname','u_lname')->where('id', $UserCoID)->get();
-                                                                                    $CoUserName = $CoUser->first()->u_fname . ' ' . $CoUser->first()->u_lname ?? 'No User Found';
-
-                                                                                    $created_at = $ConversationsModel->created_at ?? 'No Date Found';
-                                                                                    $CreatedAt = Carbon::parse($created_at)->format('d M Y, h:i A');
-                                                                                    echo '<div class="alert alert-secondary" role="alert" style="border-radius: 10px; background-color: #fbfbfb; color: black; font-size: 16px; padding-left: 4%; padding-right: 4%; margin-bottom: 20px;">';
-                                                                                        echo '<h6 style="color: #858181;text-align:left;margin-top:10px;font-size:10px;"><strong>Date :</strong> ' . $CreatedAt . '<br></h6>';
-                                                                                        echo $MessageData;
-                                                                                        echo '<h6 style="color: #858181;font-style: italic;text-align:right;margin-top:10px;">--' . $CoUserName . '<br></h6>';
-                                                                                    echo '</div>';
-                                                                                }
-                                                                        echo '</div>';
-                                                                        echo '<div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                        </div>';
-                                                                    echo '</div>';
-                                                                echo '</div>';
-                                                            echo '</div>';
-                                                            //end model
+                                                            $LinkData = array($QuestionSr,0,$QuestionQT);
+                                                            $stringLinkData = implode(",",$LinkData);
+                                                             echo '<div style="text-align:center;">
+                                                                <button type="button" class="open-conversation btn btn-primary"
+                                                                data-url="' . route('ajaxconversation', ['linkdata' => $stringLinkData]) . '"
+                                                                >Start Conversation</button>
+                                                            </div>';
                                                     echo '</div>';
                                                 echo '</aside>';
                                             echo '</div>';      
@@ -605,47 +580,13 @@ use Carbon\Carbon;
                                                                                 echo '<h6 style="color: #858181;font-style: italic;text-align:right;margin-top:10px;">--' . $CoUserName . '<br></h6>';
                                                                             echo '</div>';
                                                                         }
-                                                                    //Model
-                                                                    $ConversationlinkData = array($QuestionSr, $InnerQuestionID);
-                                                                    $ConversationLink = implode("a",$ConversationlinkData);
-                                                                    echo '<div style="text-align:center;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter'. $ConversationLink .'">Start Conversation</button></div>';
-                                                                    // Modal
-                                                                    echo '<div class="modal fade" id="exampleModalCenter'. $ConversationLink .'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">';
-                                                                        echo '<div class="modal-dialog modal-dialog-centered" role="document">
-                                                                            <div class="modal-content" >
-                                                                                <div class="modal-header" > 
-                                                                                    <h5 class="modal-title" id="exampleModalLongTitle">Conversation</h5>
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>';
-                                                                                echo '<div class="modal-body">';
-                                                                                    $DataConversation = explode('a', $ConversationLink);
-                                                                                    $QSrA = $DataConversation[0];
-                                                                                    $QSrB = $DataConversation[1];
-                                                                                    $ConversationsModelAs = DB::table('conversation')->select('*')->where(['co_q_id' => $QSrA,'co_inner_q' => $QSrB])->orderBy('co_id', 'asc')->get();
-                                                                                    foreach ($ConversationsModelAs as $ConversationsModelA)
-                                                                                        {
-                                                                                            $MessageData = $ConversationsModelA->co_message ?? 'No Question Found';
-                                                                                            $UserCoID = $ConversationsModelA->co_u_id ?? 'No User Found';
-                                                                                            $CoUser = DB::table('users')->select('u_fname','u_lname')->where('id', $UserCoID)->get();
-                                                                                            $CoUserName = $CoUser->first()->u_fname . ' ' . $CoUser->first()->u_lname ?? 'No User Found';
-                                                                                            $created_at = $ConversationsModelA->created_at ?? 'No Date Found';
-                                                                                            $CreatedAt = Carbon::parse($created_at)->format('d M Y, h:i A');
-                                                                                            echo '<div class="alert alert-secondary" role="alert" style="border-radius: 10px; background-color: #fbfbfb; color: black; font-size: 16px; padding-left: 4%; padding-right: 4%; margin-bottom: 20px;">';
-                                                                                                echo '<h6 style="color: #858181;text-align:left;margin-top:10px;font-size:10px;"><strong>Date :</strong> ' . $CreatedAt . '<br></h6>';
-                                                                                                echo $MessageData;
-                                                                                                echo '<h6 style="color: #858181;font-style: italic;text-align:right;margin-top:10px;">--' . $CoUserName . '<br></h6>';
-                                                                                            echo '</div>';
-                                                                                        }
-                                                                                echo '</div>';
-                                                                                echo '<div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                                </div>';
-                                                                            echo '</div>';
-                                                                        echo '</div>';
-                                                                    echo '</div>';
-                                                                    //End Model
+                                                                    $LinkData2 = array($QuestionSr,$InnerQuestionID,$QuestionQT);
+                                                                    $stringLinkData2 = implode(",",$LinkData2);
+                                                                    echo '<div style="text-align:center;">
+                                                                        <button type="button" class="open-conversation btn btn-primary"
+                                                                        data-url="' . route('ajaxconversation', ['linkdata' => $stringLinkData2]) . '"
+                                                                        >Start Conversation</button>
+                                                                    </div>';
                                                                 echo '</div>';
                                                             echo '</aside>';
                                                         echo '</div>';
@@ -795,6 +736,8 @@ $Correct = round(($CorrectAnswerTotal / $GrangTotal) * 100, 2);
 $Incorrect = round(($IncorrectAnswerTotal / $GrangTotal) * 100, 2);
 $Skip = round(($SkipAnswerTotal / $GrangTotal) * 100, 2);    
 @endphp
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>        
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     // Set new default font family and font color to mimic Bootstrap's default styling
 (Chart.defaults.global.defaultFontFamily = "Metropolis"),
@@ -847,3 +790,37 @@ var myPieChart = new Chart(ctx, {
     }
 });
 </script>
+<script>
+    function closedatadiv() {
+        const dataDiv = document.getElementById('datadiv');
+        if (dataDiv) {
+            dataDiv.style.display = 'none';
+            dataDiv.innerHTML = '';
+            }
+        return false;
+    }
+    document.addEventListener('click', function (event) {
+        const button = event.target.closest('.open-conversation');
+            if (!button) {
+                return;
+                }
+        const dataDiv = document.getElementById('datadiv');
+        const urlPath = button.dataset.url;
+        dataDiv.style.display = 'block';
+        dataDiv.innerHTML = 'Loading...';
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+            if (this.status >= 200 && this.status < 300) {
+                dataDiv.innerHTML = this.responseText;
+                } else {
+                dataDiv.innerHTML = 'Unable to load conversation.';
+                }
+        };
+        xhttp.onerror = function () {
+            dataDiv.innerHTML = 'Network error.';
+            };
+        xhttp.open('GET', urlPath, true);
+        xhttp.send();
+    });
+</script>
+<div id="datadiv"></div>

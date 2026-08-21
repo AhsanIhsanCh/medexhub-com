@@ -55,34 +55,36 @@ use Carbon\Carbon;
                             if ($Conversation->co_qt_id == 1) 
                                 {
                                     $StyleClass = "type-pill exam";
-                                    $QuestionTypeName = "Question Type : MCQ";
-                                    $QuestionIDNo =  "Question ID : ".$Conversation->co_q_id;
+                                    $QuestionIDNo =  "MCQ ID : ".$Conversation->co_q_id;
+                                    $QuestionInner = "0";
                                 }
                             if ($Conversation->co_qt_id == 2) 
                                 {
                                     $StyleClass = "type-pill revision";
-                                    $QuestionTypeName = "Question Type : EMQ";
-                                    $QuestionIDNo =  "Question ID : ".$Conversation->co_q_id;
+                                    $QuestionIDNo =  "EMQ ID : ".$Conversation->co_q_id;
+                                    $QuestionInner =  "Question No : ".$Conversation->co_inner_q;
                                 }
-                        $Co_Q_ID = $Conversation->co_q_id;
-                        $ConversationsInner = DB::table('conversation')->where('co_q_id', $Co_Q_ID)->orderBy('updated_at', 'desc')->get();
-                        $Co_ID = $ConversationsInner->first()->co_id;
+                            $Co_Q_ID = $Conversation->co_q_id;
+                            $ConversationsInner = DB::table('conversation')->where('co_q_id', $Conversation->co_q_id)->where('co_inner_q', $Conversation->co_inner_q)->orderBy('updated_at', 'desc')->get();
+                            $Co_ID = $ConversationsInner->first()->co_id;
+                            $Q_ID = $ConversationsInner->first()->co_q_id;
+                            $Q_Inner_ID = $ConversationsInner->first()->co_inner_q;
+                            $QT_ID = $ConversationsInner->first()->co_qt_id;
+                            $LinkData = array($Q_ID,$Q_Inner_ID,$QT_ID);
+                            $stringLinkData = implode(",",$LinkData);
                         @endphp
                         <tr>
                             <td style="text-align: center;">{{ $loop->iteration }}</td>
                             <td style="padding-top: 10px;">{{ $ConversationsInner->first()->co_message }}<br>
                                 <p class="{{ $StyleClass }}" style="font-size:11px;max-height:20px;background-color: var(--surface-soft);"> {{ $QuestionIDNo }}</p>
-                                <p class="{{ $StyleClass }}" style="font-size:11px;max-height:20px;background-color: var(--surface-soft);"> {{ $QuestionTypeName }}</p>
+                                @if($QuestionInner != 0)
+                                    <p class="{{ $StyleClass }}" style="font-size:11px;max-height:20px;background-color: var(--surface-soft);"> {{ $QuestionInner }}</p>
+                                @endif
                             </td>
                             <td  style="text-align: center;">
-                                <button
-                                    type="button"
-                                    class="open-conversation"
-                                    data-url="{{ route('ajaxconversation', ['co_id' => $Co_ID]) }}"
-                                    style="border:0; background:none;"
-                                >
-                                    Open
-                                </button>
+                                <button type="button" class="open-conversation btn btn-primary btn-sm"
+                                data-url="{{ route('ajaxconversation', ['linkdata' => $stringLinkData]) }}"
+                                >Open</button>
                             </td>
                         </tr>
                     @endforeach 

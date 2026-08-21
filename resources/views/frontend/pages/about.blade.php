@@ -284,8 +284,8 @@ button { font: inherit; }
           <h1>Medical revision resources created by practising doctors.</h1>
           <p class="hero-copy">Relevant, high-quality medical examination questions, explanatory notes and flexible learning tools designed to make exam preparation clearer.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="https://www.medexhub.com/index.php?P=7">Explore question banks</a>
-            <a class="btn btn-outline" href="https://www.medexhub.com/index.php?D=4&amp;P=4">Contact us</a>
+            <a class="btn btn-primary" href="/exam">Browse exams</a>
+            <a class="btn btn-outline" href="/contact">Contact us</a>
           </div>
           <nav class="breadcrumbs" aria-label="Breadcrumb">
             <a href="https://medextech.com.au/">Home</a>
@@ -335,7 +335,6 @@ button { font: inherit; }
           <p class="lead">MCQs and EMQs are prepared by practising doctors with extensive experience in medical education.</p>
           <p>We are committed to providing relevant, high-quality questions with explanatory notes that help candidates understand the reasoning behind each answer.</p>
           <p>We are also developing innovative features such as customisable flash cards, quality feedback, external links and statistics. Our content is regularly updated so candidates can access comprehensive exam support in one place.</p>
-          <a class="text-link" href="https://www.medexhub.com/index.php?P=7">Put us to the test and explore our revision resources <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -396,7 +395,7 @@ button { font: inherit; }
           <p class="eyebrow light">Our approach</p>
           <h2>Question banks that build understanding—not just recall.</h2>
           <p>MedExHub combines clinically oriented questions, concise explanations and targeted performance feedback so candidates can identify gaps and revise with purpose.</p>
-          <a class="btn btn-light" href="https://www.medexhub.com/index.php?P=7">Choose your exam</a>
+          <a class="btn btn-light" href="/exam">Choose your exam</a>
         </div>
 
         <div class="approach-list">
@@ -438,8 +437,8 @@ button { font: inherit; }
           <h2>Find the revision resource that matches your next medical exam.</h2>
         </div>
         <div class="cta-actions">
-          <a class="btn btn-light" href="https://www.medexhub.com/index.php?P=7">Browse exams</a>
-          <a class="btn btn-transparent" href="https://www.medexhub.com/index.php?D=4&amp;P=4">Contact us</a>
+          <a class="btn btn-light" href="/exam">Browse exams</a>
+          <a class="btn btn-transparent" href="/contact">Contact us</a>
         </div>
       </div>
     </section>
