@@ -19,6 +19,8 @@ use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CommonController;
 
 
 
@@ -31,6 +33,13 @@ Route::get('/', function () {
 Route::get('login', function () { return view('login/login');})->name('login');
 Route::get('register', function () { return view('login/register');})->name('register');
 Route::post('loginRequest', [LoginController::class, 'loginRequest'])->name('loginRequest');
+
+Route::post('registerRequest', [LoginController::class, 'registerRequest'])->name('registerRequest');
+
+
+
+
+
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('exams', function () { return view('frontend/pages/exams');})->name('exams');
@@ -99,6 +108,10 @@ Route::post('makeexam', [ExamController::class, 'makeexam'])->name('makeexam')->
 
 
 Route::post('/contact', [FormController::class, 'store'])->name('contact.store');
+Route::post('/sendcontactmessage', [CommonController::class, 'SendContactMessage'])->name('sendcontactmessage');
+
+
+
 
 Route::get('buyexam/{e_id}', [BasketController::class, 'buyexam'])->middleware(['auth']);
 Route::get('basket', [BasketController::class, 'userbasketdata'])->middleware(['auth']);
@@ -133,6 +146,10 @@ Route::get('/ajaxconversation/{linkdata}', [ConversationController::class, 'ajax
 
 Route::post('/addconversationmessage', [ConversationController::class, 'addconversationmessage'])->name('addconversationmessage')->middleware(['auth']);
 
+Route::get('profile', [ProfileController::class, 'profile'])->middleware(['auth']);
+Route::post('/SaveAccountDetails', [ProfileController::class, 'SaveAccountDetails'])->name('saveprofile1')->middleware(['auth']);
+Route::post('/UpdatePassword', [ProfileController::class, 'UpdatePassword'])->name('saveprofile2')->middleware(['auth']);
+Route::post('/UpdateSettings', [ProfileController::class, 'UpdateSettings'])->name('saveprofile3')->middleware(['auth']);
 
 
 

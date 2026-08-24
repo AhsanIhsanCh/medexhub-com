@@ -1,32 +1,16 @@
-
 <!doctype html>
-
   <html lang="zxx" class="page-login-7">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Sign in to your MedExHub account.">
   <title>Sign In | MedExHub</title>
-  
   <link rel="stylesheet" href="../theme_files/css/style_v1.css"/>
   <link rel="stylesheet" href="../theme_files/css/style_common.css"/>
 </head>
 <body>
-
-
 @include('frontend.header')
-
-
-
-
-
-
-
-
-  
-
-
-
+@include('messages')
   <main>
     <section class="page-hero" aria-labelledby="page-title">
       <div class="hero-content">
@@ -39,7 +23,6 @@
         </nav>
       </div>
     </section>
-
     <section class="signin-section" id="signin" aria-labelledby="signin-title">
       <div class="signin-card">
         <div class="signin-heading">
@@ -54,7 +37,6 @@
           <h2 id="signin-title">Sign In</h2>
           <p class="signin-subtitle">Enter your account details to continue to MedExHub.</p>
         </div>
-
           <form class="signin-form" action="{{ route('loginRequest') }}" method="post">
             @csrf
           <div class="form-field">
@@ -68,7 +50,6 @@
               <!-- <input id="email" name="email" type="email" autocomplete="email" placeholder="Name@Example.Com" required> -->
             </div>
           </div>
-
           <div class="form-field">
             <label for="password">Password</label>
             <div class="input-shell">
@@ -82,16 +63,12 @@
           </div>
           <!-- <input type="submit" class="button button-primary submit-button" value="Sign In"> -->
           <button class="button button-primary submit-button" type="submit">Sign In</button>
-          <button class="button button-primary submit-button" type="submit">Register</button>
+          <a class="button button-primary submit-button" href="/register">Register</a>
         </form>
       </div>
     </section>
   </main>
-
 @include('frontend.footer')
-
-
-
 </body>
 </html>
 

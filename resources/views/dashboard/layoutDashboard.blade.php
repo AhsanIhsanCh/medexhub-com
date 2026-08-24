@@ -30,6 +30,9 @@
       @yield('examhistory')
       @yield('loginhistory')
       @yield('conversation')
+      @yield('profile')
+
+      
   </main>
   @include('frontend.footer')
   <script>

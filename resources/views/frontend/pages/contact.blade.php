@@ -1112,58 +1112,30 @@
                             </div>
                         @endif
 
-                        <form method="POST" action="" novalidate>
+                        <form method="POST" action="{{ route('sendcontactmessage') }}">
                             @csrf
-
                             <div class="honeypot" aria-hidden="true">
                                 <label for="website">Website</label>
                                 <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
                             </div>
-
                             <div class="form-grid">
                                 <div class="form-group">
-                                    <label class="form-label" for="name">
-                                        Full name <span class="required" aria-hidden="true">*</span>
-                                    </label>
-                                    <input
-                                        class="form-control"
-                                        id="name"
-                                        name="name"
-                                        type="text"
-                                        value="{{ old('name') }}"
-                                        maxlength="120"
-                                        autocomplete="name"
-                                        required
-                                    >
+                                    <label class="form-label" for="name">Full name <span class="required" aria-hidden="true">*</span></label>
+                                    <input class="form-control" id="name" name="name" type="text" value="{{ old('name') }}" maxlength="120" autocomplete="name" required>
                                     @error('name')
                                         <span class="field-error">{{ $message }}</span>
                                     @enderror
                                 </div>
-
                                 <div class="form-group">
-                                    <label class="form-label" for="email">
-                                        Email address <span class="required" aria-hidden="true">*</span>
-                                    </label>
-                                    <input
-                                        class="form-control"
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        value="{{ old('email') }}"
-                                        maxlength="190"
-                                        autocomplete="email"
-                                        required
-                                    >
+                                    <label class="form-label" for="email">Email address <span class="required" aria-hidden="true">*</span></label>
+                                    <input class="form-control" id="email" name="email" type="email" value="{{ old('email') }}" maxlength="190" autocomplete="email" required>
                                     <span class="field-help">Use the email linked to your account where possible.</span>
                                     @error('email')
                                         <span class="field-error">{{ $message }}</span>
                                     @enderror
                                 </div>
-
                                 <div class="form-group">
-                                    <label class="form-label" for="category">
-                                        Enquiry type <span class="required" aria-hidden="true">*</span>
-                                    </label>
+                                    <label class="form-label" for="category">Enquiry type <span class="required" aria-hidden="true">*</span></label>
                                     <select class="form-control" id="category" name="category" required>
                                         <option value="">Select an enquiry type</option>
                                         <option value="account" @selected(old('category') === 'account')>Account or login</option>
@@ -1179,70 +1151,31 @@
                                         <span class="field-error">{{ $message }}</span>
                                     @enderror
                                 </div>
-
                                 <div class="form-group">
                                     <label class="form-label" for="reference">Reference number</label>
-                                    <input
-                                        class="form-control"
-                                        id="reference"
-                                        name="reference"
-                                        type="text"
-                                        value="{{ old('reference') }}"
-                                        maxlength="100"
-                                        placeholder="Invoice or transaction ID, if relevant"
-                                    >
+                                    <input class="form-control" id="reference" name="reference" type="text" value="{{ old('reference') }}" maxlength="100"placeholder="Invoice or transaction ID, if relevant">
                                     @error('reference')
                                         <span class="field-error">{{ $message }}</span>
                                     @enderror
                                 </div>
-
                                 <div class="form-group full">
-                                    <label class="form-label" for="subject">
-                                        Subject <span class="required" aria-hidden="true">*</span>
-                                    </label>
-                                    <input
-                                        class="form-control"
-                                        id="subject"
-                                        name="subject"
-                                        type="text"
-                                        value="{{ old('subject') }}"
-                                        maxlength="160"
-                                        placeholder="Briefly describe your enquiry"
-                                        required
-                                    >
+                                    <label class="form-label" for="subject">Subject <span class="required" aria-hidden="true">*</span></label>
+                                    <input class="form-control" id="subject" name="subject" type="text" value="{{ old('subject') }}" maxlength="160" placeholder="Briefly describe your enquiry" required>
                                     @error('subject')
                                         <span class="field-error">{{ $message }}</span>
                                     @enderror
                                 </div>
-
                                 <div class="form-group full">
-                                    <label class="form-label" for="message">
-                                        Message <span class="required" aria-hidden="true">*</span>
-                                    </label>
-                                    <textarea
-                                        class="form-control"
-                                        id="message"
-                                        name="message"
-                                        maxlength="5000"
-                                        placeholder="Tell us what happened, which exam or subscription is affected, and any troubleshooting you have already tried."
-                                        required
-                                    >{{ old('message') }}</textarea>
+                                    <label class="form-label" for="message">Message <span class="required" aria-hidden="true">*</span></label>
+                                    <textarea class="form-control" id="message" name="message" maxlength="5000" placeholder="Tell us what happened, which exam or subscription is affected, and any troubleshooting you have already tried." required>{{ old('message') }}</textarea>
                                     <span class="field-help">Please do not include passwords, complete payment card details or patient-identifying information.</span>
                                     @error('message')
                                         <span class="field-error">{{ $message }}</span>
                                     @enderror
                                 </div>
-
                                 <div class="form-group full">
                                     <div class="checkbox-row">
-                                        <input
-                                            id="privacy_acknowledgement"
-                                            name="privacy_acknowledgement"
-                                            type="checkbox"
-                                            value="1"
-                                            @checked(old('privacy_acknowledgement'))
-                                            required
-                                        >
+                                        <input id="privacy_acknowledgement" name="privacy_acknowledgement" type="checkbox" value="1" @checked(old('privacy_acknowledgement')) required>
                                         <label for="privacy_acknowledgement">
                                             I understand that MedExHub will use the information in this form to respond to my enquiry in accordance with the
                                             <a href="/privacy">Privacy Policy</a>.
@@ -1252,7 +1185,6 @@
                                         <span class="field-error">{{ $message }}</span>
                                     @enderror
                                 </div>
-
                                 <div class="form-group full form-actions">
                                     <p>Fields marked with an asterisk are required.</p>
                                     <button class="btn btn-primary submit-btn" type="submit">Send message</button>

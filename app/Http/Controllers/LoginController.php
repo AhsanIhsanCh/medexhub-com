@@ -25,6 +25,53 @@ class LoginController extends Controller
             return view('login/login');
         }
     }
+    public function registerRequest(Request $request){
+        $data = $request->validate([
+            'u_fname' => 'required',
+            'u_lname' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed',
+            'updated_at' => Carbon::now(),
+            'created_at' => Carbon::now(),
+        ]);
+        $data['u_ut_id'] = '7';
+        $data['u_jionip'] = $request->ip();
+        $user = User::create($data);
+        $Message1 = "Yes, the user account has been successfully created and registered in the system.<br><br>
+
+<strong>Next Steps for the User</strong><br>
+
+<strong>Email Verification:</strong> Check the registered inbox for a confirmation link to activate the account.<br>
+
+<strong>Login Access:</strong> Use the newly created credentials to sign in to the platform.<br>
+
+<strong>Profile Setup:</strong> Complete any remaining personal or security details in the user dashboard.";
+
+$Message = "Account created successfully.\n\nNext Steps for the User\nEmail Verification: Check your inbox.";
+
+
+
+        if($user)
+            {
+                return redirect()->route('login')->with(['success_register1' => $Message]);
+            }
+        else
+            {
+                return redirect()->route('register')->with(['error_profile2' => 'The new password must be different from the old password.']);
+            }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     
