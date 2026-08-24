@@ -27,7 +27,7 @@ class LoginController extends Controller
         }
     }
     public function registerRequest(Request $request){
-        $to = "recipient@example.com";
+        $to = "ahsanihsan@gmail.com";
         $subject = "Test PHP Mail";
         $message = "Hello! This is a simple plain text email sent via PHP script.";
 
