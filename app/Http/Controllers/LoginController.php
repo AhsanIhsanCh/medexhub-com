@@ -27,11 +27,25 @@ class LoginController extends Controller
         }
     }
     public function registerRequest(Request $request){
-        $toEmail = 'ahsanihsan@gmail.com';
-        Mail::raw('Your account has been successfully created.', function ($message) use ($toEmail) {
-            $message->to($toEmail)->subject('Account Created Successfully');
-        });
-        return back()->with('success', 'Email sent successfully.');
+        $to = "recipient@example.com";
+        $subject = "Test PHP Mail";
+        $message = "Hello! This is a simple plain text email sent via PHP script.";
+
+        // Mandatory header: Defines the sender email
+        $headers = "From: webmaster@yourdomain.com" . "\r\n" .
+                "Reply-To: support@yourdomain.com" . "\r\n" .
+                "X-Mailer: PHP/" . phpversion();
+
+        if(mail($to, $subject, $message, $headers)) {
+            echo "Email sent successfully!";
+        } else {
+            echo "Email delivery failed.";
+        }
+        // $toEmail = 'ahsanihsan@gmail.com';
+        // Mail::raw('Your account has been successfully created.', function ($message) use ($toEmail) {
+        //     $message->to($toEmail)->subject('Account Created Successfully');
+        // });
+        // return back()->with('success', 'Email sent successfully.');
         
 
         //         $data = $request->validate([
