@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Mail\welcomeemail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+
 use Carbon\Carbon;
 class LoginController extends Controller
 {
@@ -26,7 +28,18 @@ class LoginController extends Controller
             return view('login/login');
         }
     }
+    
+    public function testMailRequest(){
+        $toEmail = "ahsanihsan@gmail.com";
+        $message = "Hello! This is a simple plain text email sent via PHP script.";
+        $subject = "Test PHP Mail";
+        $returnmailmessage = Mail::to($toEmail)->send(new welcomeemail($message,$subject));
+        dd($returnmailmessage);
+    }
+    
+    
     public function registerRequest(Request $request){
+       
         $to = "ahsanihsan@gmail.com";
         $subject = "Test PHP Mail";
         $message = "Hello! This is a simple plain text email sent via PHP script.";

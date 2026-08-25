@@ -55,7 +55,7 @@ Route::get('contact', function () { return view('frontend/pages/contact');})->na
 
 
 
-
+Route::get('testmail', [LoginController::class, 'testMailRequest']);
 
 
 //Dashboard Route
