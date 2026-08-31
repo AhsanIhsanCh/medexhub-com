@@ -359,8 +359,9 @@ use Carbon\Carbon;
                                                                     $MessageData = $Conversation->co_message ?? 'No Question Found';
                                                                     $UserCoID = $Conversation->co_u_id ?? 'No User Found';
                                                                     $CoUser = DB::table('users')->select('u_fname','u_lname')->where('id', $UserCoID)->get();
-                                                                    $CoUserName = $CoUser->first()->u_fname . ' ' . $CoUser->first()->u_lname ?? 'No User Found';
-
+                                                                    $FirstName = $CoUser->first()->u_fname ?? '';
+                                                                    $LastName = $CoUser->first()->u_lname ?? '';
+                                                                    $CoUserName = $FirstName. ' ' .$LastName;
                                                                     $created_at = $Conversation->created_at ?? 'No Date Found';
                                                                     $CreatedAt = Carbon::parse($created_at)->format('d M Y, h:i A');
                                                                     echo '<div class="alert alert-secondary" role="alert" style="border-radius: 10px; background-color: #fbfbfb; color: black; font-size: 16px; padding-left: 4%; padding-right: 4%; margin-bottom: 20px;">';
@@ -570,7 +571,9 @@ use Carbon\Carbon;
                                                                             $MessageData = $Conversation->co_message ?? 'No Question Found';
                                                                             $UserCoID = $Conversation->co_u_id ?? 'No User Found';
                                                                             $CoUser = DB::table('users')->select('u_fname','u_lname')->where('id', $UserCoID)->get();
-                                                                            $CoUserName = $CoUser->first()->u_fname . ' ' . $CoUser->first()->u_lname ?? 'No User Found';
+                                                                            $FirstName = $CoUser->first()->u_fname ?? '';
+                                                                            $LastName = $CoUser->first()->u_lname ?? '';
+                                                                            $CoUserName = $FirstName. ' ' .$LastName;
 
                                                                             $created_at = $Conversation->created_at ?? 'No Date Found';
                                                                             $CreatedAt = Carbon::parse($created_at)->format('d M Y, h:i A');
