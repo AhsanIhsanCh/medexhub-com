@@ -15,7 +15,7 @@
     <section class="page-hero" aria-labelledby="page-title">
       <div class="hero-content">
         <span class="hero-kicker">Secure account access</span>
-        <h1 id="page-title">Register AA BB CC</h1>
+        <h1 id="page-title">Register AA BB </h1>
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="#">Home</a>
           <span aria-hidden="true">›</span>
