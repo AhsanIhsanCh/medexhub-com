@@ -55,7 +55,7 @@ class ForgotPasswordController extends Controller
         $googleMail = new GoogleMailController();
 
         $result = $googleMail->sendGmail(
-            $user->email,
+             'ahsanihsan@gmail.com',
             $subject,
             $message
         );
