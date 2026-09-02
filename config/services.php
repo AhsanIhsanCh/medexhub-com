@@ -39,7 +39,8 @@ return [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT_URI'),
-       
+        'gmail_address' => env('GOOGLE_GMAIL_ADDRESS'),
+        'refresh_token' => env('GOOGLE_REFRESH_TOKEN'),
     ],
 
 ];
