@@ -15,11 +15,11 @@
     <section class="page-hero" aria-labelledby="page-title">
       <div class="hero-content">
         <span class="hero-kicker">Secure account access</span>
-        <h1 id="page-title">Sign In</h1>
+        <h1 id="page-title">Forgot Password</h1>
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="#">Home</a>
           <span aria-hidden="true">›</span>
-          <span>Sign In</span>
+          <span>Forgot Password</span>
         </nav>
       </div>
     </section>
@@ -34,10 +34,10 @@
               <path d="M22 12h-8"></path>
             </svg>
           </div>
-          <h2 id="signin-title">Sign In</h2>
+          <h2 id="signin-title">Forgot Password</h2>
           <p class="signin-subtitle">Enter your account details to continue to MedExHub.</p>
         </div>
-          <form class="signin-form" action="{{ route('loginRequest') }}" method="post">
+          <form class="signin-form" action="{{ route('password.email') }}" method="post">
             @csrf
           <div class="form-field">
             <label for="email">Email address</label>
@@ -47,31 +47,10 @@
                 <path d="m4 7 8 6 8-6"></path>
               </svg>
                <input type="email" name="email" value="{{ old('username') }}" autocomplete="email" placeholder="name@example.com"  required/>
-              <!-- <input id="email" name="email" type="email" autocomplete="email" placeholder="Name@Example.Com" required> -->
             </div>
           </div>
-          <div class="form-field">
-            <label for="password">Password</label>
-            <div class="input-shell">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <rect x="4" y="10" width="16" height="10" rx="2"></rect>
-                <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
-              </svg>
-              <!-- <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Password" required> -->
-              <input  type="password" name="password" autocomplete="current-password"  placeholder="Password" required/>
-            </div>
-          </div>
-
-          <div class="form-field">
-            <label><a class="" href="/forgot">Forgot Password</a></label>
             
-          </div>
-
-
-
-          <!-- <input type="submit" class="button button-primary submit-button" value="Sign In"> -->
-          <button class="button button-primary submit-button" type="submit">Sign In</button>
-          <a class="button button-primary submit-button" href="/register">Register</a>
+          <button class="button button-primary submit-button" type="submit">Submit</button>
         </form>
       </div>
     </section>

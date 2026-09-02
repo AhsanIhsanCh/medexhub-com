@@ -24,6 +24,7 @@ use App\Http\Controllers\CommonController;
 
 
 use App\Http\Controllers\GoogleMailController;
+use App\Http\Controllers\ForgotPasswordController;
 
 
 
@@ -41,6 +42,13 @@ Route::post('loginRequest', [LoginController::class, 'loginRequest'])->name('log
 
 Route::post('registerRequest', [LoginController::class, 'registerRequest'])->name('registerRequest');
 
+
+Route::get('forgot', function () { return view('login/forgot');})->name('forgot');
+
+
+
+
+Route::post('/forgot-password', [ForgotPasswordController::class,'sendResetLink'])->name('password.email');
 
 
 
