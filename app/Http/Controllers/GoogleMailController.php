@@ -59,7 +59,7 @@ class GoogleMailController extends Controller
     public function sendTest()
     {
         $this->sendGmail(
-            'medextech7@gmail.com',
+            'ahsanihsan@gmail.com',
             'Test Email',
             '<h2>Hello</h2><p>This email was sent from Laravel 12 using the Gmail API.</p>'
         );
