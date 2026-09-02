@@ -23,6 +23,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommonController;
 
 
+use App\Http\Controllers\GoogleMailController;
+
+
+
+
 
 use App\Http\Middleware\ValidUser;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +41,13 @@ Route::post('loginRequest', [LoginController::class, 'loginRequest'])->name('log
 
 Route::post('registerRequest', [LoginController::class, 'registerRequest'])->name('registerRequest');
 
+
+
+
+Route::get('/google/auth', [GoogleMailController::class, 'redirect']);
+Route::get('/google/callback', [GoogleMailController::class, 'callback']);
+
+Route::get('/test-gmail', [GoogleMailController::class, 'sendTest']);
 
 
 
