@@ -11,8 +11,7 @@ class ForgotPasswordController extends Controller
 {
     public function sendResetLink(Request $request)
     {
-        echo "test";
-        die;
+        
         
         $request->validate([
             'email' => 'required|email|exists:users,email',
@@ -27,7 +26,8 @@ class ForgotPasswordController extends Controller
         $resetUrl = url('/reset-password/' . $token . '?email=' . urlencode($user->email));
 
         $subject = 'Reset Your Password';
-
+echo "test2";
+        die;
         $message = '
             <h2>Reset Your Password</h2>
 
