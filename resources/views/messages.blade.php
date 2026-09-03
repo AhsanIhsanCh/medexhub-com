@@ -106,3 +106,11 @@
         setTimeout(() => {const popup = document.getElementById('success-popup');if (popup) {popup.classList.add('hide');setTimeout(() => {popup.remove();}, 300);}}, 10000);
     </script>
 @endif
+@if (session('success_resetpass'))
+    <div id="success-popup" class="success-popup">{{ session('success_resetpass') }}</div>
+    <script>
+        setTimeout(() => {const popup = document.getElementById('success-popup');if (popup) {popup.classList.add('hide');setTimeout(() => {popup.remove();}, 300);}}, 10000);
+    </script>
+@endif
+
+

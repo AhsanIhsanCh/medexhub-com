@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Http\Controllers\GoogleMailController;
 
-
-
-
-
-
 class ForgotPasswordController extends Controller
 {
     public function sendResetLink(Request $request)
@@ -59,7 +54,7 @@ class ForgotPasswordController extends Controller
         );
         return back()->with('success_fotgotpass', 'Password reset link has been sent to your email.');
     }
-
+    
     public function resetPassword(Request $request)
     {
         $requestData = $request->validate([
@@ -67,32 +62,22 @@ class ForgotPasswordController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:8|confirmed',
         ]);
-
-        //dd($requestData);
-
-        $status = Password::reset(
-            $request->only(
+        $status = Password::reset($request->only(
                 'email',
                 'password',
                 'password_confirmation',
                 'token'
             ),
             function ($user, $password) {
-
                 $user->forceFill([
                     'password' => Hash::make($password),
                     'remember_token' => Str::random(60),
                 ])->save();
             }
         );
-
         if ($status === Password::PASSWORD_RESET) {
-            return redirect('/login')
-                ->with('success', 'Your password has been reset successfully.');
+            return redirect('/login')->with('success_resetpass', 'Your password has been reset successfully.');
         }
-
-        return back()->withErrors([
-            'email' => __($status)
-        ]);
+        return back()->withErrors(['email' => __($status)]);
     }
 }

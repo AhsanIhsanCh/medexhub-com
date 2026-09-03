@@ -61,15 +61,9 @@
               <input  type="password" name="password" autocomplete="current-password"  placeholder="Password" required/>
             </div>
           </div>
-
           <div class="form-field">
             <label><a class="" href="/forgotpage">Forgot Password</a></label>
-            
           </div>
-
-
-
-          <!-- <input type="submit" class="button button-primary submit-button" value="Sign In"> -->
           <button class="button button-primary submit-button" type="submit">Sign In</button>
           <a class="button button-primary submit-button" href="/register">Register</a>
         </form>
@@ -79,4 +73,3 @@
 @include('frontend.footer')
 </body>
 </html>
-
