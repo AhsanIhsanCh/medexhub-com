@@ -11,7 +11,7 @@
   --shadow: 0 24px 60px rgba(31, 70, 83, 0.12);
 }
 
-.text-danger {color: #dc3545;}
+.text-danger-message {color: #dc3545;font-weight: bold;}
 
 
 
