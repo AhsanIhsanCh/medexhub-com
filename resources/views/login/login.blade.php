@@ -63,7 +63,7 @@
           </div>
 
           <div class="form-field">
-            <label><a class="" href="/forgot">Forgot Password</a></label>
+            <label><a class="" href="/forgotpage">Forgot Password</a></label>
             
           </div>
 

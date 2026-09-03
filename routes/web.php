@@ -43,7 +43,7 @@ Route::post('loginRequest', [LoginController::class, 'loginRequest'])->name('log
 Route::post('registerRequest', [LoginController::class, 'registerRequest'])->name('registerRequest');
 
 
-Route::get('forgot', function () { return view('login/forgot');})->name('forgot');
+Route::get('forgotpage', function () { return view('login/forgot');})->name('forgotpage');
 
 
 
