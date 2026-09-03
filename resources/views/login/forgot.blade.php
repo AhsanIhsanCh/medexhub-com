@@ -48,7 +48,7 @@
               </svg>
                 <input type="email" name="email" value="{{ old('username') }}" autocomplete="email" placeholder="name@example.com"  required/><br>
                 @error('email')
-                  <span class="text-danger">{{ $message }}</span>
+                  <span class="text-danger-message">{{ $message }}</span>
                 @enderror
             </div>
           </div>
