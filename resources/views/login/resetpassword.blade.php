@@ -61,7 +61,9 @@
                 <input  type="password" name="password_confirmation" autocomplete="password_confirmation"  placeholder="Confirm Password" required/>
                 </div>
             </div>
-            
+              @error('password')
+                <div class="text-danger">{{ $message }}</div>
+              @enderror
           <button class="button button-primary submit-button" type="submit">Submit</button>
         </form>
       </div>
