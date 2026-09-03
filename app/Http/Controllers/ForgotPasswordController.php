@@ -68,7 +68,7 @@ class ForgotPasswordController extends Controller
             'password' => 'required|min:8|confirmed',
         ]);
 
-        dd($requestData);
+        //dd($requestData);
 
         $status = Password::reset(
             $request->only(
