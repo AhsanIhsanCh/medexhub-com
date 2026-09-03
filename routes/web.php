@@ -48,7 +48,7 @@ Route::get('forgotpage', function () { return view('login/forgot');})->name('for
 
 
 
-Route::post('/forgot-password', [ForgotPasswordController::class,'sendResetLink'])->name('passwordemail');
+Route::post('/forgotpassword', [ForgotPasswordController::class,'sendResetLink'])->name('passwordemail');
 
 
 
