@@ -54,8 +54,7 @@ class ForgotPasswordController extends Controller
             MedexTech</p>
         ';
 
-        dd($resetUrl);
-        die;
+     
 
 
         $googleMail = new GoogleMailController();
