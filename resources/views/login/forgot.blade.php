@@ -37,7 +37,7 @@
           <h2 id="signin-title">Forgot Password</h2>
           <p class="signin-subtitle">Enter your account details to continue to MedExHub.</p>
         </div>
-          <form class="signin-form" action="{{ route('password.email') }}" method="post">
+          <form class="signin-form" action="{{ route('passwordemail') }}" method="post">
             @csrf
           <div class="form-field">
             <label for="email">Email address</label>
