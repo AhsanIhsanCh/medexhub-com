@@ -37,8 +37,10 @@
           <h2 id="signin-title">Reset Password</h2>
           <p class="signin-subtitle">Enter your account details to continue to MedExHub.</p>
         </div>
-          <form class="signin-form" action="{{ route('passwordemail') }}" method="post">
+          <form class="signin-form" action="{{ route('password.update') }}" method="post">
             @csrf
+            <input type="hidden" name="token" value="{{ $token }}">
+            <input type="hidden" name="email" value="{{ $email }}">
           <div class="form-field">
                 <label for="password">Password</label>
                 <div class="input-shell">

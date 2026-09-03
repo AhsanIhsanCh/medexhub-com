@@ -44,18 +44,9 @@ Route::post('registerRequest', [LoginController::class, 'registerRequest'])->nam
 
 
 Route::get('forgotpage', function () { return view('login/forgot');})->name('forgotpage');
-
-
-
-
 Route::post('/forgotpassword', [ForgotPasswordController::class,'sendResetLink'])->name('passwordemail');
+Route::get('/reset-password/{token}', function ($token) { return view('login.resetpassword', [ 'token' => $token, 'email' => request('email'),]);})->name('password.reset');
 
-Route::get('/reset-password/{token}', function ($token) {
-    return view('login.resetpassword', [
-        'token' => $token,
-        'email' => request('email'),
-    ]);
-})->name('password.reset');
 
 Route::post('/reset-password', [
     ForgotPasswordController::class,
