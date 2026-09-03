@@ -16,16 +16,16 @@ class ForgotPasswordController extends Controller
         $request->validate([
             'email' => 'required|email|exists:users,email',
         ]);
-echo "test2";
-        die;
+
         $user = User::where('email', $request->email)->first();
 
         // Generate Laravel password reset token
         $token = Password::createToken($user);
 
         // Generate reset password URL
-        $resetUrl = url('/reset-password/' . $token . '?email=' . urlencode($user->email));
-
+        echo $resetUrl = url('/reset-password/' . $token . '?email=' . urlencode($user->email));
+echo "test2";
+        die;
         $subject = 'Reset Your Password';
 
         $message = '
