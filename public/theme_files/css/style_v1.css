@@ -1,9 +1,3 @@
-
- 
- 
- /* MedExHub shared CSS bundle. Page-scoped to prevent conflicts. */
-
-/* ===== Dashboard(8).html | html.page-dashboard-8 ===== */
 html.page-dashboard-8{
       --ink: #173047;
       --ink-soft: #496276;
@@ -39,20 +33,13 @@ html.page-dashboard-8{
       --container: 1380px;
 }
 html.page-dashboard-8 *{box-sizing: border-box;}
-html.page-dashboard-8 body{margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
-      background:
+html.page-dashboard-8 body{margin: 0;font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;color: var(--ink);background:
         radial-gradient(circle at 7% 10%, rgba(40, 120, 242, 0.12), transparent 30%),
         radial-gradient(circle at 88% 3%, rgba(40, 181, 122, 0.12), transparent 28%),
         radial-gradient(circle at 78% 82%, rgba(239, 79, 143, 0.08), transparent 34%),
-        var(--bg);
-      min-height: 100vh;}
-html.page-dashboard-8 a{color: inherit;
-      text-decoration: none;}
-html.page-dashboard-8 .page-shell{min-height: 100vh;
-      position: relative;
-      overflow: hidden;}
+        var(--bg);min-height: 100vh;}
+html.page-dashboard-8 a{color: inherit;text-decoration: none;}
+html.page-dashboard-8 .page-shell{min-height: 100vh;position: relative;overflow: hidden;}
 html.page-dashboard-8 .page-shell::before,
 html.page-dashboard-8 .page-shell::after{content: "";
       position: fixed;
