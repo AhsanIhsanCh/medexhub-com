@@ -50,6 +50,18 @@ Route::get('forgotpage', function () { return view('login/forgot');})->name('for
 
 Route::post('/forgotpassword', [ForgotPasswordController::class,'sendResetLink'])->name('passwordemail');
 
+Route::get('/reset-password/{token}', function ($token) {
+    return view('auth.reset-password', [
+        'token' => $token,
+        'email' => request('email'),
+    ]);
+})->name('password.reset');
+
+Route::post('/reset-password', [
+    ForgotPasswordController::class,
+    'resetPassword'
+])->name('password.update');
+
 
 
 Route::get('/google/auth', [GoogleMailController::class, 'redirect']);
