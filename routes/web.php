@@ -51,7 +51,7 @@ Route::get('forgotpage', function () { return view('login/forgot');})->name('for
 Route::post('/forgotpassword', [ForgotPasswordController::class,'sendResetLink'])->name('passwordemail');
 
 Route::get('/reset-password/{token}', function ($token) {
-    return view('auth.reset-password', [
+    return view('login.resetpassword', [
         'token' => $token,
         'email' => request('email'),
     ]);
