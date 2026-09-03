@@ -11,46 +11,22 @@ class ForgotPasswordController extends Controller
 {
     public function sendResetLink(Request $request)
     {
-        
-        
-
-      $request->validate([
-    'email' => 'required|email|exists:users,email',
-        ], [
+        $request->validate(['email' => 'required|email|exists:users,email',], 
+        [
             'email.required' => 'Please enter your email address.',
             'email.email' => 'Please enter a valid email address.',
             'email.exists' => 'This email address is not registered.',
         ]);
-
-
-        // $request->validate([
-        //     'email' => 'required|email|exists:users,email',
-        // ]);
-       
-
-
-
-
-
-
-
         $user = User::where('email', $request->email)->first();
-
         // Generate Laravel password reset token
         $token = Password::createToken($user);
-
         // Generate reset password URL
         $resetUrl = url('/reset-password/' . $token . '?email=' . urlencode($user->email));
-
         $subject = 'Reset Your Password';
-
         $message = '
             <h2>Reset Your Password</h2>
-
-            <p>Hello ' . e($user->name ?? $user->email) . ',</p>
-
+            <p>Hello ' . e($user->u_fname ?? $user->u_lname) . ',</p>
             <p>We received a request to reset your password.</p>
-
             <p>
                 <a href="' . $resetUrl . '"
                    style="
@@ -64,27 +40,20 @@ class ForgotPasswordController extends Controller
                     Reset Password
                 </a>
             </p>
-
             <p>If you did not request a password reset, you can ignore this email.</p>
-
             <p>Regards,<br>
-            MedexTech</p>
+            MedExHub</p>
         ';
-
-     
-
-
         $googleMail = new GoogleMailController();
-
         $result = $googleMail->sendGmail(
             $user->email,
             $subject,
             $message
         );
-
-        return back()->with(
-            'success',
-            'Password reset link has been sent to your email.'
-        );
+        return back()->with('success_fotgotpass', 'Password reset link has been sent to your email.');
+        // return back()->with(
+        //     'success',
+        //     'Password reset link has been sent to your email.'
+        // );
     }
 }
