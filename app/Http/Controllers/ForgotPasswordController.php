@@ -14,17 +14,13 @@ class ForgotPasswordController extends Controller
         
         
 
-        try {
-    $request->validate([
-        'email' => 'required|email|exists:users,email',
-    ]);
-} catch (ValidationException $e) {
-    return response()->json([
-        'success' => false,
-        'message' => 'Validation failed!',
-        'errors'  => $e->errors()
-    ], 422);
-}
+      $request->validate([
+    'email' => 'required|email|exists:users,email',
+        ], [
+            'email.required' => 'Please enter your email address.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.exists' => 'This email address is not registered.',
+        ]);
 
 
         // $request->validate([
