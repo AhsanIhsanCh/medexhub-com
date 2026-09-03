@@ -7,6 +7,37 @@
   <title>Sign In | MedExHub</title>
   <link rel="stylesheet" href="../theme_files/css/style_v1.css"/>
   <link rel="stylesheet" href="../theme_files/css/style_common.css"/>
+  <style>
+            .login-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #555;
+        }
+
+        .remember input {
+            width: 16px;
+            height: 16px;
+        }
+
+        .forgot-password {
+            color: #3769ac;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+          </style>
 </head>
 <body>
 @include('frontend.header')
@@ -61,11 +92,15 @@
               <input  type="password" name="password" autocomplete="current-password"  placeholder="Password" required/>
             </div>
           </div>
-          <div class="form-field">
-            <label><a class="" href="/forgotpage">Forgot Password</a></label>
+          <div class="login-options">
+            <label class="remember">
+                <!-- <input style="width: 16px;height: 16px;" type="checkbox" name="remember">
+                Remember me -->
+            </label>
+            <a href="/forgotpage" class="forgot-password"> Forgot Password?</a>
           </div>
           <button class="button button-primary submit-button" type="submit">Sign In</button>
-          <a class="button button-primary submit-button" href="/register">Register</a>
+          <a style="color:#fff" class="submit-button button button-reg" href="/register">Register</a>
         </form>
       </div>
     </section>
