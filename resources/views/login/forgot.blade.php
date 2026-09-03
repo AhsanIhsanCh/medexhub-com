@@ -47,12 +47,11 @@
                 <path d="m4 7 8 6 8-6"></path>
               </svg>
                 <input type="email" name="email" value="{{ old('username') }}" autocomplete="email" placeholder="name@example.com"  required/>
-                <div style="margin-top:10px;"></div>
-                @error('email')
-                  <span class="text-danger-message">{{ $message }}</span>
-                @enderror
             </div>
           </div>
+          @error('email')
+            <span class="text-danger-message">{{ $message }}</span>
+          @enderror
           <button class="button button-primary submit-button" type="submit">Submit</button>
         </form>
       </div>

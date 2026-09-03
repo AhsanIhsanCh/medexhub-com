@@ -62,7 +62,7 @@
                 </div>
             </div>
               @error('password')
-                <div class="text-danger">{{ $message }}</div>
+                <div class="text-danger-message">{{ $message }}</div>
               @enderror
           <button class="button button-primary submit-button" type="submit">Submit</button>
         </form>
