@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
+use App\Http\Controllers\GoogleMailController;
 
 use Carbon\Carbon;
 class LoginController extends Controller
