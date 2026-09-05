@@ -63,12 +63,12 @@ class LoginController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             ]);
-        $verificationUrl = URL::temporarySignedRoute('verification.verify',now()->addMinutes(60),[
-        'id' => $user->getKey(),
-        'hash' => sha1($user->getEmailForVerification()),
-        ]);
+        // $verificationUrl = URL::temporarySignedRoute('verification.verify',now()->addMinutes(60),[
+        // 'id' => $user->getKey(),
+        // 'hash' => sha1($user->getEmailForVerification()),
+        // ]);
 
-
+        $verificationUrl = "http://medwxhub.com";
 
 
         
