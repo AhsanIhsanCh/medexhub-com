@@ -49,6 +49,9 @@
                <input type="text" name="u_fname" value="{{ old('username') }}" autocomplete="First Name" placeholder="First Name"  required/>
             </div>
           </div>
+          @error('u_fname')
+            <span class="text-danger-message">{{ $message }}</span>
+          @enderror
           <div class="form-field">
             <label for="email">Last Name :</label>
             <div class="input-shell">
@@ -59,6 +62,9 @@
                <input type="text" name="u_lname" value="{{ old('username') }}" autocomplete="Last Name" placeholder="Last Name"  required/>
             </div>
           </div>
+          @error('u_lname')
+            <span class="text-danger-message">{{ $message }}</span>
+          @enderror
           <div class="form-field">
             <label for="email">Email address</label>
             <div class="input-shell">
@@ -69,26 +75,32 @@
                <input type="email" name="email" value="{{ old('username') }}" autocomplete="email" placeholder="name@example.com"  required/>
             </div>
           </div>
-            <div class="form-field">
-                <label for="password">Password</label>
-                <div class="input-shell">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <rect x="4" y="10" width="16" height="10" rx="2"></rect>
-                    <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
-                </svg>
-                <input  type="password" name="password" autocomplete="password"  placeholder="Password" required/>
-                </div>
-            </div>
-            <div class="form-field">
-                <label for="password">Confirm Password</label>
-                <div class="input-shell">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <rect x="4" y="10" width="16" height="10" rx="2"></rect>
-                    <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
-                </svg>
-                <input  type="password" name="password_confirmation" autocomplete="password_confirmation"  placeholder="Confirm Password" required/>
-                </div>
-            </div>
+          @error('email')
+            <span class="text-danger-message">{{ $message }}</span>
+          @enderror
+          <div class="form-field">
+              <label for="password">Password</label>
+              <div class="input-shell">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="4" y="10" width="16" height="10" rx="2"></rect>
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+              </svg>
+              <input  type="password" name="password" autocomplete="password"  placeholder="Password" required/>
+              </div>
+          </div>
+          <div class="form-field">
+              <label for="password">Confirm Password</label>
+              <div class="input-shell">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="4" y="10" width="16" height="10" rx="2"></rect>
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+              </svg>
+              <input  type="password" name="password_confirmation" autocomplete="password_confirmation"  placeholder="Confirm Password" required/>
+              </div>
+          </div>
+          @error('password')
+            <span class="text-danger-message">{{ $message }}</span>
+          @enderror
           <button class="button button-primary submit-button" type="submit">Register</button>
         </form>
       </div>
