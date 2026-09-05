@@ -67,7 +67,7 @@ class LoginController extends Controller
         // 'id' => $user->getKey(),
         // 'hash' => sha1($user->getEmailForVerification()),
         // ]);
-
+        $Email = $request->input('email');
         $verificationUrl = "http://medwxhub.com";
 
 
@@ -96,7 +96,7 @@ class LoginController extends Controller
         ';
         $googleMail = new GoogleMailController();
         $result = $googleMail->sendGmail(
-            $user->email,
+            $Email,
             $subject,
             $message
         );
