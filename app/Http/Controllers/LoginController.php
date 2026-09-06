@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Mail\welcomeemail;
@@ -10,7 +9,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\GoogleMailController;
-
 use Carbon\Carbon;
 class LoginController extends Controller
 {
@@ -30,17 +28,8 @@ class LoginController extends Controller
             return view('login/login');
         }
     }
-    
-    // public function testMailRequest(){
-    //     $toEmail = "ahsanihsan@gmail.com";
-    //     $message = "Hello! This is a simple plain text email sent via PHP script.";
-    //     $subject = "Test PHP Mail";
-    //     $returnmailmessage = Mail::to($toEmail)->send(new welcomeemail($message,$subject));
-    //     dd($returnmailmessage);
-    // }
-    //'email' => 'required|email|unique:users,email',
-    
-    public function registerRequest(Request $request){
+    public function registerRequest(Request $request)
+    {
         $requestData = $request->validate([
             'u_fname' => 'required',
             'u_lname' => 'required',
@@ -69,31 +58,78 @@ class LoginController extends Controller
         'hash' => sha1($user->getEmailForVerification()),
         ]);
         $Email = $request->input('email');
-        // $verificationUrl = "http://medwxhub.com";
-
-
-        
+        $FName = $request->input('u_fname');
+        $LName = $request->input('u_lname');
+        //Register Email Design
         $subject = 'New Registration';
         $message = '
-            <h2>New Registration</h2>
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Verify Your Email</title>
+            </head>
+            <body style="margin:0; padding:0; background:#f4f6f9; font-family:Arial, Helvetica, sans-serif;">
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f6f9; padding:40px 15px;">
+                    <tr>
+                        <td align="center">
+                            <table width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;background:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,0.08);">
+                                <!-- Header -->
+                                <tr>
+                                    <td align="center" style="background:#3769ac;padding:30px 20px;">
+                                        <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:600;">MedExHub</h1>
+                                    </td>
+                                </tr>
+                                <!-- Content -->
+                                <tr>
+                                    <td style="padding:40px 35px; color:#333333;">
+                                        <h2 style="margin:0 0 20px;font-size:24px;color:#222222;text-align:center;">Verify Your Email Address </h2>
+                                        <p style="margin:0 0 20px;font-size:16px;line-height:1.7;">Hi {{ $FName }}  {{ $FName }},</p>
+                                        <p style="margin:0 0 25px;font-size:16px;line-height:1.7;color:#555555;">
+                                            Thank you for creating an account with MedExHub.
+                                            Please verify your email address by clicking the button below.
+                                        </p>
+                                        <!-- Verify Button -->
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td align="center" style="padding:10px 0 30px;">
+                                                    <a href="{{ $verificationUrl }}" style="display:inline-block;background:#3769ac;color:#ffffff;text-decoration:none;padding:14px 30px;border-radius:6px;font-size:16px;font-weight:bold;">
+                                                        Verify Email Address
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <p style="margin:0 0 15px;font-size:14px;line-height:1.6;color:#777777;">
+                                            If the button above does not work, copy and paste
+                                            the following link into your browser:
+                                        </p>
+                                        <p style="margin:0 0 25px;font-size:13px;line-height:1.6;word-break:break-all;color:#3769ac;">
+                                            {{ $verificationUrl }}
+                                        </p>
+                                        <p style="margin:0;font-size:14px;line-height:1.6;color:#777777;">
+                                            If you did not create this account, you can safely ignore this email.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <!-- Footer -->
+                                <tr>
+                                    <td align="center" style="background:#f7f8fa;padding:25px 20px;border-top:1px solid #eeeeee;">
+                                        <p style="margin:0 0 8px;font-size:13px;color:#888888;">©  MedExMed. All rights reserved.</p>
+                                        <p style="margin:0;font-size:12px;color:#aaaaaa;">This is an automated email. Please do not reply.</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </body>
+            </html>
             
-            <p>We received a request to reset your password.</p>
-            <p>
-                <a href="' . $verificationUrl . '"
-                   style="
-                        background:#3769ac;
-                        color:#ffffff;
-                        padding:12px 20px;
-                        text-decoration:none;
-                        border-radius:5px;
-                        display:inline-block;
-                   ">
-                    Reset Password
-                </a>
-            </p>
-            <p>If you did not request a password reset, you can ignore this email.</p>
-            <p>Regards,<br>
-            MedExHub</p>
+        
+        
+        
+       
         ';
         $googleMail = new GoogleMailController();
         $result = $googleMail->sendGmail(
@@ -102,83 +138,9 @@ class LoginController extends Controller
             $message
         );
         return back()->with('success_fotgotpass', 'Password reset link has been sent to your email.');
-    
-    
-        
-    
-    
-        // $to = "ahsanihsan@gmail.com";
-        // $subject = "Test PHP Mail";
-        // $message = "Hello! This is a simple plain text email sent via PHP script.";
-
-        // // Mandatory header: Defines the sender email
-        // $headers = "From: webmaster@yourdomain.com" . "\r\n" .
-        //         "Reply-To: support@yourdomain.com" . "\r\n" .
-        //         "X-Mailer: PHP/" . phpversion();
-
-        // if(mail($to, $subject, $message, $headers)) {
-        //     echo "Email sent successfully!";
-        // } else {
-        //     echo "Email delivery failed.";
-    
-        // $toEmail = 'ahsanihsan@gmail.com';
-        // Mail::raw('Your account has been successfully created.', function ($message) use ($toEmail) {
-        //     $message->to($toEmail)->subject('Account Created Successfully');
-        // });
-        // return back()->with('success', 'Email sent successfully.');
-        
-
-        //         $data = $request->validate([
-        //             'u_fname' => 'required',
-        //             'u_lname' => 'required',
-        //             'email' => 'required|email',
-        //             'password' => 'required|confirmed',
-        //             'updated_at' => Carbon::now(),
-        //             'created_at' => Carbon::now(),
-        //         ]);
-        //         $data['u_ut_id'] = '7';
-        //         $data['u_jionip'] = $request->ip();
-        //         $user = User::create($data);
-        //         $Message1 = "Yes, the user account has been successfully created and registered in the system.<br><br>
-
-        // <strong>Next Steps for the User</strong><br>
-
-        // <strong>Email Verification:</strong> Check the registered inbox for a confirmation link to activate the account.<br>
-
-        // <strong>Login Access:</strong> Use the newly created credentials to sign in to the platform.<br>
-
-        // <strong>Profile Setup:</strong> Complete any remaining personal or security details in the user dashboard.";
-
-        // $Message = "Account created successfully.\n\nNext Steps for the User\nEmail Verification: Check your inbox.";
-
-
-
-        //         if($user)
-        //             {
-        //                 return redirect()->route('login')->with(['success_register1' => $Message]);
-        //             }
-        //         else
-        //             {
-        //                 return redirect()->route('register')->with(['error_profile2' => 'The new password must be different from the old password.']);
-        //             }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-    public function adminRegisterSave(Request $request){
+    public function adminRegisterSave(Request $request)
+    {
         $data = $request->validate([
             'u_fname' => 'required',
             'u_lname' => 'required',
@@ -214,7 +176,8 @@ class LoginController extends Controller
             return view('admin/pages/login');
         }
     }
-    public function dashboardPage(){
+    public function dashboardPage()
+    {
         if (Auth::check()) {
             return view('admin/index');
         } else {
@@ -222,26 +185,10 @@ class LoginController extends Controller
             return view('admin/pages/login');
         }
     }
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         //return view('admin/pages/login');
         return view('landing');
     }
-
-
-
-
 }
-
-
-
-
-// $password = 'secretpassword';
-        // echo $hashedPassword = Hash::make($password);
-        // echo "<br>";
-        // echo $username = $request->input('email');
-        // echo $Password = $request->input('password');
-
-
-        // $user = Auth::user(); // Retrieve the authenticated user object
-        //     $userId = Auth::id(); // Retrieve the authenticated user's ID

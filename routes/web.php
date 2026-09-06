@@ -27,38 +27,20 @@ Route::get('login', function () { return view('login/login');})->name('login');
 Route::get('register', function () { return view('login/register');})->name('register');
 Route::post('loginRequest', [LoginController::class, 'loginRequest'])->name('loginRequest');
 Route::post('registerRequest', [LoginController::class, 'registerRequest'])->name('registerRequest');
-
-
-
 Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) {
-
     $user = User::findOrFail($id);
-
-   
-
     if (! hash_equals(
         (string) $hash,
         sha1($user->getEmailForVerification())
     )) {
         abort(403);
     }
-
-
-
     if (! $user->hasVerifiedEmail()) {
         $user->markEmailAsVerified();
         User::find($user->id)->update(['u_ut_id' => 99]); 
     }
-
-    return redirect('/login')
-        ->with('success', 'Your email has been verified successfully.');
-
-})->middleware('signed')
-  ->name('verification.verify');
-
-
-
-
+    return redirect('/login')->with('success', 'Your email has been verified successfully.');
+    })->middleware('signed')->name('verification.verify');
 Route::get('forgotpage', function () { return view('login/forgot');})->name('forgotpage');
 Route::post('/forgotpassword', [ForgotPasswordController::class,'sendResetLink'])->name('passwordemail');
 Route::get('/reset-password/{token}', function ($token) { return view('login.resetpassword', [ 'token' => $token, 'email' => request('email'),]);})->name('password.reset');
