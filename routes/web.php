@@ -34,7 +34,7 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) 
 
     $user = User::findOrFail($id);
 
-    dump($user);
+   
 
     if (! hash_equals(
         (string) $hash,
@@ -43,9 +43,11 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) 
         abort(403);
     }
 
+
+
     if (! $user->hasVerifiedEmail()) {
         $user->markEmailAsVerified();
-        User::where('status', 'active')->update(['u_ut_id' => 99]);
+        User::find($user->id)->update(['u_ut_id' => 99]); 
     }
 
     return redirect('/login')
