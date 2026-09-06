@@ -43,6 +43,11 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) 
 
     if (! $user->hasVerifiedEmail()) {
         $user->markEmailAsVerified();
+        $user = User::create([
+            
+            'u_ut_id' => 99,
+            
+            ]);
     }
 
     return redirect('/login')
