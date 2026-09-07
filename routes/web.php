@@ -37,7 +37,7 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) 
     }
     if (! $user->hasVerifiedEmail()) {
         $user->markEmailAsVerified();
-        User::find($user->id)->update(['u_ut_id' => 99]); 
+        User::find($user->id)->update(['u_ut_id' => 5]); 
     }
     return redirect('/login')->with('success', 'Your email has been verified successfully.');
     })->middleware('signed')->name('verification.verify');
