@@ -107,6 +107,8 @@ class LoginController extends Controller
                                         <p style="margin:0 0 25px;font-size:13px;line-height:1.6;word-break:break-all;color:#3769ac;">'.$verificationUrl.'</p>
                                         <p style="margin:0;font-size:14px;line-height:1.6;color:#777777;">
                                             If you did not create this account, you can safely ignore this email.
+                                            <br><br><br>Regards,
+                                            <br>MedExHub
                                         </p>
                                     </td>
                                 </tr>

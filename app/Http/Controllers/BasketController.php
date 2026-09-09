@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 class BasketController extends Controller
 {
-    
-
-    function userbasketdata(){
+    function userbasketdata()
+    {
         $userId = auth()->id();
         $Baskets = DB::table('baskets')->where('ba_u_id', $userId)->where('ba_status', '0')->orderBy('created_at', 'desc')->get();
         return view('dashboard/subscription/basket',['u_id' => $userId, 'Baskets' => $Baskets]);
     }
-    function buyexam($e_id){
+    function buyexam($e_id)
+    {
         $userId = auth()->id();
         $Exams = DB::table('exams')->select('e_inner_level','e_price1y')->where('e_id', $e_id)->get();
         $JionDate = date("Y-m-d H:i:s" , time());
@@ -24,7 +24,7 @@ class BasketController extends Controller
         echo $BasketsCount = $BasketsC->count();
         if($BasketsCount > 0)
             {
-                return redirect()->back()->with('error_basket4', 'Exam already added in basket.');
+                return redirect()->back()->with('error_04', 'Exam already added in basket.');
             }
         else
             {
@@ -41,14 +41,16 @@ class BasketController extends Controller
                 'updated_at' => Carbon::now(),
                 ]);
             $Baskets = DB::table('baskets')->where('ba_u_id', $userId)->where('ba_status', '0')->orderBy('created_at', 'desc')->get();
-            return redirect()->back()->with('success_basket3', 'Exam added successfully.');
+            return redirect()->back()->with('success_03', 'Exam added successfully.');
             }
     }
-    function basketremoveitem($ba_id){
+    function basketremoveitem($ba_id)
+    {
         DB::table('baskets')->where('ba_id', $ba_id)->delete();
-        return redirect()->back()->with('success_basket1', 'Exam removed successfully.');
+        return redirect()->back()->with('success_01', 'Exam removed successfully.');
     }
-    function basketupdateitem(Request $request){
+    function basketupdateitem(Request $request)
+    {
         $for = $request->query('for');
         $ba_Id = $request->query('ba_id');
         $Baskets = DB::table('baskets')->select('ba_e_id')->where('ba_id', $ba_Id)->get();
@@ -57,23 +59,24 @@ class BasketController extends Controller
         if($for == 6) $ExamPrice = $Exams->first()->e_price6m;
         if($for == 12) $ExamPrice = $Exams->first()->e_price1y;
         DB::table('baskets')->where('ba_id', $ba_Id)->update(['ba_for' => $for, 'ba_price' => $ExamPrice, 'ba_discount_price' => '0.00']);
-        return redirect()->back()->with('success_basket2', 'Exam updated successfully.');
+        return redirect()->back()->with('success_02', 'Exam updated successfully.');
     }
-    function basketaddcoupon(Request $request){
+    function basketaddcoupon(Request $request)
+    {
         $userId = auth()->id();
         $Coupon = $request->input('TextDiscount');
         $Coupon = DB::table('coupon')->select('*')->where('coup_coupon', $Coupon)->get();
         //Check if coupon is Avalable
         if ($Coupon->isEmpty()) 
             {
-                return redirect()->back()->with('error_basket1', 'Invalid coupon.');
+                return redirect()->back()->with('error_01', 'Enter invalid coupon.');
             }
         $TodayDate = date("Y-m-d H:i:s" , time());
         $ExpDate = $Coupon->first()->coup_exp_date;
         //Check if coupon is Expired
         if ($TodayDate > $ExpDate)
             {
-                return redirect()->back()->with('error_basket2', 'Date expired.');
+                return redirect()->back()->with('error_02', 'Coupon date expired.');
             }
         $DiscountType = $Coupon->first()->coup_discount_type;
         $DiscountValue = $Coupon->first()->coup_discount;
@@ -108,7 +111,8 @@ class BasketController extends Controller
             }
         return redirect()->back()->with('onlymessage_basket1', $MessageArr);
     }
-    function basketdummypay(Request $request){
+    function basketdummypay(Request $request)
+    {
         $ExamTotal = "0";
         $TotalDiscount = "0";
         $userId = auth()->id();
