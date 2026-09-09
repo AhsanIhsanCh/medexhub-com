@@ -52,8 +52,9 @@
           @error('email')
             <span class="text-danger-message">{{ $message }}</span>
           @enderror
-           <div class="mb-3">
-        {!! NoCaptcha::display() !!}
+          {!! NoCaptcha::renderJs() !!}
+          <div class="mb-3">
+          {!! NoCaptcha::display() !!}
 
         @error('g-recaptcha-response')
             <div class="text-danger">
@@ -61,14 +62,13 @@
             </div>
         @enderror
     </div>
-A
 
 
 
 
           <button class="button button-primary submit-button" type="submit">Submit</button>
         </form>
-        {!! NoCaptcha::renderJs() !!}
+       
       </div>
     </section>
   </main>
