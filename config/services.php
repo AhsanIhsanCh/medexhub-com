@@ -43,4 +43,9 @@ return [
         'refresh_token' => env('GOOGLE_REFRESH_TOKEN'),
     ],
 
+    'nocaptcha' => [
+        'secret' => env('NOCAPTCHA_SECRET'),
+        'sitekey' => env('NOCAPTCHA_SITEKEY'),
+    ],
+
 ];

@@ -68,6 +68,7 @@
 
           <button class="button button-primary submit-button" type="submit">Submit</button>
         </form>
+        {!! NoCaptcha::renderJs() !!}
       </div>
     </section>
   </main>
