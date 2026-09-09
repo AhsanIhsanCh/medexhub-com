@@ -10,7 +10,11 @@ class ForgotPasswordController extends Controller
 {
     public function sendResetLink(Request $request)
     {
-        $request->validate(['email' => 'required|email|exists:users,email',], 
+        $request->validate(
+        [
+            'email' => 'required|email|exists:users,email',
+            'g-recaptcha-response' => 'required|captcha',
+        ], 
         [
             'email.required' => 'Please enter your email address.',
             'email.email' => 'Please enter a valid email address.',
