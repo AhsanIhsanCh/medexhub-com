@@ -86,7 +86,7 @@ class LoginController extends Controller
                                 <tr>
                                     <td style="padding:40px 35px; color:#333333;">
                                         <h2 style="margin:0 0 20px;font-size:24px;color:#222222;text-align:center;">Verify Your Email Address </h2>
-                                        <p style="margin:0 0 20px;font-size:16px;line-height:1.7;">Hi '.$FName.' '.$FName.',</p>
+                                        <p style="margin:0 0 20px;font-size:16px;line-height:1.7;">Hi '.$FName.' '.$LName.',</p>
                                         <p style="margin:0 0 25px;font-size:16px;line-height:1.7;color:#555555;">
                                             Thank you for creating an account with MedExHub.
                                             Please verify your email address by clicking the button below.
