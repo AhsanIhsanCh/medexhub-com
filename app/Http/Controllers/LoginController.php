@@ -33,7 +33,7 @@ class LoginController extends Controller
         $requestData = $request->validate([
             'u_fname' => 'required',
             'u_lname' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
             'g-recaptcha-response' => 'required|captcha',
         ],
