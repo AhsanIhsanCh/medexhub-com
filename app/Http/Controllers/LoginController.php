@@ -35,6 +35,7 @@ class LoginController extends Controller
             'u_lname' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:8|confirmed',
+            'g-recaptcha-response' => 'required|captcha',
         ],
         [
             'u_fname.required' => 'First name is required.',

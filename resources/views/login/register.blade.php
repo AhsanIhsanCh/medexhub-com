@@ -101,6 +101,15 @@
           @error('password')
             <span class="text-danger-message">{{ $message }}</span>
           @enderror
+          {!! NoCaptcha::renderJs() !!}
+          <div class="mb-3">
+            {!! NoCaptcha::display() !!}
+          </div>
+          @error('g-recaptcha-response')
+            <div class="text-danger">
+              <span class="text-danger-message">{{ $message }}</span>
+            </div>
+          @enderror
           <button class="button button-primary submit-button" type="submit">Register</button>
         </form>
       </div>
