@@ -54,18 +54,13 @@
           @enderror
           {!! NoCaptcha::renderJs() !!}
           <div class="mb-3">
-          {!! NoCaptcha::display() !!}
-
-        @error('g-recaptcha-response')
+            {!! NoCaptcha::display() !!}
+          </div>
+          @error('g-recaptcha-response')
             <div class="text-danger">
-                {{ $message }}
+              <span class="text-danger-message">{{ $message }}</span>
             </div>
-        @enderror
-    </div>
-
-
-
-
+          @enderror
           <button class="button button-primary submit-button" type="submit">Submit</button>
         </form>
        
