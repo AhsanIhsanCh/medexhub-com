@@ -7,6 +7,22 @@
 
 
 
+
+
+
+@if (session('success3s'))
+    <div id="success-popup" class="success-popup">{{ session('success3s') }}</div>
+    <script>
+        setTimeout(() => {const popup = document.getElementById('success-popup');if (popup) {popup.classList.add('hide');setTimeout(() => {popup.remove();}, 300);}}, 3000);
+    </script>
+@endif
+
+
+
+
+
+
+
 @if (session('error_01'))
     <div id="error-popup" class="error-popup">{{ session('error_01') }}</div>
     <script>
@@ -36,12 +52,6 @@
 
 
 
-@if (session('success_01'))
-    <div id="success-popup" class="success-popup">{{ session('success_01') }}</div>
-    <script>
-        setTimeout(() => {const popup = document.getElementById('success-popup');if (popup) {popup.classList.add('hide');setTimeout(() => {popup.remove();}, 300);}}, 3000);
-    </script>
-@endif
 @if (session('success_02'))
     <div id="success-popup" class="success-popup">{{ session('success_02') }}</div>
     <script>

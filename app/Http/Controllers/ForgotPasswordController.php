@@ -96,8 +96,9 @@ class ForgotPasswordController extends Controller
             $subject,
             $message
         );
-        return back()->with('success_fotgotpass', 'Password reset link has been sent to your email.');
+        return back()->with('success3s', 'Password reset link has been sent to your email.');
     }
+
     public function resetPassword(Request $request)
     {
         $requestData = $request->validate([

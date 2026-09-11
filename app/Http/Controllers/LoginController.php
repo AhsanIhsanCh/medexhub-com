@@ -26,6 +26,7 @@ class LoginController extends Controller
             return redirect()->back()->with('error3s', 'Password not Crrect.');
         }
     }
+
     public function registerRequest(Request $request)
     {
         $requestData = $request->validate([
@@ -133,43 +134,44 @@ class LoginController extends Controller
         );
         return back()->with('success_fotgotpass', 'Password reset link has been sent to your email.');
     }
-    public function adminRegisterSave(Request $request)
-    {
-        $data = $request->validate([
-            'u_fname' => 'required',
-            'u_lname' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
-            'updated_at' => Carbon::now(),
-            'created_at' => Carbon::now(),
-        ]);
-        $data['u_jionip'] = $request->ip();
-        $user = User::create($data);
-        if($user)
-            {
-                return redirect()->route('loginAdmin');
-                // return response()->(['success' => true],200);
-            }
-        else
-            {
-                echo "no user added";
-            }
-    }
-    public function adminLoginRequest(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-        if(Auth::attempt($credentials)){
-            $request->session()->regenerate();
-            return redirect()->route('adminDashboard');
-        }
-        else {
-            echo "<div class='alert alert-danger' role='alert'>Password not Crrect</div>";
-            return view('admin/pages/login');
-        }
-    }
+    // public function adminRegisterSave(Request $request)
+    // {
+    //     $data = $request->validate([
+    //         'u_fname' => 'required',
+    //         'u_lname' => 'required',
+    //         'email' => 'required|email',
+    //         'password' => 'required|confirmed',
+    //         'updated_at' => Carbon::now(),
+    //         'created_at' => Carbon::now(),
+    //     ]);
+    //     $data['u_jionip'] = $request->ip();
+    //     $user = User::create($data);
+    //     if($user)
+    //         {
+    //             return redirect()->route('loginAdmin');
+    //             // return response()->(['success' => true],200);
+    //         }
+    //     else
+    //         {
+    //             echo "no user added";
+    //         }
+    // }
+    // public function adminLoginRequest(Request $request)
+    // {
+    //     $credentials = $request->validate([
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //     ]);
+    //     if(Auth::attempt($credentials)){
+    //         $request->session()->regenerate();
+    //         return redirect()->route('adminDashboard');
+    //     }
+    //     else {
+    //         echo "<div class='alert alert-danger' role='alert'>Password not Crrect</div>";
+    //         return view('admin/pages/login');
+    //     }
+    // }
+
     public function dashboardPage()
     {
         if (Auth::check()) {
@@ -179,6 +181,7 @@ class LoginController extends Controller
             return view('admin/pages/login');
         }
     }
+    
     public function logout()
     {
         Auth::logout();

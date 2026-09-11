@@ -6,69 +6,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
-
-
-
-
 class ExamController extends Controller
 {
-    public function updatedbentry()
-    {
-        
-//  $FeedBacks = DB::table('feedback')->select('*')->whereBetween('fb_id', [2001, 3000])->get();
-//  foreach ($FeedBacks as $FeedBack)
-//         {
-//                 $FBID = $FeedBack->fb_id ?? 'No User Found';
-//                 echo $UserIDDM = $FeedBack->fb_u_id ?? 'No User Found';
-//                 echo "<br>";
-//                 echo $QuestionDM = $FeedBack->fb_q_id ?? 'No Question Found';
-//                 echo "<br>";
-//                 echo $QuestionInnerDM = $FeedBack->fb_inner_q ?? 'No Question Found';
-//                 echo "<br>";
-//                 echo $QuestionTypeDM = $FeedBack->fb_qt_id ?? 'No Question Found';
-//                 echo "<br>";
-//                 $FeedBackData = DB::table('feedback_data')->select('*')->where('fbd_fb_id', $FBID)->get();
-//                 foreach($FeedBackData as $Data)
-//                     {
-//                         //echo $Message = $Data->fbd_message ?? 'No Message Found';
-//                         $MessageTypeDM = $Data->fbd_reply ?? 'No Message Type Found';
-//                         echo $MessageDM = $Data->fbd_message ?? 'No Message Found';
-//                         if($MessageTypeDM == 3)
-//                             {
-//                                 $UserIDDM = "2";
-//                             }
-//                         echo "<br><br><br><br><br>";
-
-//                         DB::table('conversation')->insert([
-//                                     'co_u_id' => $UserIDDM,
-//                                     'co_qt_id' => $QuestionTypeDM,
-//                                     'co_q_id' => $QuestionDM,
-//                                     'co_inner_q' => $QuestionInnerDM,
-//                                     'co_message_type' => $MessageTypeDM,
-//                                     'co_message' => $MessageDM,
-//                                     'co_status' => 0,
-//                                     'created_at' => Carbon::now(),
-//                                     'updated_at' => Carbon::now(),
-//                                     ]);
-
-                        								
-
-//                     }
-//         }
-
-
-
-//     dump($FeedBacks);
-        echo "Done";
-    }
-
-    public function purchasedexam()
+    
+public function purchasedexam()
     {
         $userId = auth()->id();
         $Subscribes = DB::table('subscribes')->where('su_u_id', $userId)->orderBy('su_e_id', 'asc')->get();
         return view('dashboard/exam/exam',['Subscribes' => $Subscribes]);
     }
-
+    
     public function showexam($e_id)
     {
         $Tests = DB::table('tests')->where([['t_u_id', auth()->id()],['t_e_id', $e_id]])->orderBy('t_id', 'desc')->get();
@@ -79,12 +26,11 @@ class ExamController extends Controller
     {
         return view('dashboard/exam/createnew',['e_id' => $e_id, 'Subselecteds' => []]);
     }
-      public function subsectionselected(Request $request)
+
+    public function subsectionselected(Request $request)
     {
         $e_id = $request->input('e_id');
-        $Subselected = $request->input('TopicSelection', []); 
-
-        dump($Subselected);
+        $Subselected = $request->input('TopicSelection', []);
         return view('dashboard/exam/createnew',['e_id' => $e_id, 'Subselecteds' => $Subselected]);
     }
 
@@ -309,10 +255,9 @@ class ExamController extends Controller
             DB::table('tests_reviewed')->where('tr_u_id', auth()->id())->where('tr_c_id', $e_id)->update(['tr_questions' => implode(',', $sortedArray),]);
             return view('dashboard/exam/viewexam',['testid' => $testid, 'e_id' => $e_id]);
     }
-public function subsection($e_id)
+
+    public function subsection($e_id)
     {
         return view('dashboard/exam/subsection',['e_id' => $e_id]);
-    }
-
-    
+    }    
 }
