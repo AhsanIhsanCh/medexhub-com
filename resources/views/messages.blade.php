@@ -1,7 +1,7 @@
 @if (session('error3s'))
     <div id="error-popup" class="error-popup">{{ session('error') }}</div>
     <script>
-        setTimeout(() => {const popup = document.getElementById('error-popup');if (popup) {popup.classList.add('hide');setTimeout(() => {popup.remove();}, 300);}}, 3000);
+        setTimeout(() => {const popup = document.getElementById('error-popup');if (popup) {popup.classList.add('hide');setTimeout(() => {popup.remove();}, 300);}}, 300000);
     </script>
 @endif 
 
