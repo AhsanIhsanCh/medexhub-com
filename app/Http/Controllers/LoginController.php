@@ -21,11 +21,9 @@ class LoginController extends Controller
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
             return view('landing');
-            // return redirect()->route('dashboard');
         }
         else {
-            echo "<div class='alert alert-danger' role='alert'>Password not Crrect</div>";
-            return view('login/login');
+            return redirect()->back()->with('error3s', 'Password not Crrect.');
         }
     }
     public function registerRequest(Request $request)
