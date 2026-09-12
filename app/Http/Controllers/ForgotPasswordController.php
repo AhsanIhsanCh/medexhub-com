@@ -2,9 +2,10 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password as PasswordRule;
+use Illuminate\Support\Facades\Password as PasswordFacade;
 use App\Http\Controllers\GoogleMailController;
 class ForgotPasswordController extends Controller
 {
