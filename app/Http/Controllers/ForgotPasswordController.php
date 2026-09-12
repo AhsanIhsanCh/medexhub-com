@@ -114,6 +114,7 @@ class ForgotPasswordController extends Controller
             'password.required' => 'Please enter a new password.',
             'password.min' => 'Password must be at least 8 characters.',
             'password.confirmed' => 'Password and confirm password do not match.',
+            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
         ]);
         $status = Password::reset($request->only(
                 'email',
