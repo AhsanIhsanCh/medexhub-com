@@ -132,7 +132,7 @@ class ForgotPasswordController extends Controller
             }
         );
         if ($status === PasswordFacade::PASSWORD_RESET) {
-            return redirect('/login')->with('success5s', 'Your password reset successfully.');
+            return redirect('/login')->with('success5s', 'Your password reset successfully login your account.');
         }
         return back()->withErrors(['email' => __($status)]);
     }

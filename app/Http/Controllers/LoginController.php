@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Validation\Rules\Password;
 use App\Http\Controllers\GoogleMailController;
 use Carbon\Carbon;
 class LoginController extends Controller
@@ -33,7 +34,7 @@ class LoginController extends Controller
             'u_fname' => 'required',
             'u_lname' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8|confirmed',
+            'password' => ['required','min:8','confirmed','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/',],
             'g-recaptcha-response' => 'required|captcha',
         ],
         [
@@ -42,8 +43,10 @@ class LoginController extends Controller
             'email.required' => 'Please enter your email address.',
             'email.email' => 'Please enter a valid email address.',
             'password.required' => 'Please enter a new password.',
+            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
             'password.min' => 'Password must be at least 8 characters.',
             'password.confirmed' => 'Password and confirm password do not match.',
+            'g-recaptcha-response.required' => 'Please complete the CAPTCHA verification.',
         ]);
         $user = User::create([
             'u_fname' => $request->u_fname,
@@ -132,7 +135,7 @@ class LoginController extends Controller
             $subject,
             $message
         );
-        return back()->with('success_fotgotpass', 'Password reset link has been sent to your email.');
+        return back()->with('success5s', 'Verification email send your email login your email account and verify your account and go forward.');
     }
     // public function adminRegisterSave(Request $request)
     // {
