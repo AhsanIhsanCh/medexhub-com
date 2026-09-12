@@ -97,7 +97,7 @@ class ForgotPasswordController extends Controller
             $subject,
             $message
         );
-        return back()->with('success3s', 'Password reset link has been sent to your email.');
+        return back()->with('success5s', 'Password reset link has been send you successfully.');
     }
 
     public function resetPassword(Request $request)
@@ -131,7 +131,7 @@ class ForgotPasswordController extends Controller
             }
         );
         if ($status === Password::PASSWORD_RESET) {
-            return redirect('/login')->with('success5s', 'Password reset link has been send you successfully.');
+            return redirect('/login')->with('success5s', 'Your password reset successfully.');
         }
         return back()->withErrors(['email' => __($status)]);
     }
