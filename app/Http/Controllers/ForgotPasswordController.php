@@ -24,7 +24,7 @@ class ForgotPasswordController extends Controller
         ]);
         $user = User::where('email', $request->email)->first();
         // Generate Laravel password reset token
-        $token = Password::createToken($user);
+        $token = PasswordFacade::createToken($user);
         // Generate reset password URL
         $resetUrl = url('/reset-password/' . $token . '?email=' . urlencode($user->email));
         $subject = 'Reset Your Password';
@@ -118,7 +118,7 @@ class ForgotPasswordController extends Controller
             'password.confirmed' => 'Password and confirm password do not match.',
             
         ]);
-        $status = Password::reset($request->only(
+        $status = PasswordFacade::reset($request->only(
                 'email',
                 'password',
                 'password_confirmation',
@@ -131,7 +131,7 @@ class ForgotPasswordController extends Controller
                 ])->save();
             }
         );
-        if ($status === Password::PASSWORD_RESET) {
+        if ($status === PasswordFacade::PASSWORD_RESET) {
             return redirect('/login')->with('success5s', 'Your password reset successfully.');
         }
         return back()->withErrors(['email' => __($status)]);
