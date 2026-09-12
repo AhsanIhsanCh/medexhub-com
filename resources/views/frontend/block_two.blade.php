@@ -6,7 +6,7 @@
                 <h2 class="section-title">Choose your pathway</h2>
                 <p class="section-copy">Focused revision resources organised around the exam you are preparing for, with flexible access periods and free trials.</p>
             </div>
-            <a class="btn btn-secondary" href="https://www.medexhub.com/index.php?P=7">View all exams</a>
+            <a class="btn btn-secondary" href="/exams">View all exams</a>
         </div>
         <div aria-label="Filter exam cards" class="filter-bar">
             <button class="filter-btn active" data-filter="all">All resources</button>
@@ -26,7 +26,7 @@
                         <div class="price-label">Access from</div>
                         <div class="price">A$299 <span>/ 3 months</span></div>
                     </div>
-                    <a class="arrow-link" href="https://www.medexhub.com/index.php?P=7">Details <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
+                    <a class="arrow-link" href="/exams#acem-primary">Details <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
                 </div>
             </article>
             <article class="exam-card" data-category="acem" style="--card-color:#3778c2;--card-soft:#edf5ff">
@@ -39,7 +39,7 @@
                         <div class="price-label">Access from</div>
                         <div class="price">A$99 <span>/ 3 months</span></div>
                     </div>
-                    <a class="arrow-link" href="https://www.medexhub.com/index.php?P=7">Details <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
+                    <a class="arrow-link" href="/exams#acem-fellowship">Details <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
                 </div>
             </article>
             <article class="exam-card" data-category="racgp" style="--card-color:#4f914a;--card-soft:#eef8ea">
@@ -52,7 +52,7 @@
                         <div class="price-label">Access from</div>
                         <div class="price">A$120 <span>/ 3 months</span></div>
                     </div>
-                    <a class="arrow-link" href="https://www.medexhub.com/index.php?P=7">Details <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
+                    <a class="arrow-link" href="/exams#racgp-akt">Details <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
                 </div>
             </article>
             <article class="exam-card" data-category="amc" style="--card-color:#c83c72;--card-soft:#fff0f5">
@@ -65,7 +65,7 @@
                         <div class="price-label">Access from</div>
                         <div class="price">A$100 <span>/ 3 months</span></div>
                     </div>
-                    <a class="arrow-link" href="https://www.medexhub.com/index.php?P=7">Details <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
+                    <a class="arrow-link" href="/exams#amc-mcq">Details <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
                 </div>
             </article>
             <article class="exam-card" data-category="racgp cards" style="--card-color:#d39c15;--card-soft:#fff7e2">
@@ -78,7 +78,7 @@
                             <div class="price-label">Access from</div>
                             <div class="price">A$99 <span>/ 3 months</span></div>
                         </div>
-                        <a class="arrow-link" href="https://www.medexhub.com/index.php?P=7">Details <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
+                        <a class="arrow-link" href="/exams#racgp-flashcards">Details <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
                     </div>
             </article>
             <article class="exam-card" data-category="racgp" style="--card-color:#7959bd;--card-soft:#f3efff">
@@ -91,7 +91,7 @@
                         <div class="price-label">Availability</div>
                         <div class="price">Free trial <span>available</span></div>
                     </div>
-                    <a class="arrow-link" href="https://www.medexhub.com/index.php?P=7">Details <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
+                    <a class="arrow-link" href="/exams#racgp-kfp">Details <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
                 </div>
             </article>
         </div>

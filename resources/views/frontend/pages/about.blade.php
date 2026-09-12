@@ -284,11 +284,11 @@ button { font: inherit; }
           <h1>Medical revision resources created by practising doctors.</h1>
           <p class="hero-copy">Relevant, high-quality medical examination questions, explanatory notes and flexible learning tools designed to make exam preparation clearer.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="/exam">Browse exams</a>
+            <a class="btn btn-primary" href="/exams">Browse exams</a>
             <a class="btn btn-outline" href="/contact">Contact us</a>
           </div>
           <nav class="breadcrumbs" aria-label="Breadcrumb">
-            <a href="https://medextech.com.au/">Home</a>
+            <a href="/">Home</a>
             <span aria-hidden="true">/</span>
             <span>About us</span>
           </nav>
@@ -395,7 +395,7 @@ button { font: inherit; }
           <p class="eyebrow light">Our approach</p>
           <h2>Question banks that build understanding—not just recall.</h2>
           <p>MedExHub combines clinically oriented questions, concise explanations and targeted performance feedback so candidates can identify gaps and revise with purpose.</p>
-          <a class="btn btn-light" href="/exam">Choose your exam</a>
+          <a class="btn btn-light" href="/exams">Choose your exam</a>
         </div>
 
         <div class="approach-list">
@@ -437,7 +437,7 @@ button { font: inherit; }
           <h2>Find the revision resource that matches your next medical exam.</h2>
         </div>
         <div class="cta-actions">
-          <a class="btn btn-light" href="/exam">Browse exams</a>
+          <a class="btn btn-light" href="/exams">Browse exams</a>
           <a class="btn btn-transparent" href="/contact">Contact us</a>
         </div>
       </div>

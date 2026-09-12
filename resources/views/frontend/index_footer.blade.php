@@ -100,6 +100,30 @@
     }, 1000);
   </script>
 
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const id = window.location.hash.substring(1);
+    if (id) {
+        const detail = document.getElementById(id);
+        if (detail) {
+            // Close all details first
+            document.querySelectorAll('.course-detail').forEach(function(item) {
+                item.open = false;
+            });
+            // Open selected detail
+            detail.open = true;
+            // Scroll to selected detail
+            detail.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }
+  });
+</script>
+
     <script src="/theme_files/js/jquery-3.4.1.min.js"></script>
         <!-- bootstarp js -->
     <script src="/packages/bootstrap5/js/bootstrap.bundle.js"></script>

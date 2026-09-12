@@ -7,16 +7,16 @@
             <div>
                 <div class="footer-title">Exams</div>
                 <div class="footer-links">
-                    <a href="/exams">ACEM Primary</a>
-                    <a href="/exams">ACEM Fellowship</a>
-                    <a href="/exams">RACGP AKT</a>
-                    <a href="/exams">AMC MCQ</a>
+                    <a href="/exams#acem-primary">ACEM Primary</a>
+                    <a href="/exams#acem-fellowship">ACEM Fellowship</a>
+                    <a href="/exams#racgp-akt">RACGP AKT</a>
+                    <a href="/exams#amc-mcq">AMC MCQ</a>
                 </div>
             </div>
             <div>
                 <div class="footer-title">Resources</div>
                 <div class="footer-links">
-                    <a href="#sample">Sample question</a>
+                    <a href="/#sample">Sample question</a>
                     <a href="/faq">FAQs</a>
                     <a href="https://www.isim.ai" target="_blank">iSim.ai</a>
                     <a href="https://www.notly.ai" target="_blank">notly.ai</a>

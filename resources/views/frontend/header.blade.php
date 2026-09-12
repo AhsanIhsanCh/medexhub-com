@@ -38,7 +38,7 @@
                 <a href="/about">About</a>
                 <a href="/exams">Exams</a>
                 <a href="/faq">FAQ's</a>
-                <a href="#sample">Sample question</a>
+                <a href="/#sample">Sample question</a>
             </nav>
             <div class="nav-actions">
                 <style>

@@ -77,7 +77,7 @@
             </div>
             <div class="side-actions">
                 <button class="btn btn-outline" onclick="window.print()">Print terms</button>
-                <a class="btn btn-primary" href="https://medextech.com.au/contact">Contact us</a>
+                <a class="btn btn-primary" href="/contact">Contact us</a>
             </div>
         </aside>
         <article>
@@ -271,7 +271,7 @@
                     <span class="num">15</span>
                     <h2>Privacy and communications</h2>
                 </div>
-                <p>Our collection, use, disclosure, storage and handling of personal information are described in our <a href="https://medextech.com.au/privacy">Privacy Policy</a>. Where applicable, we handle personal information in accordance with the Privacy Act 1988 (Cth) and the Australian Privacy Principles.</p>
+                <p>Our collection, use, disclosure, storage and handling of personal information are described in our <a href="/privacy">Privacy Policy</a>. Where applicable, we handle personal information in accordance with the Privacy Act 1988 (Cth) and the Australian Privacy Principles.</p>
                 <p>We may send transactional communications needed to operate your Account or Subscription, including registration, payment, security, expiry and service messages. Marketing communications will be handled in accordance with applicable law and available preference controls.</p>
             </section>
             <section class="section" id="suspension" style="padding: 28px;">

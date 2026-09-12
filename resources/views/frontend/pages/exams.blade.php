@@ -285,21 +285,14 @@
         html { scroll-behavior: auto; }
         *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
         }
-
- 
-
-
-
-
     </style>
-<section class="details-section section" id="course-details">
+    <section class="details-section section" id="course-details">
       <div class="container narrow-container">
         <div class="section-heading centered-heading">
           <p class="eyebrow">Course information</p>
           <h2>Subscriptions, topics and inclusions</h2>
           <p>Open a course below for the full details from the existing MedExHub exams page.</p>
         </div>
-
         <div class="course-accordions">
           <details class="course-detail" id="acem-primary" open>
             <summary>
@@ -496,5 +489,11 @@
         </div>
       </div>
     </section>
+
+
+
+
+
+
 @include('frontend.footer')
 @include('frontend.index_footer')

@@ -783,7 +783,7 @@
                     <div class="sidebar-support">
                         <h3>Still need help?</h3>
                         <p>Send your question to the MedExHub support team.</p>
-                        <a href="https://www.medexhub.com/index.php?D=3&P=5">
+                        <a href="/contact">
                             Contact support <span aria-hidden="true">→</span>
                         </a>
                     </div>
@@ -1189,7 +1189,7 @@
                             <p>Our support team can help with your account, order or technical issue.</p>
                         </div>
                         <a class="button button-primary"
-                           href="https://www.medexhub.com/index.php?D=3&P=5">
+                           href="/contact">
                             Contact support
                         </a>
                     </div>
