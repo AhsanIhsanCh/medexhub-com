@@ -18,7 +18,8 @@ class ForgotPasswordController extends Controller
         [
             'email.required' => 'Please enter your email address.',
             'email.email' => 'Please enter a valid email address.',
-            'email.exists' => 'This email address is not registered.',
+            'email.exists' => 'This email address in not registered with us..',
+            'g-recaptcha-response.required' => 'Please complete the CAPTCHA verification.',
         ]);
         $user = User::where('email', $request->email)->first();
         // Generate Laravel password reset token
@@ -104,10 +105,10 @@ class ForgotPasswordController extends Controller
         $requestData = $request->validate([
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:8|confirmed','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/',
         ],
         [
-            'token.required' => 'The reset token is required.',
+            'token.required' => 'The reset token is missing go back and try again.',
             'email.required' => 'Please enter your email address.',
             'email.email' => 'Please enter a valid email address.',
             'password.required' => 'Please enter a new password.',
@@ -128,7 +129,7 @@ class ForgotPasswordController extends Controller
             }
         );
         if ($status === Password::PASSWORD_RESET) {
-            return redirect('/login')->with('success_resetpass', 'Your password has been reset successfully.');
+            return redirect('/login')->with('success5s', 'Password reset link has been send you successfully.');
         }
         return back()->withErrors(['email' => __($status)]);
     }

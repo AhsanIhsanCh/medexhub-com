@@ -23,7 +23,7 @@ class LoginController extends Controller
             return view('landing');
         }
         else {
-            return redirect()->back()->with('error3s', 'Password not Crrect.');
+            return redirect()->back()->with('error3s', 'Username or Password not Correct. <br> If you forgot your password use forgot link and recover your password.');
         }
     }
 
