@@ -14,7 +14,7 @@ class CommonController extends Controller
     function SendContactMessage(Request $request){
         $credentials = $request->validate([
             'name' => ['required'],
-            'email' => ['required'],
+            'email' => ['required', 'email'],
             'category' => ['required'],
             'reference' => ['sometimes'],
             'subject' => ['required'],
