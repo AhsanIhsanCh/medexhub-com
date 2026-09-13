@@ -4,6 +4,12 @@
         setTimeout(() => {const popup = document.getElementById('error-popup');if (popup) {popup.classList.add('hide');setTimeout(() => {popup.remove();}, 300);}}, 3000);
     </script>
 @endif 
+@if (session('error5s'))
+    <div id="error-popup" class="error-popup">{!! session('error5s') !!}</div>
+    <script>
+        setTimeout(() => {const popup = document.getElementById('error-popup');if (popup) {popup.classList.add('hide');setTimeout(() => {popup.remove();}, 300);}}, 5000);
+    </script>
+@endif 
 
 @if (session('success3s'))
     <div id="success-popup" class="success-popup">{!! session('success3s') !!}</div>
