@@ -22,6 +22,14 @@ class ForgotPasswordController extends Controller
             'email.exists' => 'This email address in not registered with us..',
             'g-recaptcha-response.required' => 'Please complete the CAPTCHA verification.',
         ]);
+
+        $CheckRot = $request->checkrawdata;
+        dump($CheckRot);
+        if (!empty($CheckRot)) {
+            return back()->withErrors(['email' => 'Invalid request.']);
+        }
+
+
         $user = User::where('email', $request->email)->first();
         // Generate Laravel password reset token
         $token = PasswordFacade::createToken($user);
