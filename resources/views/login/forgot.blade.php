@@ -50,6 +50,7 @@
             </div>
           </div>
           <input style="display: none;" type="text" name="checkrawdata" value="" />
+          <input type="hidden" name="time_to_submit" id="time_to_submit" value="0">
           @error('email')
             <span class="text-danger-message">{{ $message }}</span>
           @enderror
@@ -68,6 +69,15 @@
       </div>
     </section>
   </main>
+  <script>
+    const formLoadedAt = Date.now();
+
+    document.querySelector('form').addEventListener('submit', function () {
+        const elapsedSeconds = Math.round((Date.now() - formLoadedAt) / 1000);
+
+        document.getElementById('time_to_submit').value = elapsedSeconds;
+    });
+</script>
 @include('frontend.footer')
 </body>
 </html>
