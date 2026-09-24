@@ -10,6 +10,7 @@
 	@include('frontend.block_four')
 	@include('frontend.block_five')
 	@include('frontend.block_six')
+	
 	@include('frontend.footer')
 	@include('frontend.index_footer')
 	

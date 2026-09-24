@@ -97,3 +97,16 @@
         </div>
     </div>
 </section>
+<script>
+		const filterButtons = document.querySelectorAll('.filter-btn');
+    const examCards = document.querySelectorAll('.exam-card');
+    filterButtons.forEach(button => button.addEventListener('click', () => {
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      const filter = button.dataset.filter;
+      examCards.forEach(card => {
+        const categories = card.dataset.category.split(' ');
+        card.classList.toggle('hidden', filter !== 'all' && !categories.includes(filter));
+      });
+    }));
+	</script>

@@ -17,6 +17,7 @@
   @include('frontend.headerAuth')
   <main class="page-shell">
     @include('dashboard.dashboardMenu')
+      
       @yield('exam')
       @yield('showtest')
       @yield('createnew')
