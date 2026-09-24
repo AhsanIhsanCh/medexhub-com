@@ -49,7 +49,7 @@
                 <input type="email" name="email" value="{{ old('username') }}" autocomplete="email" placeholder="name@example.com"  required/>
             </div>
           </div>
-          <input  type="text" name="checkrawdata" value="" />
+          <input style="display: none;" type="text" name="checkrawdata" value="" />
           <input type="hidden" name="time_to_submit" id="time_to_submit" value="0">
           @error('email')
             <span class="text-danger-message">{{ $message }}</span>

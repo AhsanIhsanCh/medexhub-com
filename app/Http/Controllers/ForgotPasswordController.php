@@ -14,7 +14,7 @@ class ForgotPasswordController extends Controller
         $request->validate(
         [
             'email' => 'required|email|exists:users,email',
-            // 'g-recaptcha-response' => 'required|captcha',
+            'g-recaptcha-response' => 'required|captcha',
             'time_to_submit' => 'required|integer|min:1|max:3600',
         ], 
         [
@@ -24,19 +24,9 @@ class ForgotPasswordController extends Controller
             'g-recaptcha-response.required' => 'Please complete the CAPTCHA verification.',
         ]);
          $CheckRot = $request->checkrawdata;
-        
-        if (((int) $request->time_to_submit < 12) OR (!empty($CheckRot)))
+        if (((int) $request->time_to_submit < 2) OR (!empty($CheckRot)))
             {
                 return back();
-            }
-        else
-            {
-                echo "Go";
-            }
-        die;
-       
-        if (!empty($CheckRot)) {
-            return back();
             }
         else
             {

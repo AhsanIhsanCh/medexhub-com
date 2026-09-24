@@ -36,6 +36,7 @@ class LoginController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => ['required','min:8','confirmed','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/',],
             'g-recaptcha-response' => 'required|captcha',
+            'time_to_submit' => 'required|integer|min:1|max:3600',
         ],
         [
             'u_fname.required' => 'First name is required.',
@@ -48,9 +49,10 @@ class LoginController extends Controller
             'password.confirmed' => 'Password and confirm password do not match.',
             'g-recaptcha-response.required' => 'Please complete the CAPTCHA verification.',
         ]);
-        $CheckRot = $request->checkrawdata;
-        if (!empty($CheckRot)) {
-            return back();
+         $CheckRot = $request->checkrawdata;
+        if (((int) $request->time_to_submit < 2) OR (!empty($CheckRot)))
+            {
+                return back();
             }
         else
             {
