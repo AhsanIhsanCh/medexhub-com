@@ -25,11 +25,18 @@ class ForgotPasswordController extends Controller
 
         $CheckRot = $request->checkrawdata;
         dump($CheckRot);
+        if (!empty($CheckRot)) {
+            echo "Invalid request. Please try again.";
+        }
+        else
+        {
+            echo "Proceed with the password reset process";
+        }
+
+
         die;
         
-        // if (!empty($CheckRot)) {
-        //     return back()->withErrors(['email' => 'Invalid request.']);
-        // }
+        
 
 
         $user = User::where('email', $request->email)->first();
