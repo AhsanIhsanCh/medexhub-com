@@ -25,9 +25,11 @@ class ForgotPasswordController extends Controller
 
         $CheckRot = $request->checkrawdata;
         dump($CheckRot);
-        if (!empty($CheckRot)) {
-            return back()->withErrors(['email' => 'Invalid request.']);
-        }
+        die;
+        
+        // if (!empty($CheckRot)) {
+        //     return back()->withErrors(['email' => 'Invalid request.']);
+        // }
 
 
         $user = User::where('email', $request->email)->first();
