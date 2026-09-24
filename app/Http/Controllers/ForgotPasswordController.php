@@ -23,7 +23,7 @@ class ForgotPasswordController extends Controller
             'email.exists' => 'This email address in not registered with us..',
             'g-recaptcha-response.required' => 'Please complete the CAPTCHA verification.',
         ]);
-        if ((int) $request->time_to_submit < 2) 
+        if ((int) $request->time_to_submit < 12) 
             {
             return back();
         }
