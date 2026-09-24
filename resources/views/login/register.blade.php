@@ -39,7 +39,8 @@
         </div>
           <form class="signin-form" action="{{ route('registerRequest') }}" method="post">
             @csrf
-          <div class="form-field">
+          <input style="display: none;" type="text" name="checkrawdata" value="" />
+            <div class="form-field">
             <label for="email">First Name :</label>
             <div class="input-shell">
               <svg viewBox="0 0 24 24" aria-hidden="true">
