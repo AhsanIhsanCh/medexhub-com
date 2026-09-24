@@ -27,7 +27,6 @@ class LoginController extends Controller
             return redirect()->back()->with('error3s', 'Username or Password not Correct. <br> If you forgot your password use forgot link and recover your password.');
         }
     }
-
     public function registerRequest(Request $request)
     {
         $requestData = $request->validate([
@@ -146,58 +145,22 @@ class LoginController extends Controller
                 return back()->with('success5s', 'Verification email send your email login your email account and verify your account and go forward.');
             }
     }
-    // public function adminRegisterSave(Request $request)
-    // {
-    //     $data = $request->validate([
-    //         'u_fname' => 'required',
-    //         'u_lname' => 'required',
-    //         'email' => 'required|email',
-    //         'password' => 'required|confirmed',
-    //         'updated_at' => Carbon::now(),
-    //         'created_at' => Carbon::now(),
-    //     ]);
-    //     $data['u_jionip'] = $request->ip();
-    //     $user = User::create($data);
-    //     if($user)
-    //         {
-    //             return redirect()->route('loginAdmin');
-    //             // return response()->(['success' => true],200);
-    //         }
-    //     else
-    //         {
-    //             echo "no user added";
-    //         }
-    // }
-    // public function adminLoginRequest(Request $request)
-    // {
-    //     $credentials = $request->validate([
-    //         'email' => 'required|email',
-    //         'password' => 'required',
-    //     ]);
-    //     if(Auth::attempt($credentials)){
-    //         $request->session()->regenerate();
-    //         return redirect()->route('adminDashboard');
-    //     }
-    //     else {
-    //         echo "<div class='alert alert-danger' role='alert'>Password not Crrect</div>";
-    //         return view('admin/pages/login');
-    //     }
-    // }
-
-    public function dashboardPage()
+    public function adminpage()
     {
-        if (Auth::check()) {
-            return view('admin/index');
-        } else {
-            echo "<div class='alert alert-danger' role='alert'>User is not authenticated</div>";
-            return view('admin/pages/login');
-        }
+        if (Auth::check()) 
+            {
+                return view('admin.pages.dashboard');
+            }
+        else
+            {
+                return view('/login');
+            }
     }
-    
     public function logout()
     {
         Auth::logout();
-        //return view('admin/pages/login');
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
         return view('landing');
     }
 }

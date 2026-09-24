@@ -9,5 +9,16 @@ use Carbon\Carbon;
 
 class AdminMaintenanceController extends Controller
 {
-    //
+   
+
+    public function maintenancesession()
+    {
+        $Exams = "2";
+        return view('admin/source/maintenance/maintenance-session',['Exams' => $Exams]);
+    }
+    public function maintenancelogin()
+    {
+        $Exams = "2";
+        return view('admin/source/maintenance/maintenance-login',['Exams' => $Exams]);
+    }
 }

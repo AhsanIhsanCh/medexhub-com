@@ -9,9 +9,21 @@ use Carbon\Carbon;
 
 class AdminUserController extends Controller
 {
-   public function show()
+   public function adminusers()
     {
-        $Users = DB::table('users')->get();
+        $Users = "s";
         return view('admin/source/users/users',['Users' => $Users]);
+    }
+
+    public function adminusersban()
+    {
+        $Users = "s";
+        return view('admin/source/users/users-ban',['Users' => $Users]);
+    }
+
+    public function adminuserspending()
+    {
+        $Users = "s";
+        return view('admin/source/users/users-pending',['Users' => $Users]);
     }
 }

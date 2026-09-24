@@ -9,5 +9,10 @@ use Carbon\Carbon;
 
 class AdminConversationController extends Controller
 {
-    //
+    public function adminconversation()
+    {
+        $Accounts = "s";
+        $AccountsNew = "s";
+        return view('admin/source/conversation/conversation',['data' => $Accounts,'New' => $AccountsNew]);
+    }
 }

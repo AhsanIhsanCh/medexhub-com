@@ -9,12 +9,29 @@ use Carbon\Carbon;
 
 class AdminAccountController extends Controller
 {
-    public function show()
+    public function adminaccountpayment()
     {
-        $Accounts = DB::table('payments')->latest('pay_date')->take(5000)->get()->reverse();
-        $currentMonth = Carbon::now()->month;
-        $currentYear = Carbon::now()->year;
-        $AccountsNew = DB::table('payments')->whereYear('pay_date', $currentYear)->whereMonth('pay_date', $currentMonth)->get();
-        return view('admin/source/account/account',['data' => $Accounts,'New' => $AccountsNew]);
+        // $Accounts = DB::table('payments')->latest('pay_date')->take(5000)->get()->reverse();
+        // $currentMonth = Carbon::now()->month;
+        // $currentYear = Carbon::now()->year;
+        // $AccountsNew = DB::table('payments')->whereYear('pay_date', $currentYear)->whereMonth('pay_date', $currentMonth)->get();
+
+        $Accounts = "s";
+        $AccountsNew = "s";
+        return view('admin/source/account/payment',['data' => $Accounts,'New' => $AccountsNew]);
     }
+
+    public function adminaccountreturnpayment()
+    {
+        $Accounts = "s";
+        $AccountsNew = "s";
+        return view('admin/source/account/payment-return',['data' => $Accounts,'New' => $AccountsNew]);
+    }
+    public function adminaccountmiscellaneouspayment()
+    {
+        $Accounts = "s";
+        $AccountsNew = "s";
+        return view('admin/source/account/payment-miscellaneous',['data' => $Accounts,'New' => $AccountsNew]);
+    }
+
 }

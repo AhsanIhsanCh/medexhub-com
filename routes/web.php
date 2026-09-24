@@ -3,11 +3,22 @@ use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminAccountController;
-use App\Http\Controllers\AdminExamController;
-use App\Http\Controllers\AdminQuestionController;
+use App\Http\Controllers\AdminAddOnController;
+use App\Http\Controllers\AdminArchivesController;
 use App\Http\Controllers\AdminConversationController;
+
+
+use App\Http\Controllers\AdminExamController;
+
 use App\Http\Controllers\AdminMaintenanceController;
+
+use App\Http\Controllers\AdminQuestionController;
+
 use App\Http\Controllers\AdminUserController;
+
+
+
+
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\WorkboardController;
 use App\Http\Controllers\SubscribeController;
@@ -105,21 +116,50 @@ Route::post('/UpdatePassword', [ProfileController::class, 'UpdatePassword'])->na
 Route::post('/UpdateSettings', [ProfileController::class, 'UpdateSettings'])->name('saveprofile3')->middleware(['auth']);
 
 
-//Admin Route
-// Route::middleware(['auth'])->group(function () { Route::get('/admin', function () { return view('admin/pages/login');})->name('admin');});
-Route::get('/admin', function () { return view('admin/pages/login');});
-Route::post('adminLoginRequest', [LoginController::class, 'adminLoginRequest'])->name('adminLoginRequest');
-Route::get('adminDashboard', [LoginController::class, 'dashboardPage'])->name('adminDashboard')->middleware(['auth']);
+// //Admin Route
+// // Route::middleware(['auth'])->group(function () { Route::get('/admin', function () { return view('admin/pages/login');})->name('admin');});
+// // Route::get('/admin', function () { return view('admin/pages/login');});
+// Route::post('adminLoginRequest', [LoginController::class, 'adminLoginRequest'])->name('adminLoginRequest');
+
+
+
+
+
+
+Route::get('admin', [LoginController::class, 'adminpage'])->name('admin')->middleware(['auth']);
 //Admin Account Routes
-Route::get('adminAccount', [AdminAccountController::class, 'show'])->name('adminAccount')->middleware(['auth']);
+Route::get('admin-payment', [AdminAccountController::class, 'adminaccountpayment'])->name('admin-payment')->middleware(['auth']);
+Route::get('admin-return-payment', [AdminAccountController::class, 'adminaccountreturnpayment'])->name('admin-return-payment')->middleware(['auth']);
+Route::get('admin-miscellaneous-payment', [AdminAccountController::class, 'adminaccountmiscellaneouspayment'])->name('admin-miscellaneous-payment')->middleware(['auth']);
+//Admin User Routes
+Route::get('admin-users', [AdminUserController::class, 'adminusers'])->name('admin-users')->middleware(['auth']);
+Route::get('admin-users-ban', [AdminUserController::class, 'adminusersban'])->name('admin-users-ban')->middleware(['auth']);
+Route::get('admin-users-pending', [AdminUserController::class, 'adminuserspending'])->name('admin-users-pending')->middleware(['auth']);
 //Admin Conversation Routes
-Route::get('adminConversation', [AdminConversationController::class, 'show'])->name('adminConversation')->middleware(['auth']);
+Route::get('admin-conversation', [AdminConversationController::class, 'adminconversation'])->name('admin-conversation')->middleware(['auth']);
+//Admin Exams Routes
+Route::get('admin-exams', [AdminArchivesController::class, 'adminexams'])->name('admin-exams')->middleware(['auth']);
+Route::get('admin-mcq', [AdminArchivesController::class, 'adminmcq'])->name('admin-mcq')->middleware(['auth']);
+Route::get('admin-emq', [AdminArchivesController::class, 'adminemq'])->name('admin-emq')->middleware(['auth']);
+Route::get('admin-flash-card', [AdminArchivesController::class, 'adminflashcard'])->name('admin-flash-card')->middleware(['auth']);
+Route::get('admin-kfp1', [AdminArchivesController::class, 'adminkfp1'])->name('admin-kfp1')->middleware(['auth']);
+Route::get('admin-kfp2', [AdminArchivesController::class, 'adminkfp2'])->name('admin-kfp2')->middleware(['auth']);
+//Admin Add On Routes
+Route::get('admin-coupons', [AdminAddOnController::class, 'admincoupons'])->name('admin-coupons')->middleware(['auth']);
+Route::get('admin-exam-year', [AdminAddOnController::class, 'adminexamyear'])->name('admin-exam-year')->middleware(['auth']);
 //Admin Maintenance Routes
-Route::get('adminMaintenance', [AdminMaintenanceController::class, 'show'])->name('adminMaintenance')->middleware(['auth']);
+Route::get('admin-maintenance-session', [AdminMaintenanceController::class, 'maintenancesession'])->name('admin-maintenance-session')->middleware(['auth']);
+Route::get('admin-maintenance-login', [AdminMaintenanceController::class, 'maintenancelogin'])->name('admin-maintenance-login')->middleware(['auth']);
+
+
+
+
+
+
+
 //Admin Question Routes
 Route::get('adminQuestions', [AdminQuestionController::class, 'show'])->name('adminQuestions')->middleware(['auth']);
-//Admin User Routes
-Route::get('adminUsers', [AdminUserController::class, 'show'])->name('adminUsers')->middleware(['auth']);
+
 //Admin Exams Routes
 Route::get('adminExams', [AdminExamController::class, 'show'])->name('adminExams')->middleware(['auth']);
 Route::get('adminExamInner/{e_id}', [AdminExamController::class, 'showInner'])->name('adminExamInner')->middleware(['auth']);

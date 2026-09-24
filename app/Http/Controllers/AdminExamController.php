@@ -9,7 +9,13 @@ use Carbon\Carbon;
 
 class AdminExamController extends Controller
 {
-    public function show()
+    
+
+
+
+
+
+public function show()
     {
         $Exams = DB::table('exams')->where('e_level', '1')->get();
         return view('admin/source/question/exam/exam',['Exams' => $Exams,'e_id' => '0','displaytype' => '1']);
