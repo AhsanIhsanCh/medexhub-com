@@ -1,19 +1,23 @@
+<?php
+
+use App\Models\User;
+?>
 <!-- Header -->
 		<div class="header">
 			<div class="main-header">
 				<!-- Logo -->
 				<div class="header-left active">
 					<a href="index.html" class="logo logo-normal">
-						<img src="admin_assets/img/logo.svg" alt="Img">
+						<img src="admin_assets/img/logo_full.png" alt="Img">
 					</a>
 					<a href="index.html" class="logo logo-white">
-						<img src="admin_assets/img/logo-white.svg" alt="Img">
+						<img src="admin_assets/img/logo_full_white.png" alt="Img">
 					</a>
 					<a href="index.html" class="logo-small">
-						<img src="admin_assets/img/logo-small.png" alt="Img">
+						<img src="admin_assets/img/logo.png" alt="Img">
 					</a>
 					<a href="index.html" class="logo-small-white">
-						<img src="admin_assets/img/logo-small-white.png" alt="Img">
+						<img src="admin_assets/img/logo_white.png" alt="Img">
 					</a>
 				</div>
 				<!-- /Logo -->
@@ -30,7 +34,7 @@
 
 					<!-- Search -->
 					<li class="nav-item nav-searchinputs">
-						<div class="top-nav-search">
+						<!-- <div class="top-nav-search">
 							<a href="javascript:void(0);" class="responsive-search">
 								<i class="fa fa-search"></i>
 							</a>
@@ -69,12 +73,12 @@
 									</div>
 								</div>
 							</form>
-						</div>
+						</div> -->
 					</li>
 					<!-- /Search -->
 
 					<!-- Select Store -->
-					<li class="nav-item dropdown has-arrow main-drop select-store-dropdown">
+					<!-- <li class="nav-item dropdown has-arrow main-drop select-store-dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle nav-link select-store"
 							data-bs-toggle="dropdown">
 							<span class="user-info">
@@ -100,12 +104,12 @@
 								<img src="admin_assets/img/store/store-04.png" alt="Store Logo" class="img-fluid">Grocery Eden
 							</a>
 						</div>
-					</li>
+					</li> -->
 					<!-- /Select Store -->
 
 					<li class="nav-item dropdown link-nav">
 						<a href="javascript:void(0);" class="btn btn-primary btn-md d-inline-flex align-items-center" data-bs-toggle="dropdown">
-							<i class="ti ti-circle-plus me-1"></i>Add New
+							<i class="ti ti-circle-plus me-1"></i>Quick Links
 						</a>
 						<div class="dropdown-menu dropdown-xl dropdown-menu-center">
 							<div class="row g-2">
@@ -209,28 +213,7 @@
 						</div>
 					</li>
 					
-					<li class="nav-item pos-nav">
-						<a href="pos.html" class="btn btn-dark btn-md d-inline-flex align-items-center">
-							<i class="ti ti-device-laptop me-1"></i>POS
-						</a>
-					</li>
-
-					<!-- Flag -->
-					<li class="nav-item dropdown has-arrow flag-nav nav-item-box">
-						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0);"
-							role="button">
-							<img src="admin_assets/img/flags/us-flag.svg" alt="Language" class="img-fluid">
-						</a>
-						<div class="dropdown-menu dropdown-menu-right">
-							<a href="javascript:void(0);" class="dropdown-item">
-								<img src="admin_assets/img/flags/english.svg" alt="Img" height="16">English
-							</a>
-							<a href="javascript:void(0);" class="dropdown-item">
-								<img src="admin_assets/img/flags/arabic.svg" alt="Img" height="16">Arabic
-							</a>
-						</div>
-					</li>
-					<!-- /Flag -->
+					
 
 					<li class="nav-item nav-item-box">
 						<a href="javascript:void(0);" id="btnFullscreen">
@@ -320,21 +303,28 @@
 					<li class="nav-item nav-item-box">
 						<a href="general-settings.html"><i class="ti ti-settings"></i></a>
 					</li>
+					<?php
+					 $userId = auth()->id();
+					 $user = User::where('id', $userId)->first();
+					 $FName = $user ? $user->u_fname : 'Mr';
+					 $LName = $user ? $user->u_lname : 'User';
+					 echo $Userimage = $user ? $user->u_image : 'noimage.png';
+					?>
 					<li class="nav-item dropdown has-arrow main-drop profile-nav">
 						<a href="javascript:void(0);" class="nav-link userset" data-bs-toggle="dropdown">
 							<span class="user-info p-0">
 								<span class="user-letter">
-									<img src="admin_assets/img/profiles/avator1.jpg" alt="Img" class="img-fluid">
+									<img src="images/profiles/<?php echo $Userimage; ?>" alt="Img" class="img-fluid">
 								</span>
 							</span>
 						</a>
 						<div class="dropdown-menu menu-drop-user">
 							<div class="profileset d-flex align-items-center">
 								<span class="user-img me-2">
-									<img src="admin_assets/img/profiles/avator1.jpg" alt="Img">
+									<img src="images/profiles/<?php echo $Userimage; ?>" alt="Img">
 								</span>
 								<div>
-									<h6 class="fw-medium">John Smilga</h6>
+									<h6 class="fw-medium"><?php echo $FName . ' ' . $LName; ?></h6>
 									<p>Admin</p>
 								</div>
 							</div>
