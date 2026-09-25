@@ -24,7 +24,7 @@ class LoginController extends Controller
             return view('landing');
         }
         else {
-            return redirect()->back()->with('error3s', 'Username or Password not Correct. <br> If you forgot your password use forgot link and recover your password.');
+            return redirect()->back()->with('error3s', 'We could not verify your login details.<br> Please check your username and password and try again.<br> If you have forgotten your password, use the Forgot Password link to reset it.');
         }
     }
     public function registerRequest(Request $request)
@@ -38,14 +38,14 @@ class LoginController extends Controller
             'time_to_submit' => 'required|integer|min:1|max:3600',
         ],
         [
-            'u_fname.required' => 'First name is required.',
-            'u_lname.required' => 'Last name is required.',
+            'u_fname.required' => 'Please enter your first name.',
+            'u_lname.required' => 'Please enter your last name.',
             'email.required' => 'Please enter your email address.',
             'email.email' => 'Please enter a valid email address.',
-            'password.required' => 'Please enter a new password.',
-            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
-            'password.min' => 'Password must be at least 8 characters.',
-            'password.confirmed' => 'Password and confirm password do not match.',
+            'password.required' => 'Please enter a password.',
+            'password.regex' => 'Your password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
+            'password.min' => 'Your password must be at least 8 characters long.',
+            'password.confirmed' => 'The password and password confirmation do not match.',
             'g-recaptcha-response.required' => 'Please complete the CAPTCHA verification.',
         ]);
          $CheckRot = $request->checkrawdata;
@@ -94,11 +94,11 @@ class LoginController extends Controller
                                         <!-- Content -->
                                         <tr>
                                             <td style="padding:40px 35px; color:#333333;">
-                                                <h2 style="margin:0 0 20px;font-size:24px;color:#222222;text-align:center;">Verify Your Email Address </h2>
+                                                <h2 style="margin:0 0 20px;font-size:24px;color:#222222;text-align:center;">Verify Your Email Address</h2>
                                                 <p style="margin:0 0 20px;font-size:16px;line-height:1.7;">Hi '.$FName.' '.$LName.',</p>
                                                 <p style="margin:0 0 25px;font-size:16px;line-height:1.7;color:#555555;">
-                                                    Thank you for creating an account with MedExHub.
-                                                    Please verify your email address by clicking the button below.
+                                                    Thank you for creating your MedExHub account.<br><br>
+                                                    To complete your registration, please verify your email address by clicking the button below.
                                                 </p>
                                                 <!-- Verify Button -->
                                                 <table width="100%" cellpadding="0" cellspacing="0">
@@ -111,14 +111,13 @@ class LoginController extends Controller
                                                     </tr>
                                                 </table>
                                                 <p style="margin:0 0 15px;font-size:14px;line-height:1.6;color:#777777;">
-                                                    If the button above does not work, copy and paste
-                                                    the following link into your browser:
+                                                    If the button above does not work, copy and paste the verification link below into your browser:
                                                 </p>
                                                 <p style="margin:0 0 25px;font-size:13px;line-height:1.6;word-break:break-all;color:#3769ac;">'.$verificationUrl.'</p>
                                                 <p style="margin:0;font-size:14px;line-height:1.6;color:#777777;">
-                                                    If you did not create this account, you can safely ignore this email.
-                                                    <br><br><br>Regards,
-                                                    <br>MedExHub
+                                                    If you did not create a MedExHub account, no action is required and you may safely ignore this email.
+                                                    <br><br><br>Kind Regards,
+                                                    <br>The MedExHub Team
                                                 </p>
                                             </td>
                                         </tr>
@@ -142,7 +141,7 @@ class LoginController extends Controller
                     $subject,
                     $message
                 );
-                return back()->with('success5s', 'Verification email send your email login your email account and verify your account and go forward.');
+                return back()->with('success5s', 'Your account has been created successfully.<br> We have sent a verification email to your email address.<br> Please check your inbox and verify your email to continue.');
             }
     }
     public function adminpage()

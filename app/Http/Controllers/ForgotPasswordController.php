@@ -20,7 +20,7 @@ class ForgotPasswordController extends Controller
         [
             'email.required' => 'Please enter your email address.',
             'email.email' => 'Please enter a valid email address.',
-            'email.exists' => 'This email address in not registered with us..',
+            'email.exists' => 'We could not find an account associated with this email address.',
             'g-recaptcha-response.required' => 'Please complete the CAPTCHA verification.',
         ]);
          $CheckRot = $request->checkrawdata;
@@ -61,8 +61,8 @@ class ForgotPasswordController extends Controller
                                                 <h2 style="margin:0 0 20px;font-size:24px;color:#222222;text-align:center;">Reset Your Password </h2>
                                                 <p style="margin:0 0 20px;font-size:16px;line-height:1.7;">Hi '.$user->u_fname.' '.$user->u_lname.',</p>
                                                 <p style="margin:0 0 25px;font-size:16px;line-height:1.7;color:#555555;">
-                                                    We received a request to reset your password.
-                                                    Please reset your password by clicking the button below.
+                                                    We received a request to reset the password for your MedExHub account.<br><br>
+                                                    Click the button below to create a new password.
                                                 </p>
                                                 <!-- Verify Button -->
                                                 <table width="100%" cellpadding="0" cellspacing="0">
@@ -75,14 +75,13 @@ class ForgotPasswordController extends Controller
                                                     </tr>
                                                 </table>
                                                 <p style="margin:0 0 15px;font-size:14px;line-height:1.6;color:#777777;">
-                                                    If the button above does not work, copy and paste
-                                                    the following link into your browser:
+                                                    If the button above does not work, copy and paste the password reset link below into your browser:
                                                 </p>
                                                 <p style="margin:0 0 25px;font-size:13px;line-height:1.6;word-break:break-all;color:#3769ac;">'.$resetUrl.'</p>
                                                 <p style="margin:0;font-size:14px;line-height:1.6;color:#777777;">
-                                                    If you did not request a password reset, you can ignore this email.
-                                                    <br><br><br>Regards,
-                                                    <br>MedExHub
+                                                    If you did not request a password reset, no action is required and you may safely ignore this email. Your password will remain unchanged.
+                                                    <br><br><br>Kind Regards,
+                                                    <br>The MedExHub Team
                                                 </p>
                                             </td>
                                         </tr>
@@ -106,10 +105,9 @@ class ForgotPasswordController extends Controller
                     $subject,
                     $message
                 );
-                return back()->with('success5s', 'Password reset link has been send you successfully.');
+                return back()->with('success5s', 'A password reset link has been sent to your email address. Please check your inbox.');
             }
     }
-
     public function resetPassword(Request $request)
     {
         $requestData = $request->validate([
@@ -118,13 +116,13 @@ class ForgotPasswordController extends Controller
             'password' => ['required','min:8','confirmed','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/',],
         ],
         [
-            'token.required' => 'The reset token is missing go back and try again.',
+            'token.required' => 'This password reset link is invalid or incomplete. Please request a new password reset link.',
             'email.required' => 'Please enter your email address.',
             'email.email' => 'Please enter a valid email address.',
             'password.required' => 'Please enter a new password.',
-            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
-            'password.min' => 'Password must be at least 8 characters.',
-            'password.confirmed' => 'Password and confirm password do not match.',
+            'password.regex' => 'Your password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
+            'password.min' => 'Your password must be at least 8 characters long.',
+            'password.confirmed' => 'The password and password confirmation do not match.',
             
         ]);
         $status = PasswordFacade::reset($request->only(
@@ -141,7 +139,7 @@ class ForgotPasswordController extends Controller
             }
         );
         if ($status === PasswordFacade::PASSWORD_RESET) {
-            return redirect('/login')->with('success5s', 'Your password reset successfully login your account.');
+            return redirect('/login')->with('success5s', 'Your password has been reset successfully. You can now sign in to your account.');
         }
         return back()->withErrors(['email' => __($status)]);
     }
