@@ -8,16 +8,16 @@ use App\Models\User;
 				<!-- Logo -->
 				<div class="header-left active">
 					<a href="index.html" class="logo logo-normal">
-						<img src="admin_assets/img/logo_full.png" alt="Img">
+						<img src="{{ asset('admin_assets/img/logo_full.png') }}" alt="Img">
 					</a>
 					<a href="index.html" class="logo logo-white">
-						<img src="admin_assets/img/logo_full_white.png" alt="Img">
+						<img src="{{ asset('admin_assets/img/logo_full_white.png') }}" alt="Img">
 					</a>
 					<a href="index.html" class="logo-small">
-						<img src="admin_assets/img/logo.png" alt="Img">
+						<img src="{{ asset('admin_assets/img/logo.png') }}" alt="Img">
 					</a>
 					<a href="index.html" class="logo-small-white">
-						<img src="admin_assets/img/logo_white.png" alt="Img">
+						<img src="{{ asset('admin_assets/img/logo_white.png') }}" alt="Img">
 					</a>
 				</div>
 				<!-- /Logo -->
@@ -242,7 +242,7 @@ use App\Models\User;
 										<a href="activities.html">
 											<div class="media d-flex">
 												<span class="avatar flex-shrink-0">
-													<img alt="Img" src="admin_assets/img/profiles/avatar-13.jpg">
+													<img alt="Img" src="{{ asset('admin_assets/img/profiles/avatar-13.jpg') }}" class="img-fluid">
 												</span>
 												<div class="flex-grow-1">
 													<p class="noti-details"><span class="noti-title">James Kirwin</span> confirmed his order.  Order No: #78901.Estimated delivery: 2 days</p>
@@ -255,7 +255,7 @@ use App\Models\User;
 										<a href="activities.html">
 											<div class="media d-flex">
 												<span class="avatar flex-shrink-0">
-													<img alt="Img" src="admin_assets/img/profiles/avatar-03.jpg">
+													<img alt="Img" src="{{ asset('admin_assets/img/profiles/avatar-03.jpg') }}" class="img-fluid">
 												</span>
 												<div class="flex-grow-1">
 													<p class="noti-details"><span class="noti-title">Leo Kelly</span> cancelled his order scheduled for  17 Jan 2026</p>
@@ -268,7 +268,7 @@ use App\Models\User;
 										<a href="activities.html" class="recent-msg">
 											<div class="media d-flex">
 												<span class="avatar flex-shrink-0">
-													<img alt="Img" src="admin_assets/img/profiles/avatar-17.jpg">
+													<img alt="Img" src="{{ asset('admin_assets/img/profiles/avatar-17.jpg') }}" class="img-fluid">
 												</span>
 												<div class="flex-grow-1">
 													<p class="noti-details">Payment of $50 received for Order #67890 from <span class="noti-title">Antonio Engle</span></p>
@@ -281,7 +281,7 @@ use App\Models\User;
 										<a href="activities.html" class="recent-msg">
 											<div class="media d-flex">
 												<span class="avatar flex-shrink-0">
-													<img alt="Img" src="admin_assets/img/profiles/avatar-02.jpg">
+													<img alt="Img" src="{{ asset('admin_assets/img/profiles/avatar-02.jpg') }}" class="img-fluid">
 												</span>
 												<div class="flex-grow-1">
 													<p class="noti-details"><span class="noti-title">Andrea</span> confirmed his order.  Order No: #73401.Estimated delivery: 3 days</p>
@@ -314,14 +314,14 @@ use App\Models\User;
 						<a href="javascript:void(0);" class="nav-link userset" data-bs-toggle="dropdown">
 							<span class="user-info p-0">
 								<span class="user-letter">
-									<img src="images/profiles/<?php echo $Userimage; ?>" alt="Img" class="img-fluid">
+									<img src="{{ asset('images/profiles/' . $Userimage) }}" alt="Img" class="img-fluid">
 								</span>
 							</span>
 						</a>
 						<div class="dropdown-menu menu-drop-user">
 							<div class="profileset d-flex align-items-center">
 								<span class="user-img me-2">
-									<img src="images/profiles/<?php echo $Userimage; ?>" alt="Img">
+									<img src="{{ asset('images/profiles/' . $Userimage) }}" alt="Img" class="img-fluid rounded-circle">
 								</span>
 								<div>
 									<h6 class="fw-medium"><?php echo $FName . ' ' . $LName; ?></h6>

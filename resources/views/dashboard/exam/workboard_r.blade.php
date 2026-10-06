@@ -120,6 +120,15 @@ use Carbon\Carbon;
     input:checked + .option-card .radio{border-color:#2f80ff;}
     input:checked + .option-card .radio::after{content:"";width:18px;height:18px;background:#2f80ff;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
     .letter-title { font-size: 1rem; background-color:#778866;width:90%;padding-top:15px;padding-bottom:15px;}
+    .result2-bar-chart {width: 100%;max-width: 500px;font-family: Arial, sans-serif;}
+    .result2-bar-item {margin-bottom: 18px;}
+    .result2-bar-track {width: 100%;height: 24px;background: #eeeeee;border-radius: 5px;overflow: hidden;}
+    .result2-bar-normal {height: 100%;background: #b8bbc0;border-radius: 5px;}
+    .result2-bar-wrong {height: 100%;background: var(--bs-danger);border-radius: 5px;}
+    .result2-bar-correct {height: 100%;background: var(--exam-success);border-radius: 5px;}
+    .result2-bar-info {display: flex;justify-content: space-between;margin-top: 5px;font-size: 13px;}
+    .result2-bar-label {font-weight: 600;}
+    .result2-bar-value {color: #666;}
   </style>
 @foreach ($Tests as $item)
     @php
@@ -228,7 +237,7 @@ use Carbon\Carbon;
                             <input type="hidden" name="NextQuestion" value="{{ $NextQuestion }}">
                             <input type="hidden" name="Question_QT" value="{{ $QuestionQT }}">
                             <input type="hidden" name="Question_No" value="{{ $QuestionNo }}">
-                            <input type="submit" class="btn btn-primary px-4" value="Submit answer">
+                            <input type="submit" class="btn btn-primary px-4" id="submitBtn" value="Submit answer">
                             <a href="/finishexam/{{$testid}}" class="btn btn-success ms-lg-auto" id="finishBtn">Finish exam</a>
                         </div>
                         </form>
@@ -293,7 +302,7 @@ use Carbon\Carbon;
                                                 echo '</div>';
                                                 echo '<div class="col-md-10 mt-2">';
                                                     echo '<select class="form-select " name="option[]" aria-label="Default select example">';
-                                                        echo '<option selected value= "0">Select</option>';
+                                                        echo '<option selected value= "">Select</option>';
                                                             $EMQOptionCount2 = $QuestionEMQ->first()->emq_op_count ?? 0;
                                                             for($a = 1; $a <= $EMQOptionCount2; $a++)
                                                                 {
@@ -314,7 +323,7 @@ use Carbon\Carbon;
                             <input type="hidden" name="NextQuestion" value="{{ $NextQuestion }}">
                             <input type="hidden" name="Question_QT" value="{{ $QuestionQT }}">
                             <input type="hidden" name="Question_No" value="{{ $QuestionNo }}">
-                            <input type="submit" class="btn btn-primary px-4" value="Submit answer">
+                            <input type="submit" class="btn btn-primary px-4" id="submitBtnArray" value="Submit answer">
                             <a href="/finishexam/{{$testid}}" class="btn btn-success ms-lg-auto" id="finishBtn">Finish exam</a>
                         </div>
                         </form>
@@ -620,6 +629,180 @@ use Carbon\Carbon;
                     </div>
                 </section>
             </div>
+            @if($DispalyType == 2)
+                @if ($QuestionQT == '1')
+                    <?php
+                    $MCQTotalAttempts = $QuestionMCQ->first()->mcq_g_1 + $QuestionMCQ->first()->mcq_g_2 + $QuestionMCQ->first()->mcq_g_3 + $QuestionMCQ->first()->mcq_g_4 + $QuestionMCQ->first()->mcq_g_5 + $QuestionMCQ->first()->mcq_g_6 + $QuestionMCQ->first()->mcq_g_7 + $QuestionMCQ->first()->mcq_g_8;
+                    ?>
+                    <div class="col-12 col-md-4 col-lg-12 mt-4">
+                        <section class="card border-0 shadow-sm h-100">
+                            <div class="card-body p-3 p-xl-4" >
+                                <h3 class="h6 fw-bold d-flex align-items-center gap-2 border-bottom pb-3 mb-3">
+                                    <span class="metric-icon" aria-hidden="true">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#2664eb" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="12" width="4" height="9" rx="1"/>
+                                        <rect x="10" y="7" width="4" height="14" rx="1"/>
+                                        <rect x="17" y="3" width="4" height="18" rx="1"/>
+                                    </svg>
+                                    </span>
+                                    Total Attempts ( {{ $MCQTotalAttempts }} )
+                                </h3>
+                                <div class="result2-bar-chart">
+                                    <?php    
+                                        $MCQOptionCountA = $QuestionMCQ->first()->mcq_op_count ?? 0;
+                                        for($e = 1; $e <= $MCQOptionCountA; $e++)
+                                            {
+                                                $Alphabet = chr(64 + $e);
+                                                $ChartCol = 'mcq_g_'.$e;
+                                                $MCQChartValue = $QuestionMCQ->first()->$ChartCol ?? 0;
+                                                $ChartPerA = round(($MCQChartValue / $MCQTotalAttempts) * 100, 0);
+                                                $ChartPer = round(($MCQChartValue / $MCQTotalAttempts) * 100, 1);
+                                                if($CorrectAnswer == $Alphabet)
+                                                    {
+                                                        echo "<div class='result2-bar-item'>";
+                                                            echo "<div class='result2-bar-track'><div class='result2-bar-correct' style='width:$ChartPerA%;'></div></div>";
+                                                            echo "<div class='result2-bar-info'><span class='result2-bar-label'>Option $Alphabet (<span style='font-size:12px;font-weight: normal;'> $MCQChartValue Attempts</span>)</span><span class='result2-bar-value'>$ChartPer%</span></div>";
+                                                        echo "</div>";
+                                                    }
+                                                else
+                                                    {
+                                                        if($UserAnswer == $Alphabet)
+                                                            {
+                                                                 echo "<div class='result2-bar-item'>";
+                                                                    echo "<div class='result2-bar-track'><div class='result2-bar-wrong' style='width:$ChartPerA%;'></div></div>";
+                                                                    echo "<div class='result2-bar-info'><span class='result2-bar-label'>Option $Alphabet (<span style='font-size:12px;font-weight: normal;'> $MCQChartValue Attempts</span>)</span><span class='result2-bar-value'>$ChartPer%</span></div>";
+                                                                echo "</div>";
+                                                            }
+                                                        else
+                                                            {
+                                                                echo "<div class='result2-bar-item'>";
+                                                                    echo "<div class='result2-bar-track'><div class='result2-bar-normal' style='width:$ChartPerA%;'></div></div>";
+                                                                    echo "<div class='result2-bar-info'><span class='result2-bar-label'>Option $Alphabet (<span style='font-size:12px;font-weight: normal;'> $MCQChartValue Attempts</span>)</span><span class='result2-bar-value'>$ChartPer%</span></div>";
+                                                                echo "</div>";
+                                                            }
+                                                    }
+                                            }
+                                    ?>
+                                        
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                @endif
+                @if ($QuestionQT == '2')
+                    <?php
+                    $EMQQuestionCountChart = $QuestionEMQ->first()->emq_q_count ?? 0;
+                    for($f = 1; $f <= $EMQQuestionCountChart; $f++)
+                        {
+                            $InnerQuestionID = $f;
+                            $QuestionGraphEMQ = DB::table('questions_emq_graph')->select('*')->where(['emqg_emq_id' => $QuestionID,'emqg_inner_q_id' => $InnerQuestionID])->get();
+                            $TotalAttemptsEMQ = $QuestionGraphEMQ->first()->emqg_ans_1 + $QuestionGraphEMQ->first()->emqg_ans_2 + $QuestionGraphEMQ->first()->emqg_ans_3 + $QuestionGraphEMQ->first()->emqg_ans_4 + $QuestionGraphEMQ->first()->emqg_ans_5 + $QuestionGraphEMQ->first()->emqg_ans_6 + $QuestionGraphEMQ->first()->emqg_ans_7 + $QuestionGraphEMQ->first()->emqg_ans_8 + $QuestionGraphEMQ->first()->emqg_ans_9 + $QuestionGraphEMQ->first()->emqg_ans_10 + $QuestionGraphEMQ->first()->emqg_ans_11 + $QuestionGraphEMQ->first()->emqg_ans_12 + $QuestionGraphEMQ->first()->emqg_ans_13 + $QuestionGraphEMQ->first()->emqg_ans_14 + $QuestionGraphEMQ->first()->emqg_ans_15 + $QuestionGraphEMQ->first()->emqg_ans_16 + $QuestionGraphEMQ->first()->emqg_ans_17 + $QuestionGraphEMQ->first()->emqg_ans_18 + $QuestionGraphEMQ->first()->emqg_ans_19 + $QuestionGraphEMQ->first()->emqg_ans_20 + $QuestionGraphEMQ->first()->emqg_ans_21 + $QuestionGraphEMQ->first()->emqg_ans_22 + $QuestionGraphEMQ->first()->emqg_ans_23 + $QuestionGraphEMQ->first()->emqg_ans_24 + $QuestionGraphEMQ->first()->emqg_ans_25;
+                    
+                        }
+                    ?>
+                    <div class="col-12 col-md-4 col-lg-12 mt-4">
+                        <section class="card border-0 shadow-sm h-100">
+                            <div class="card-body p-3 p-xl-4" >
+                                <h3 class="h6 fw-bold d-flex align-items-center gap-2 border-bottom pb-3 mb-3">
+                                    <span class="metric-icon" aria-hidden="true">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#2664eb" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="12" width="4" height="9" rx="1"/>
+                                        <rect x="10" y="7" width="4" height="14" rx="1"/>
+                                        <rect x="17" y="3" width="4" height="18" rx="1"/>
+                                    </svg>
+                                    </span>
+                                    Total Attempts ( {{ $TotalAttemptsEMQ }} )
+                                </h3>
+                                <div class="result2-bar-chart">
+                                    <?php
+                                        $EMQQuestionCountChartA = $QuestionEMQ->first()->emq_q_count ?? 0;
+                                        $QuestionNoA = $QuestionNo - $EMQQuestionCountChartA;
+                                        for($g = 1; $g <= $EMQQuestionCountChartA; $g++)
+                                            {
+                                                $QuestionNoA++;
+                                                $InnerQuestionIDA = $g;
+                                                $QuestionGraphEMQA = DB::table('questions_emq_graph')->select('*')->where(['emqg_emq_id' => $QuestionID,'emqg_inner_q_id' => $InnerQuestionIDA])->get();
+                                                $EMQAnswerColA = "emq_a_".$g;
+                                                $CorrectAnswerA = $QuestionEMQ->first()->$EMQAnswerColA ?? 'No Option Found';
+                                                 $z = $g - 1;
+                                                $UserAnswerA = explode('.', $AnswerSheet);
+                                                $UserAnswerA = explode("'", $UserAnswerA[$z]);
+                                                $UserAnswerA = $UserAnswerA[0];
+                                                if($UserAnswerA == $CorrectAnswerA)
+                                                    {
+                                                        $QuestionAnswerStatus = "<span style='color:var(--bs-success);font-size:14px;'>✓</span>";
+                                                    }
+                                                else
+                                                    {
+                                                        $QuestionAnswerStatus = "<span style='color:var(--bs-danger);font-size:14px;'>X</span>";
+                                                    }
+
+                                                echo '<div class="alert mt-3 mb-0 alert-light">';
+                                                    echo '<div class="section-heading d-flex align-items-center justify-content-between pb-2 mb-3">
+                                                        <span class="badge rounded-pill text-bg-primary-subtle border border-primary-subtle text-primary-emphasis px-3 py-2" id="questionBadge">Question No : ' . $QuestionNoA . ' - ' . $QuestionAnswerStatus . '</span>
+                                                        <span class="small fw-semibold text-secondary" ></span>
+                                                    </div>';
+                                                   
+                                                    if($UserAnswerA == $CorrectAnswerA)
+                                                        {
+                                                            $ColNumberA = ord($CorrectAnswerA) - 64;
+                                                            $EMQOChartCol2 = "emqg_ans_".$ColNumberA;
+                                                            $EMQChartValue = $QuestionGraphEMQA->first()->$EMQOChartCol2 ?? 'No Option Found';
+                                                            if($EMQChartValue == 0)
+                                                                {
+                                                                    $ChartPer = "0";
+                                                                }
+                                                            else
+                                                                {
+                                                                    $ChartPer = round(($EMQChartValue / $TotalAttemptsEMQ) * 100, 1);
+                                                                }
+                                                            echo "<div class='result2-bar-item'>";
+                                                                echo "<div class='result2-bar-track'><div class='result2-bar-correct' style='width:$ChartPer%;'></div></div>";
+                                                                echo "<div class='result2-bar-info'><span class='result2-bar-label'>Correct Answer is <strong>$CorrectAnswerA</strong> (<span style='font-size:12px;font-weight: normal;'> $EMQChartValue </span>)</span><span class='result2-bar-value'>$ChartPer%</span></div>";
+                                                            echo "</div>";
+                                                        }
+                                                    else
+                                                        {
+                                                            $ColNumberA = ord($UserAnswerA) - 64;
+                                                            $EMQChartCol2 = "emqg_ans_".$ColNumberA;
+                                                            $EMQChartValue = $QuestionGraphEMQA->first()->$EMQChartCol2 ?? 'No Option Found';
+                                                            if($EMQChartValue == 0)
+                                                                {
+                                                                    $ChartPer = "0";
+                                                                }
+                                                            else
+                                                                {
+                                                                    $ChartPer = round(($EMQChartValue / $TotalAttemptsEMQ) * 100, 1);
+                                                                }
+                                                            echo "<div class='result2-bar-item'>";
+                                                                echo "<div class='result2-bar-track'><div class='result2-bar-wrong' style='width:$ChartPer%;'></div></div>";
+                                                                echo "<div class='result2-bar-info'><span class='result2-bar-label'>Option $UserAnswerA (<span style='font-size:12px;font-weight: normal;'> $EMQChartValue Attempts</span>)</span><span class='result2-bar-value'>$ChartPer%</span></div>";
+                                                            echo "</div>";
+                                                            $ColNumberA = ord($CorrectAnswerA) - 64;
+                                                            $EMQChartCol2 = "emqg_ans_".$ColNumberA;
+                                                            $EMQChartValue = $QuestionGraphEMQA->first()->$EMQChartCol2 ?? 'No Option Found';
+                                                            if($EMQChartValue == 0)
+                                                                {
+                                                                    $ChartPer = "0";
+                                                                }
+                                                            else
+                                                                {
+                                                                    $ChartPer = round(($EMQChartValue / $TotalAttemptsEMQ) * 100, 1);
+                                                                }
+                                                            echo "<div class='result2-bar-item'>";
+                                                                echo "<div class='result2-bar-track'><div class='result2-bar-correct' style='width:$ChartPer%;'></div></div>";
+                                                                echo "<div class='result2-bar-info'><span class='result2-bar-label'>Option $CorrectAnswerA (<span style='font-size:12px;font-weight: normal;'> $EMQChartValue Attempts</span>)</span><span class='result2-bar-value'>$ChartPer%</span></div>";
+                                                            echo "</div>";
+                                                    }
+                                                echo '</div>';
+                                            }
+                                    ?>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                @endif
+            @endif
             <div class="col-12 col-md-4 col-lg-12 mt-4">
                 <section class="card border-0 shadow-sm h-100">
                     <div class="card-body p-3 p-xl-4">
@@ -697,6 +880,8 @@ use Carbon\Carbon;
         <span>From triage to disposition, iSim.ai offers cutting-edge emergency simulation.</span>
     </footer>    
 </div>
+<script src="/packages/js/Chart.min.js" crossorigin="anonymous"></script>        
+<script src="/packages/bootstrap538/js/bootstrap.bundle.min.js"></script>
 @include('frontend.index_footer')
 @foreach ($Tests as $object)
     @php
@@ -794,4 +979,53 @@ $QuestionLeft = $TestLenth - $GharfNumber;
             cutoutPercentage: 70
         }
     });
+</script>
+<script>
+    const radios = document.querySelectorAll('input[name="option"]');
+    const submitBtn = document.getElementById('submitBtn');
+    function checkRadioSelection() 
+        {
+            const selected = document.querySelector('input[name="option"]:checked');
+            submitBtn.disabled = !selected;
+        }
+    radios.forEach(radio => { radio.addEventListener('change', checkRadioSelection);});
+    checkRadioSelection();
+    
+</script>
+<script>
+    const submitBtnArray = document.getElementById('submitBtnArray');
+    function checkSelectSelectionArray() 
+        {
+            const selects = document.querySelectorAll('select[name="option[]"]');
+            const allSelected = Array.from(selects).every(function(select) 
+                {
+                    return select.value !== '';
+                });
+            submitBtnArray.disabled = !allSelected;
+        }
+    document.addEventListener('change', function(e) 
+        {
+            if (e.target.matches('select[name="option[]"]')) {checkSelectSelectionArray();}
+        });
+    checkSelectSelectionArray();
+</script>
+<script>
+    // Method 2: Alternative JavaScript approach to disable Right-Click
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    // Block Refresh Keyboard Shortcuts (F5, Ctrl+R, Cmd+R)
+    document.addEventListener('keydown', function(e) 
+        {
+            // Check for F5
+            if (e.key === 'F5' || e.keyCode === 116) 
+                {
+                    e.preventDefault();
+                    alert("F5 refresh is disabled.");
+                }
+            // Check for Ctrl+R (Windows/Linux) or Cmd+R (Mac)
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'r' || e.key === 'R')) 
+                {
+                    e.preventDefault();
+                    alert("Ctrl+R / Cmd+R refresh is disabled.");
+                }
+        });
 </script>

@@ -87,6 +87,7 @@ Route::post('submitmcq/{testid}', [WorkboardController::class, 'submitmcq'])->na
 Route::post('submitemq/{testid}', [WorkboardController::class, 'submitemq'])->name('submitemq')->middleware(['auth']);
 Route::get('questionskip/{linkData}', [WorkboardController::class, 'questionskip'])->name('questionskip')->middleware(['auth']);
 Route::get('finishexam/{testid}', [WorkboardController::class, 'finishexam'])->name('finishexam')->middleware(['auth']);
+Route::get('timeoutexam/{testid}', [WorkboardController::class, 'timeoutexam'])->name('timeoutexam')->middleware(['auth']);
 Route::post('submitrmcq/{testid}', [WorkboardController::class, 'submitrmcq'])->name('submitrmcq')->middleware(['auth']);
 Route::post('submitramcq/{testid}', [WorkboardController::class, 'submitramcq'])->name('submitramcq')->middleware(['auth']);
 Route::post('submitremq/{testid}', [WorkboardController::class, 'submitremq'])->name('submitremq')->middleware(['auth']);
@@ -139,6 +140,11 @@ Route::get('admin-users-pending', [AdminUserController::class, 'adminuserspendin
 Route::get('admin-conversation', [AdminConversationController::class, 'adminconversation'])->name('admin-conversation')->middleware(['auth']);
 //Admin Exams Routes
 Route::get('admin-exams', [AdminArchivesController::class, 'adminexams'])->name('admin-exams')->middleware(['auth']);
+Route::get('admin-innerexams/{e_id}', [AdminArchivesController::class, 'admininnerexams'])->middleware(['auth']);
+
+
+
+
 Route::get('admin-mcq', [AdminArchivesController::class, 'adminmcq'])->name('admin-mcq')->middleware(['auth']);
 Route::get('admin-emq', [AdminArchivesController::class, 'adminemq'])->name('admin-emq')->middleware(['auth']);
 Route::get('admin-flash-card', [AdminArchivesController::class, 'adminflashcard'])->name('admin-flash-card')->middleware(['auth']);

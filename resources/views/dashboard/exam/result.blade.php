@@ -285,10 +285,17 @@ use Carbon\Carbon;
                                                             for($x = 1; $x <= $MCQOptionCount; $x++)
                                                                 {
                                                                     $GraphCol = "mcq_g_" . $x;
-                                                                    $GraphValue = $QuestionMCQ->first()->$GraphCol ?? 'No Option Found';
+                                                                    $GraphValue = $QuestionMCQ->first()->$GraphCol ?? '0';
                                                                     $Option = 'Option' . $x;
                                                                     $Alphabet = chr(64 + $x);
-                                                                    $GraphPer = round(($GraphValue / $TotalAttempts) * 100, 2);
+                                                                    if($GraphValue == 0)
+                                                                        {
+                                                                            $GraphPer = "0";
+                                                                        }
+                                                                    else
+                                                                        {
+                                                                            $GraphPer = round(($GraphValue / $TotalAttempts) * 100, 2);
+                                                                        }
                                                                     if($CorrectAnswer == $Alphabet)
                                                                         {
                                                                             echo "<div class='item' style='--clr: #ccffcc; --val: $GraphPer'>
@@ -319,7 +326,7 @@ use Carbon\Carbon;
                                                             for($y = 1; $y <= $MCQOptionCount; $y++)
                                                                 {
                                                                     $GraphCol = "mcq_g_" . $y;
-                                                                    $GraphValue = $QuestionMCQ->first()->$GraphCol ?? 'No Option Found';
+                                                                    $GraphValue = $QuestionMCQ->first()->$GraphCol ?? '0';
                                                                     $Option = 'Option' . $y;
                                                                     $Alphabet = chr(64 + $y);
                                                                     if($CorrectAnswer == $Alphabet)
@@ -495,7 +502,15 @@ use Carbon\Carbon;
                                                                             {
                                                                                 $GraphCol = "emqg_ans_" . $n;
                                                                                 $GraphValue = $QuestionGraphEMQ->first()->$GraphCol ?? 'No Option Found';
-                                                                                $GraphPer = round(($GraphValue / $TotalAttemptsEMQ) * 100, 1);
+                                                                                if($GraphValue == 0)
+                                                                                    {
+                                                                                        $GraphPer = "0";
+                                                                                    }
+                                                                                else
+                                                                                    {
+                                                                                        $GraphPer = round(($GraphValue / $TotalAttemptsEMQ) * 100, 1);
+                                                                                    }
+                                                                                
                                                                                 $Alphabet = chr(64 + $n);
                                                                                 if($CorrectAnswer == $Alphabet)
                                                                                     {
@@ -528,7 +543,7 @@ use Carbon\Carbon;
                                                                         for($m = 1; $m <= $EMQOptionCount; $m++)
                                                                             {
                                                                                 $GraphCol = "emqg_ans_" . $m;
-                                                                                $GraphValue = $QuestionGraphEMQ->first()->$GraphCol ?? 'No Option Found';
+                                                                                $GraphValue = $QuestionGraphEMQ->first()->$GraphCol ?? '0';
                                                                                 $Alphabet = chr(64 + $m);
                                                                                 if($CorrectAnswer == $Alphabet)
                                                                                     {
@@ -729,6 +744,8 @@ use Carbon\Carbon;
 Copyright © 2015 - 2026 MedExHub.com<br>
 From triage to disposition, iSim.ai  offers cutting-edge emergency simulation—give it a try!
 </div>
+<script src="/packages/js/Chart.min.js" crossorigin="anonymous"></script>        
+<script src="/packages/bootstrap538/js/bootstrap.bundle.min.js"></script>
 @include('frontend.index_footer')
 @php
 $GrangTotal = $CorrectAnswerTotal + $IncorrectAnswerTotal + $SkipAnswerTotal;
@@ -736,8 +753,6 @@ $Correct = round(($CorrectAnswerTotal / $GrangTotal) * 100, 2);
 $Incorrect = round(($IncorrectAnswerTotal / $GrangTotal) * 100, 2);
 $Skip = round(($SkipAnswerTotal / $GrangTotal) * 100, 2);    
 @endphp
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>        
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     // Set new default font family and font color to mimic Bootstrap's default styling
 (Chart.defaults.global.defaultFontFamily = "Metropolis"),

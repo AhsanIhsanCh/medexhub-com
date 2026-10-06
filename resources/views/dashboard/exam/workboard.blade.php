@@ -57,8 +57,8 @@ use Carbon\Carbon;
     .performance-sidebar { position: sticky; top: 1rem; }
     .metric-icon {display: inline-grid;width: 34px;height: 34px;place-items: center;border-radius: 10px;color: var(--exam-primary);background: var(--exam-primary-soft);font-weight: 800;}
     .timer-value {font-variant-numeric: tabular-nums;font-size: clamp(1.7rem, 4vw, 2rem);letter-spacing: .03em;}
-    .timer-ring {display: grid;width: 58px;height: 58px;place-items: center;border-radius: 50%;background: conic-gradient(var(--exam-primary) 0 72%, #dbeafe 72% 100%);}
-    .timer-ring::before {content: "";width: 44px;height: 44px;border-radius: 50%;background: #fff;}
+    /* .timer-ring {display: grid;width: 58px;height: 58px;place-items: center;border-radius: 50%;background: conic-gradient(var(--exam-primary) 0 72%, #dbeafe 72% 100%);}
+    .timer-ring::before {content: "";width: 44px;height: 44px;border-radius: 50%;background: #fff;} */
     .progress-donut {position: relative;display: grid;flex: 0 0 auto;width: 104px;height: 104px;place-items: center;border-radius: 50%;background: conic-gradient(var(--exam-success) 0 var(--progress-angle, 0deg), #e2e8f0 var(--progress-angle, 0deg) 360deg);transition: background .25s ease;}
     .progress-donut::before {content: "";position: absolute;inset: 11px;border-radius: 50%;background: #fff;box-shadow: inset 0 0 0 1px #f1f5f9;}
     .progress-centre { position: relative; z-index: 1; text-align: center; }
@@ -120,9 +120,20 @@ use Carbon\Carbon;
     input:checked + .option-card .radio{border-color:#2f80ff;}
     input:checked + .option-card .radio::after{content:"";width:18px;height:18px;background:#2f80ff;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
     .letter-title { font-size: 1rem; background-color:#778866;width:90%;padding-top:15px;padding-bottom:15px;}
+    .timer-card { width: 305px;background: #ffffff;border-radius: 14px;padding: 22px;box-shadow: 0 2px 8px rgba(0,0,0,0.10);}
+    .timer-header {display: flex;align-items: center;gap: 10px;font-size: 16px;font-weight: 700;}
+    .timer-icon {width: 34px;height: 34px;border-radius: 10px;background: #eef5ff;display: flex;align-items: center;justify-content: center;color: #2563eb;}
+    .divider {height: 1px;background: #dce3ed;margin: 16px 0 20px;}
+    .timer-body {display: flex;justify-content: space-between;align-items: center;}
+    .timer-label {font-size: 14px;color: #6b7280;margin-bottom: 9px;}
+    .timer-time {font-size: 32px;color: #172033;}
+    .timer-ring {transform: rotate(-90deg);}
+    .timer-track {fill: none;stroke: #dbeafe;stroke-width: 7;}
+    .timer-progress {fill: none;stroke: #2563eb;stroke-width: 7;transition:stroke-dashoffset 0.4s linear,stroke 0.3s ease;}
   </style>
 @foreach ($Tests as $item)
     @php
+        $TestID =  $item->t_id ?? 0;
         $QuestionNo = $item->t_answered ?? 0;
         $TestType = $item->t_type ?? 0;
         $Questions = explode(',', $item->t_questions);
@@ -220,7 +231,8 @@ use Carbon\Carbon;
                         <input type="hidden" name="NextQuestion" value="{{ $NextQuestion }}">
                         <input type="hidden" name="Question_QT" value="{{ $QuestionQT }}">
                         <input type="hidden" name="Question_No" value="{{ $QuestionNo }}">
-                        <input type="submit" class="btn btn-primary px-4" value="Submit answer">
+                        <input type="submit" class="btn btn-primary px-4" id="submitBtn" value="Submit answer">
+
                         @php
                             $linkData = array($testid, $NextQuestion, $QuestionNo);
                             $string = implode(", ", $linkData);
@@ -288,7 +300,7 @@ use Carbon\Carbon;
                                             echo '</div>';
                                             echo '<div class="col-md-10 mt-2">';
                                                 echo '<select class="form-select " name="option[]" aria-label="Default select example">';
-                                                    echo '<option selected value= "0">Select</option>';
+                                                    echo '<option selected value= "">Select</option>';
                                                         $EMQOptionCount2 = $QuestionEMQ->first()->emq_op_count ?? 0;
                                                         for($a = 1; $a <= $EMQOptionCount2; $a++)
                                                             {
@@ -310,7 +322,7 @@ use Carbon\Carbon;
                         <input type="hidden" name="NextQuestion" value="{{ $NextQuestion }}">
                         <input type="hidden" name="Question_QT" value="{{ $QuestionQT }}">
                         <input type="hidden" name="Question_No" value="{{ $QuestionNo }}">
-                        <input type="submit" class="btn btn-primary px-4" value="Submit answer">
+                        <input type="submit" class="btn btn-primary px-4" id="submitBtnArray" value="Submit answer">
                         @php
                             $linkData = array($testid, $NextQuestion, $QuestionNo);
                             $string = implode(", ", $linkData);
@@ -326,21 +338,23 @@ use Carbon\Carbon;
                     <h2 class="h5 fw-bold mb-0">Your Performance</h2>
                 </div>
                 <div class="row g-3">
-                    <div class="col-12 col-md-4 col-lg-12">
-                        <section class="card border-0 shadow-sm h-100">
-                        <div class="card-body p-3 p-xl-4">
-                            <h3 class="h6 fw-bold d-flex align-items-center gap-2 border-bottom pb-3 mb-3">
-                            <span class="metric-icon" aria-hidden="true">◷</span> Timer
-                            </h3>
-                            <div class="d-flex align-items-center justify-content-between gap-3">
-                            <div>
-                                <small class="text-secondary d-block mb-1">Time remaining</small>
-                                <div class="timer-value fw-normal" id="timer"></div>
+                    <div class="col-12 col-md-4 col-lg-12 mt-4">
+                        <div class="timer-card">
+                            <div class="timer-header">
+                                <div class="timer-icon">◷</div>Timer
                             </div>
-                            <div class="timer-ring" aria-hidden="true"></div>
+                            <div class="divider"></div>
+                            <div class="timer-body">
+                                <div>
+                                    <div class="timer-label">Time remaining</div>
+                                    <div class="timer-time" id="timeRemaining">10:00</div>
+                                </div>
+                                <svg class="timer-ring" width="58" height="58" viewBox="0 0 58 58">
+                                    <circle class="timer-track" cx="29" cy="29" r="25"></circle>
+                                    <circle id="timerProgress" class="timer-progress" cx="29" cy="29" r="25"></circle>
+                                </svg>
                             </div>
                         </div>
-                        </section>
                     </div>
                     <div class="col-12 col-md-4 col-lg-12 mt-4">
                         <section class="card border-0 shadow-sm h-100">
@@ -426,38 +440,8 @@ use Carbon\Carbon;
             <span>From triage to disposition, iSim.ai offers cutting-edge emergency simulation.</span>
         </footer>
     </div>
-<script>
-// Function to start the timer
-function startTimer() {
-    let countdownTime = localStorage.getItem('timer_end');
-    //Set timeer countdown time in workboardConntroller.php 
-    let interval = setInterval(function() {
-        let now = new Date().getTime();
-        let distance = countdownTime - now;
-        // Calculate minutes and seconds
-        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        // Display results
-        const h = hours.toString().padStart(2, '0');
-        const m = minutes.toString().padStart(2, '0');
-        const s = seconds.toString().padStart(2, '0');
-        if(h == 00)
-            document.getElementById("timer").innerHTML = m + ":" + s;
-        else
-            document.getElementById("timer").innerHTML = h + ":" + m + ":" + s;  
-        // If countdown finished
-        if (distance < 0) {
-            clearInterval(interval);
-            localStorage.removeItem('timer_end');
-            document.getElementById("timer").innerHTML = "EXPIRED";
-            // Optional: location.reload(); // Refresh page
-        }
-    }, 1000);
-}
-// Start timer on load
-window.onload = startTimer;
-</script>
+<script src="/packages/js/Chart.min.js" crossorigin="anonymous"></script>        
+<script src="/packages/bootstrap538/js/bootstrap.bundle.min.js"></script>
 @include('frontend.index_footer')
 @foreach ($Tests as $object)
     @php
@@ -548,4 +532,110 @@ $QuestionLeft = $Totallenth - $GharfNumber;
             cutoutPercentage: 70
         }
     });
+</script>
+<script>
+    const radios = document.querySelectorAll('input[name="option"]');
+    const submitBtn = document.getElementById('submitBtn');
+    function checkRadioSelection() 
+        {
+            const selected = document.querySelector('input[name="option"]:checked');
+            submitBtn.disabled = !selected;
+        }
+    radios.forEach(radio => { radio.addEventListener('change', checkRadioSelection);});
+    checkRadioSelection();
+    
+</script>
+<script>
+    const submitBtnArray = document.getElementById('submitBtnArray');
+    function checkSelectSelectionArray() 
+        {
+            const selects = document.querySelectorAll('select[name="option[]"]');
+            const allSelected = Array.from(selects).every(function(select) 
+                {
+                    return select.value !== '';
+                });
+            submitBtnArray.disabled = !allSelected;
+        }
+    document.addEventListener('change', function(e) 
+        {
+            if (e.target.matches('select[name="option[]"]')) {checkSelectSelectionArray();}
+        });
+    checkSelectSelectionArray();
+</script>
+<script>
+    // Method 2: Alternative JavaScript approach to disable Right-Click
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    // Block Refresh Keyboard Shortcuts (F5, Ctrl+R, Cmd+R)
+    document.addEventListener('keydown', function(e) 
+        {
+            // Check for F5
+            if (e.key === 'F5' || e.keyCode === 116) 
+                {
+                    e.preventDefault();
+                    alert("F5 refresh is disabled.");
+                }
+            // Check for Ctrl+R (Windows/Linux) or Cmd+R (Mac)
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'r' || e.key === 'R')) 
+                {
+                    e.preventDefault();
+                    alert("Ctrl+R / Cmd+R refresh is disabled.");
+                }
+        });
+</script>
+<script>
+    var testid = "<?php echo $TestID; ?>";
+    const redirectUrl = "../timeoutexam/"+testid;
+    const countdownTime = Number(localStorage.getItem("timer_end"));
+    const timeDisplay = document.getElementById("timeRemaining");
+    const progressCircle = document.getElementById("timerProgress");
+    const radius = 25;
+    const circumference = 2 * Math.PI * radius;
+    progressCircle.style.strokeDasharray = circumference;
+    progressCircle.style.strokeDashoffset = 0;
+    const durationKey = "notlyConsultTimerDuration";
+    let totalSeconds = Number(localStorage.getItem(durationKey));
+    if (!totalSeconds) {
+        totalSeconds = Math.max(Math.ceil((countdownTime - Date.now()) / 1000),1);
+        localStorage.setItem(durationKey, totalSeconds);
+        }
+    function updateTimer() {
+        const now = Date.now();
+        let remainingSeconds = Math.ceil((countdownTime - now) / 1000);
+        if (remainingSeconds <= 0) 
+            {
+                remainingSeconds = 0;
+                timeDisplay.textContent = "00:00";
+                progressCircle.style.strokeDashoffset =circumference;
+                progressCircle.style.stroke = "#ef4444";
+                localStorage.removeItem(durationKey);
+                localStorage.removeItem("timer_end");
+                clearInterval(timerInterval);
+                window.location.href = redirectUrl;
+                return;
+            }
+        const hours = Math.floor(remainingSeconds / 3600);
+        const minutes = Math.floor((remainingSeconds % 3600) / 60);
+        const seconds = remainingSeconds % 60;
+        if (hours > 0)
+            {
+                timeDisplay.textContent = String(hours).padStart(2, "0") + ":" + String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
+            }
+        else
+            {
+                timeDisplay.textContent = String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
+            }
+        const percentageRemaining = Math.max(0, Math.min(remainingSeconds / totalSeconds, 1));
+        const offset = circumference * (1 - percentageRemaining);
+        progressCircle.style.strokeDashoffset = offset;
+        if (percentageRemaining <= 0.10) 
+            {
+                progressCircle.style.stroke = "#ef4444";
+            }
+        else
+            {
+                progressCircle.style.stroke = "#2563eb";
+            }
+        }
+    updateTimer();
+    const timerInterval = setInterval(updateTimer, 1000);
 </script>

@@ -672,5 +672,39 @@ class WorkboardController extends Controller
             //Check Session Completed Goto Result
             return view('dashboard/exam/result',['testid' => $testid, 'Tests' => $Tests, 'e_id' => $e_id]);
             
-    }    
+    }
+    public function timeoutexam($testid)
+    {
+        ?>
+                <script>
+                    localStorage.removeItem('timer_end');
+                </script>
+                <?php
+        
+        $UpdateTestData = '';
+        $TestDB = DB::table('tests')->where([['t_u_id', auth()->id()],['t_id', $testid]])->get();
+        $e_id = $TestDB->first()->t_e_id;
+        $DBQuestions = $TestDB->first()->t_questions;
+        $Questions = explode(',', $DBQuestions);
+        $QuestionsCount = count($Questions);
+        for($i = 0; $i < $QuestionsCount; $i++)
+            {
+                $Question = explode(':', $Questions[$i]);
+                if($Question[3] == 0)
+                    {
+                        $UpdateTestData .=  $Question[0].":".$Question[1].":".$Question[2].":2,";
+                    }
+                else
+                    {
+                        $UpdateTestData .=  $Question[0].":".$Question[1].":".$Question[2].":".$Question[3].",";
+                    }
+            }
+            $modified_string = substr($UpdateTestData, 0, -1);
+            DB::table('tests')->where('t_id', $testid)->update(['t_questions' => $modified_string]);
+            //Get Updated Test Details
+            $Tests = DB::table('tests')->where([['t_u_id', auth()->id()],['t_id', $testid]])->get();
+            $e_id = $Tests->first()->t_e_id;
+            //Check Session Completed Goto Result
+            return view('dashboard/exam/result',['testid' => $testid, 'Tests' => $Tests, 'e_id' => $e_id]);
+    }
 }

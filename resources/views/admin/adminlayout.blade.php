@@ -1,9 +1,9 @@
 @include('admin.pages.index_header')
 	<!-- Main Wrapper -->
-	<div class="main-wrapper">		
+	<div class="main-wrapper">
 		@include('admin.pages.topbar')
 		@include('admin.pages.sidebar')
-        @yield('dashboard')
+		@yield('dashboard')
 		@yield('payment')
 		@yield('paymentreturn')
 		@yield('paymentmiscellaneous')
@@ -23,12 +23,7 @@
 		@yield('maintenance-login')
 
 		
-      	
-		
-		
-		
-		
 	</div>
 	<!-- /Main Wrapper -->
-	 @include('admin.popup.addstock')
+@include('admin.popup.addstock')
 @include('admin.pages.index_footer')

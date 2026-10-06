@@ -21,7 +21,7 @@ class BasketController extends Controller
         $Exams = DB::table('exams')->select('e_inner_level','e_price1y')->where('e_id', $e_id)->get();
         $JionDate = date("Y-m-d H:i:s" , time());
         $ExpDate = date("Y-m-d H:i:s", strtotime("+12 months"));
-        $BasketsC = DB::table('baskets')->where('ba_e_id', $e_id)->where('ba_status', '0')->get();
+        $BasketsC = DB::table('baskets')->where('ba_e_id', $e_id)->where('ba_u_id', $userId)->where('ba_status', '0')->get();
         echo $BasketsCount = $BasketsC->count();
         if($BasketsCount > 0)
             {
@@ -110,7 +110,7 @@ class BasketController extends Controller
                     }
                 else
                     {
-                        $MessageArr .= '<span style="color: red;">Coupon Not Valid For  <strong>' . $Exams->first()->e_name . '</strong>.</span><br>';
+                        $MessageArr .= '<span style="color: red;">Coupon Not Valid For this  <strong>' . $Exams->first()->e_name . '</strong>.</span><br>';
                     }      
             }
         return redirect()->back()->with('onlymessage_basket1', $MessageArr);
@@ -211,3 +211,5 @@ class BasketController extends Controller
         return redirect()->action([SubscribeController::class, 'subscriptions']);
     }    
 }
+
+

@@ -10,40 +10,44 @@
 	<meta name="author" content="Dreams Technologies">
 	<meta name="robots" content="index, follow">
 	<title>MedExHub - Admin</title>
-	<script src="admin_assets/js/theme-script.js"></script>	
+	<script src="{{ asset('admin_assets/js/theme-script.js') }}"></script>	
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="admin_assets/img/favicon.png">
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin_assets/img/favicon.png') }}">
 
 	<!-- Apple Touch Icon -->
-	<link rel="apple-touch-icon" sizes="180x180" href="admin_assets/img/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('admin_assets/img/apple-touch-icon.png') }}">
+
+	<link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap-datetimepicker.min.css') }}">
 
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="admin_assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap.min.css') }}">
 
 	<!-- Datetimepicker CSS -->
-	<link rel="stylesheet" href="admin_assets/css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap-datetimepicker.min.css') }}">
 
 	<!-- animation CSS -->
-	<link rel="stylesheet" href="admin_assets/css/animate.css">
+	<link rel="stylesheet" href="{{ asset('admin_assets/css/animate.css') }}">
 
 	<!-- Select2 CSS -->
-	<link rel="stylesheet" href="admin_assets/css/select2.min.css">
+	<link rel="stylesheet" href="{{ asset('admin_assets/css/select2.min.css') }}">
 
 	<!-- Daterangepikcer CSS -->
-	<link rel="stylesheet" href="admin_assets/css/daterangepicker.css">
+	<link rel="stylesheet" href="{{ asset('admin_assets/css/daterangepicker.css') }}">
+
+	<link rel="stylesheet" href="{{ asset('admin_assets/css/dataTables.bootstrap5.min.css') }}">
 
 	<!-- Tabler Icon CSS -->
-	<link rel="stylesheet" href="admin_assets/tabler_icons/tabler-icons.min.css">
+	<link rel="stylesheet" href="{{ asset('admin_assets/tabler_icons/tabler-icons.min.css') }}">
 
 	<!-- Fontawesome CSS -->
-	<link rel="stylesheet" href="admin_assets/font_awesome/css/free.min.css">
-	<link rel="stylesheet" href="admin_assets/font_awesome/css/all.min.css">
+	<link rel="stylesheet" href="{{ asset('admin_assets/font_awesome/css/free.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('admin_assets/font_awesome/css/all.min.css') }}">
 
 	  
 
 	<!-- Main CSS -->
-	<link rel="stylesheet" href="admin_assets/css/style.css">
+	<link rel="stylesheet" href="{{ asset('admin_assets/css/style.css') }}">
 
 </head>
 

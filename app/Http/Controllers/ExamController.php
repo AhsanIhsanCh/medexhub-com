@@ -255,7 +255,6 @@ public function purchasedexam()
             DB::table('tests_reviewed')->where('tr_u_id', auth()->id())->where('tr_c_id', $e_id)->update(['tr_questions' => implode(',', $sortedArray),]);
             return view('dashboard/exam/viewexam',['testid' => $testid, 'e_id' => $e_id]);
     }
-
     public function subsection($e_id)
     {
         return view('dashboard/exam/subsection',['e_id' => $e_id]);

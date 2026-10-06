@@ -3,16 +3,16 @@
 	<!-- Logo -->
 	<div class="sidebar-logo active">
 		<a href="index.html" class="logo logo-normal">
-			<img src="admin_assets/img/logo_full.png" alt="Img">
+			<img src="{{ asset('admin_assets/img/logo_full.png') }}" alt="Img">
 		</a>
 		<a href="index.html" class="logo logo-white">
-			<img src="admin_assets/img/logo_full_white.png" alt="Img">
+			<img src="{{ asset('admin_assets/img/logo_full_white.png') }}" alt="Img">
 		</a>
 		<a href="index.html" class="logo-small">
-			<img src="admin_assets/img/logo.png" alt="Img">
+			<img src="{{ asset('admin_assets/img/logo.png') }}" alt="Img">
 		</a>
 		<a href="index.html" class="logo-small-white">
-			<img src="admin_assets/img/logo_white.png" alt="Img">
+			<img src="{{ asset('admin_assets/img/logo_white.png') }}" alt="Img">
 		</a>
 		<a id="toggle_btn" href="javascript:void(0);">
 			<i data-feather="chevrons-left" class="feather-16"></i>
@@ -22,7 +22,7 @@
 	<div class="modern-profile p-3 pb-0">
 		<div class="text-center rounded bg-light p-3 mb-4 user-profile">
 			<div class="avatar avatar-lg online mb-3">
-				<img src="admin_assets/img/customer/customer15.jpg" alt="Img" class="img-fluid rounded-circle">
+				<img src="{{ asset('admin_assets/img/customer/customer15.jpg') }}" alt="Img" class="img-fluid rounded-circle">
 			</div>
 			<h6 class="fs-14 fw-bold mb-1">Adrian HermanAAAAAA</h6>
 			<p class="fs-12 mb-0">System Admin</p>
@@ -285,23 +285,23 @@
 					<!-- Logo -->
 					<div class="sidebar-logo">
 						<a href="index.html" class="logo logo-normal">
-							<img src="admin_assets/img/logo_full.png" alt="Img">
+							<img src="{{ asset('admin_assets/img/logo_full.png') }}" alt="Img">
 						</a>
 						<a href="index.html" class="logo logo-white">
-							<img src="admin_assets/img/logo_full_white.png" alt="Img">
+							<img src="{{ asset('admin_assets/img/logo_full_white.png') }}" alt="Img">
 						</a>
 						<a href="index.html" class="logo-small">
-							<img src="admin_assets/img/logo.png" alt="Img">
+							<img src="{{ asset('admin_assets/img/logo.png') }}" alt="Img">
 						</a>
 						<a href="index.html" class="logo-small-white">
-							<img src="admin_assets/img/logo_white.png" alt="Img">
+							<img src="{{ asset('admin_assets/img/logo_white.png') }}" alt="Img">
 						</a>
 					</div>
 					<!-- /Logo -->
 					<div class="sidebar-scroll">
 						<div class="text-center rounded bg-light p-3 mb-3 border">
 							<div class="avatar avatar-lg online mb-3">
-								<img src="admin_assets/img/customer/customer15.jpg" alt="Img" class="img-fluid rounded-circle">
+								<img src="{{ asset('admin_assets/img/customer/customer15.jpg') }}" alt="Img" class="img-fluid rounded-circle">
 							</div>
 							<h6 class="fs-14 fw-bold mb-1">Adrian HermanCCCCCC</h6>
 							<p class="fs-12 mb-0">System Admin</p>
