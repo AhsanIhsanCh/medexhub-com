@@ -9,10 +9,11 @@ use Carbon\Carbon;
 
 class AdminConversationController extends Controller
 {
-    public function adminconversation()
+    public function adminconversation($limitShow)
     {
-        $Accounts = "s";
-        $AccountsNew = "s";
-        return view('admin/source/conversation/conversation',['data' => $Accounts,'New' => $AccountsNew]);
+        $userId = auth()->id();
+        $latestConversations = DB::table('conversation')->select('co_q_id','co_inner_q',DB::raw('MAX(co_id) as latest_co_id'))->groupBy('co_q_id', 'co_inner_q');
+        $Conversations = DB::table('conversation as c')->joinSub($latestConversations, 'latest', function ($join) {$join->on('c.co_id', '=', 'latest.latest_co_id');})->select('c.*')->orderByDesc('c.updated_at')->limit($limitShow)->get();
+        return view('admin/source/conversation/conversation',['u_id' => $userId, 'Conversations' => $Conversations]);
     }
 }

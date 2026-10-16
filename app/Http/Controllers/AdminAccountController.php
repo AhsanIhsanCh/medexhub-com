@@ -9,16 +9,11 @@ use Carbon\Carbon;
 
 class AdminAccountController extends Controller
 {
-    public function adminaccountpayment()
+    public function adminaccountpayment($year)
     {
-        // $Accounts = DB::table('payments')->latest('pay_date')->take(5000)->get()->reverse();
-        // $currentMonth = Carbon::now()->month;
-        // $currentYear = Carbon::now()->year;
-        // $AccountsNew = DB::table('payments')->whereYear('pay_date', $currentYear)->whereMonth('pay_date', $currentMonth)->get();
-
-        $Accounts = "s";
-        $AccountsNew = "s";
-        return view('admin/source/account/payment',['data' => $Accounts,'New' => $AccountsNew]);
+        $Payments = DB::table('payments')->select( DB::raw('YEAR(created_at) as year'),DB::raw('MONTH(created_at) as month'),DB::raw('SUM(pay_amount_total) as total_amount'),DB::raw('SUM(pay_amount_discount) as total_discount'),DB::raw('SUM(pay_amount_pay) as total_payment'),DB::raw('COUNT(*) as total_orders'))
+        ->whereRaw('YEAR(created_at) = ?', [$year])->groupByRaw('YEAR(created_at), MONTH(created_at)')->orderBy('month', 'desc')->get();
+        return view('admin/source/account/payment',['Payments' => $Payments, 'year' => $year]);
     }
 
     public function adminaccountreturnpayment()

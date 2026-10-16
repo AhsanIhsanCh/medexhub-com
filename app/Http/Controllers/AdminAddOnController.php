@@ -12,13 +12,12 @@ class AdminAddOnController extends Controller
 {
     public function admincoupons()
     {
-        $Exams = "2";
-        return view('admin/source/addon/coupons',['Exams' => $Exams]);
+        $Coupons = DB::table('coupon')->orderBy('created_at', 'desc')->get();
+        return view('admin/source/addon/coupons',['Coupons' => $Coupons]);
     }
-
     public function adminexamyear()
     {
-        $Exams = "2";
-        return view('admin/source/addon/exam-year',['Exams' => $Exams]);
+         $ExamYears = DB::table('examyear')->orderBy('ey_name', 'asc')->get();
+        return view('admin/source/addon/exam-year',['ExamYears' => $ExamYears]);
     }
 }

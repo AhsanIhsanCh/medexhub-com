@@ -11,19 +11,19 @@ class AdminUserController extends Controller
 {
    public function adminusers()
     {
-        $Users = "s";
+        
+        $Users = DB::table('users')->limit(50)->orderBy('id', 'desc')->get();
         return view('admin/source/users/users',['Users' => $Users]);
     }
 
-    public function adminusersban()
+    public function adminusertype($ut_id)
     {
-        $Users = "s";
-        return view('admin/source/users/users-ban',['Users' => $Users]);
+        if($ut_id == 99) {
+            $Users = DB::table('users')->get();
+        } else {
+            $Users = DB::table('users')->where('u_ut_id', $ut_id)->orderBy('id', 'desc')->get();
+        }
+        return view('admin/source/users/users',['Users' => $Users]);
     }
-
-    public function adminuserspending()
-    {
-        $Users = "s";
-        return view('admin/source/users/users-pending',['Users' => $Users]);
-    }
+  
 }

@@ -94,7 +94,7 @@
 						<li class="submenu">
 							<a href="javascript:void(0);" class=""><i class="ti ti-building-bank fs-16 me-2"></i><span>Accounts</span><span class="menu-arrow"></span></a>
 							<ul>
-								<li><a href="/admin-payment" >Payments</a></li>
+								<li><a href="/admin-payment/{{date('Y')}}" >Payments</a></li>
 								<li><a href="/admin-return-payment" >Payments Return</a></li>
 								<li><a href="/admin-miscellaneous-payment" >Miscellaneous Payment</a></li>
 							</ul>
@@ -108,8 +108,8 @@
 							<a href="javascript:void(0);" class=""><i class="ti ti-users-group fs-16 me-2"></i><span>Users</span><span class="menu-arrow"></span></a>
 							<ul>
 								<li><a href="/admin-users" >Users</a></li>
-								<li><a href="/admin-users-pending" >Pending Validation</a></li>
-								<li><a href="/admin-users-ban" >Ban Users</a></li>
+								<li><a href="/admin-usertype/7" >Pending Validating</a></li>
+								<li><a href="/admin-usertype/99" >All Users</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -120,8 +120,7 @@
 						<li class="submenu">
 							<a href="javascript:void(0);" class=""><i class="ti ti-brand-hipchat fs-16 me-2"></i><span>Conversation</span><span class="menu-arrow"></span></a>
 							<ul>
-								<li><a href="/admin-conversation" >Conversation</a></li>
-								
+								<li><a href="/admin-conversation/50" >Conversation</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -133,11 +132,11 @@
 							<a href="javascript:void(0);" class=""><i class="ti ti-clipboard-search fs-16 me-2"></i><span>Archives</span><span class="menu-arrow"></span></a>
 							<ul>
 								<li><a href="/admin-exams" >Exams</a></li>
-								<li><a href="/admin-mcq" >MCQ</a></li>
-								<li><a href="/admin-emq" >EMQ</a></li>
-								<li><a href="/admin-flash-card" >Flash Card</a></li>
-								<li><a href="/admin-kfp1" >Select the Options (KFP 1)</a></li>
-								<li><a href="/admin-kfp2" >Free Text Questions (KFP 2)</a></li>
+								<li><a href="/admin-question/1,50" >MCQ</a></li>
+								<li><a href="/admin-question/2,50" >EMQ</a></li>
+								<li><a href="/admin-question/3,50" >Flash Card</a></li>
+								<li><a href="/admin-question/5,50" >Select the Options (KFP 1)</a></li>
+								<li><a href="/admin-question/6,50" >Free Text Questions (KFP 2)</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -148,7 +147,7 @@
 						<li class="submenu">
 							<a href="javascript:void(0);" class=""><i class="ti ti-puzzle fs-16 me-2"></i><span>Add On</span><span class="menu-arrow"></span></a>
 							<ul>
-								<li><a href="/admin-exam-year" >Exam Year</a></li>
+								<li><a href="/admin-examyear" >Exam Year</a></li>
 								<li><a href="/admin-coupons" >Coupons</a></li>										
 							</ul>
 						</li>
@@ -160,8 +159,8 @@
 						<li class="submenu">
 							<a href="javascript:void(0);" class=""><i class="ti ti-barrier-block-off fs-16 me-2"></i><span>Maintenance</span><span class="menu-arrow"></span></a>
 							<ul>
-								<li><a href="/admin-maintenance-session" >Session Maintenance</a></li>
-								<li><a href="/admin-maintenance-login" >Login Maintenance</a></li>
+								<li><a href="/admin-maintenance-session/50" >Session Maintenance</a></li>
+								<li><a href="/admin-maintenance-login/50" >Login Maintenance</a></li>
 							</ul>
 						</li>
 					</ul>

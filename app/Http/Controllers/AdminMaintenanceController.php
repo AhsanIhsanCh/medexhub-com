@@ -9,16 +9,15 @@ use Carbon\Carbon;
 
 class AdminMaintenanceController extends Controller
 {
-   
-
-    public function maintenancesession()
+    public function maintenancesession($limitShow)
     {
-        $Exams = "2";
-        return view('admin/source/maintenance/maintenance-session',['Exams' => $Exams]);
+        $Tests = DB::table('tests')->select('t_u_id', DB::raw('count(*) as total_tests'))->groupBy('t_u_id')->orderBy('t_u_id', 'desc')->limit($limitShow)->get();
+        return view('admin/source/maintenance/maintenance-session',['Tests' => $Tests]);
     }
-    public function maintenancelogin()
+    public function maintenancelogin($limitShow)
     {
-        $Exams = "2";
-        return view('admin/source/maintenance/maintenance-login',['Exams' => $Exams]);
+        $LoginHistorys = DB::table('login_history')->select('lh_u_id', DB::raw('count(*) as total_loghistory'))->groupBy('lh_u_id')->orderBy('lh_u_id', 'desc')->limit($limitShow)->get();
+        return view('admin/source/maintenance/maintenance-login',['LoginHistorys' => $LoginHistorys]);
     }
 }
+    

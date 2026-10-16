@@ -129,33 +129,39 @@ Route::post('/UpdateSettings', [ProfileController::class, 'UpdateSettings'])->na
 
 Route::get('admin', [LoginController::class, 'adminpage'])->name('admin')->middleware(['auth']);
 //Admin Account Routes
-Route::get('admin-payment', [AdminAccountController::class, 'adminaccountpayment'])->name('admin-payment')->middleware(['auth']);
+Route::get('admin-payment/{year}', [AdminAccountController::class, 'adminaccountpayment'])->name('admin-payment')->middleware(['auth']);
 Route::get('admin-return-payment', [AdminAccountController::class, 'adminaccountreturnpayment'])->name('admin-return-payment')->middleware(['auth']);
 Route::get('admin-miscellaneous-payment', [AdminAccountController::class, 'adminaccountmiscellaneouspayment'])->name('admin-miscellaneous-payment')->middleware(['auth']);
+
+
+
+
+
 //Admin User Routes
 Route::get('admin-users', [AdminUserController::class, 'adminusers'])->name('admin-users')->middleware(['auth']);
-Route::get('admin-users-ban', [AdminUserController::class, 'adminusersban'])->name('admin-users-ban')->middleware(['auth']);
-Route::get('admin-users-pending', [AdminUserController::class, 'adminuserspending'])->name('admin-users-pending')->middleware(['auth']);
+Route::get('admin-usertype/{ut_id}', [AdminUserController::class, 'adminusertype'])->name('admin-usertype')->middleware(['auth']);
 //Admin Conversation Routes
-Route::get('admin-conversation', [AdminConversationController::class, 'adminconversation'])->name('admin-conversation')->middleware(['auth']);
+Route::get('admin-conversation/{limitShow}', [AdminConversationController::class, 'adminconversation'])->name('admin-conversation')->middleware(['auth']);
 //Admin Exams Routes
 Route::get('admin-exams', [AdminArchivesController::class, 'adminexams'])->name('admin-exams')->middleware(['auth']);
 Route::get('admin-innerexams/{e_id}', [AdminArchivesController::class, 'admininnerexams'])->middleware(['auth']);
+Route::get('admin-question/{linkData}', [AdminArchivesController::class, 'adminquestion'])->name('admin-question')->middleware(['auth']);
+Route::post('admin-innerquestion', [AdminArchivesController::class, 'admininnerquestion'])->name('admin-innerquestion')->middleware(['auth']);
+Route::get('admin-innerquestionlink/{linkData}', [AdminArchivesController::class, 'admininnerquestionlink'])->name('admin-innerquestionlink')->middleware(['auth']);
 
 
 
 
-Route::get('admin-mcq', [AdminArchivesController::class, 'adminmcq'])->name('admin-mcq')->middleware(['auth']);
-Route::get('admin-emq', [AdminArchivesController::class, 'adminemq'])->name('admin-emq')->middleware(['auth']);
-Route::get('admin-flash-card', [AdminArchivesController::class, 'adminflashcard'])->name('admin-flash-card')->middleware(['auth']);
-Route::get('admin-kfp1', [AdminArchivesController::class, 'adminkfp1'])->name('admin-kfp1')->middleware(['auth']);
-Route::get('admin-kfp2', [AdminArchivesController::class, 'adminkfp2'])->name('admin-kfp2')->middleware(['auth']);
 //Admin Add On Routes
 Route::get('admin-coupons', [AdminAddOnController::class, 'admincoupons'])->name('admin-coupons')->middleware(['auth']);
-Route::get('admin-exam-year', [AdminAddOnController::class, 'adminexamyear'])->name('admin-exam-year')->middleware(['auth']);
+Route::get('admin-examyear', [AdminAddOnController::class, 'adminexamyear'])->name('admin-examyear')->middleware(['auth']);
+
+
+
+
 //Admin Maintenance Routes
-Route::get('admin-maintenance-session', [AdminMaintenanceController::class, 'maintenancesession'])->name('admin-maintenance-session')->middleware(['auth']);
-Route::get('admin-maintenance-login', [AdminMaintenanceController::class, 'maintenancelogin'])->name('admin-maintenance-login')->middleware(['auth']);
+Route::get('admin-maintenance-session/{limitShow}', [AdminMaintenanceController::class, 'maintenancesession'])->name('admin-maintenance-session')->middleware(['auth']);
+Route::get('admin-maintenance-login/{limitShow}', [AdminMaintenanceController::class, 'maintenancelogin'])->name('admin-maintenance-login')->middleware(['auth']);
 
 
 

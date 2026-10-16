@@ -57,9 +57,9 @@ use Carbon\Carbon;
                         @foreach ($LHistorys as $History)
                             @php
                                 $StyleClass = "1";
-                                $StartTime = Carbon::parse($History->lh_start_datetime)->format('F j, Y, g:i A');
-                                $EndTime = Carbon::parse($History->lh_end_datetime)->format('F j, Y, g:i A');
-                                $diff = abs(strtotime($EndTime) - strtotime($StartTime)); 
+                                $StartTime = Carbon::parse($History->created_at)->format('F j, Y, g:i A');
+                                $EndTime = Carbon::parse($History->updated_at)->format('F j, Y, g:i A');
+                                echo $diff = abs(strtotime($EndTime) - strtotime($StartTime)); 
                                 $years   = floor($diff / (365*60*60*24)); 
                                 $months  = floor(($diff - $years * 365*60*60*24) / (30*60*60*24)); 
                                 $days    = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
@@ -84,7 +84,14 @@ use Carbon\Carbon;
                                 <td style="text-align: center;">{{ $loop->iteration }}</td>
                                 <td>{{$StartTime}}</td>
                                 <td>{{$EndTime}}</td>
-                                <td style="text-align: center;"> {{ $ShowDifferenceTime }}</td>
+                                <td style="text-align: center;">
+                                <?php
+                                    if($History->lh_status == "0")
+                                        echo "<span style='color: green;font-weight: bold;'>Online</span>";
+                                    else
+                                        echo $ShowDifferenceTime;
+                                ?>
+                                </td>
                                 <td  style="text-align: center;">-</td>
                             </tr>
                         @endforeach 

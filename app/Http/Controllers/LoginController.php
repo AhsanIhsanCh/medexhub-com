@@ -21,6 +21,13 @@ class LoginController extends Controller
         ]);
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
+            DB::table('login_history')->insert([
+            'lh_u_id' => auth()->id(),
+            'lh_ip' =>  $request->ip(),
+            'lh_status' =>  0,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ]);
             return view('landing');
         }
         else {
@@ -157,6 +164,7 @@ class LoginController extends Controller
     }
     public function logout()
     {
+        DB::table('login_history')->where('lh_u_id', auth()->id())->where('lh_status', '0')->update(['updated_at' => Carbon::now(), 'lh_status' => 1]);
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
