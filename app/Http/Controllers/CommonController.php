@@ -29,10 +29,10 @@ class CommonController extends Controller
             'cos_subject' => $request->input('subject'),
             'cos_message' => $request->input('message'),
             ]);
-            return back()->with('success5s', 'Thank you for contacting us. Your message has been sent successfully, and our team will respond as soon as possible.');
+            return back()->with('success5s', 'Thank you for contacting us. Your message has been sent successfully. Our team will respond as soon as possible.');
             } catch (\Exception $e) 
             {                
-                return back()->with('error5s', 'We could not send your message at this time. Please try again.');
+                return back()->with('error5s', 'We were unable to send your message at this time. Please try again.');
             }
     }
 }

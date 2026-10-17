@@ -73,14 +73,14 @@ class BasketController extends Controller
         //Check if coupon is Avalable
         if ($Coupon->isEmpty()) 
             {
-                return redirect()->back()->with('error3s', 'Enter invalid coupon.');
+                return redirect()->back()->with('error3s', 'Please enter a valid coupon code.');
             }
         $TodayDate = date("Y-m-d H:i:s" , time());
         $ExpDate = $Coupon->first()->coup_exp_date;
         //Check if coupon is Expired
         if ($TodayDate > $ExpDate)
             {
-                return redirect()->back()->with('error3s', 'Coupon date expired.');
+                return redirect()->back()->with('error3s', 'This coupon has expired.');
             }
         $DiscountType = $Coupon->first()->coup_discount_type;
         $DiscountValue = $Coupon->first()->coup_discount;
@@ -105,12 +105,11 @@ class BasketController extends Controller
                         DB::table('baskets')->where('ba_id', $ba_Id)->update(['ba_discount_price' => $DiscountPrice]);
                         $NewCouponUsage = $Coupon->first()->coup_usage + 1;
                         DB::table('coupon')->where('coup_id', $Coupon->first()->coup_id)->update(['coup_usage' => $NewCouponUsage]);
-                        $MessageArr .= '<span style="color: green;">Coupon applied for <strong>' . $Exams->first()->e_name . '</strong> successfully.</span><br>';
-                       
+                        $MessageArr .= '<span style="color: green;">Coupon applied successfully to the <strong>' . $Exams->first()->e_name . '</strong>.</span><br>';
                     }
                 else
                     {
-                        $MessageArr .= '<span style="color: red;">Coupon Not Valid For this  <strong>' . $Exams->first()->e_name . '</strong>.</span><br>';
+                        $MessageArr .= '<span style="color: red;">This coupon is not valid for the  <strong>' . $Exams->first()->e_name . '</strong>.</span><br>';
                     }      
             }
         return redirect()->back()->with('onlymessage_basket1', $MessageArr);

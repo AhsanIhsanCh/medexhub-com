@@ -81,15 +81,15 @@ public function purchasedexam()
             $selectedNoOfQue = $request->input('NoOfQue');
             $SelectedCat_Array = explode(',', $SelectedCat);
             //Get the questions which are already in the test_reviewed table for the user and course
-            $TQs_Exist = DB::table('tests_reviewed')->where('tr_u_id', auth()->id())->where('tr_c_id', $e_id)->get();
+            $TQs_Exist = DB::table('tests_reviewed')->where('tr_u_id', auth()->id())->where('tr_e_id', $e_id)->get();
             if (count($TQs_Exist) === 0) {
                     DB::table('tests_reviewed')->insert([
                     'tr_u_id' => auth()->id(),
-                    'tr_c_id' => $e_id,
+                    'tr_e_id' => $e_id,
                     ]);
                 }
             //Get Reviewed Questions
-            $TQs = DB::table('tests_reviewed')->select('tr_questions')->where('tr_u_id', auth()->id())->where('tr_c_id', $e_id)->get();
+            $TQs = DB::table('tests_reviewed')->select('tr_questions')->where('tr_u_id', auth()->id())->where('tr_e_id', $e_id)->get();
             $RviewedArray = [];
             foreach ($TQs as $TQ) {
                 $RviewedArray = array_merge($RviewedArray, explode(',', $TQ->tr_questions));
@@ -252,7 +252,7 @@ public function purchasedexam()
             //Sort the Merged Array and remove duplicates and convert it to a string to update in the tests_reviewed table
             $sortedArray = collect($MergedArray)->sort()->unique()->values()->all();
             //Update the tests_reviewed table with the new reviewed questions
-            DB::table('tests_reviewed')->where('tr_u_id', auth()->id())->where('tr_c_id', $e_id)->update(['tr_questions' => implode(',', $sortedArray),]);
+            DB::table('tests_reviewed')->where('tr_u_id', auth()->id())->where('tr_e_id', $e_id)->update(['tr_questions' => implode(',', $sortedArray),]);
             return view('dashboard/exam/viewexam',['testid' => $testid, 'e_id' => $e_id]);
     }
     public function subsection($e_id)

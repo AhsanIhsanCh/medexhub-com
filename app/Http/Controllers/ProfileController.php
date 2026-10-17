@@ -19,14 +19,14 @@ class ProfileController extends Controller
         $Gender = $request->input('TextGender');
         $Dob = $request->input('TextDob');
         DB::table('users')->where('id', $userId)->update(['u_fname' => $FName,'u_lname' => $Lname,'u_gender' => $Gender,'u_dob' => $Dob, 'updated_at' => Carbon::now()]);
-        return redirect()->back()->with('success_profile1', 'Account details changed successfully .');
+        return redirect()->back()->with('success_profile1', 'Account details updated successfully.');
     }
     function UpdatePassword(Request $request){
         $userId = auth()->id();
         $User = DB::table('users')->select('password')->where('id', $userId)->get();
         if ($request->password !== $request->password_confirmation)
             {
-                return redirect()->back()->with('error_profile3', 'New password and confirm password do not match.')->withInput();
+                return redirect()->back()->with('error_profile3', 'The new password and confirmation password do not match.')->withInput();
             }
         $request->validate([
             'old_password' => ['required'],
@@ -35,12 +35,12 @@ class ProfileController extends Controller
         // Check old password
         if (!Hash::check($request->old_password, $User->first()->password))
             {
-               return redirect()->back()->with('error_profile1', 'The old password is incorrect .');
+               return redirect()->back()->with('error_profile1', 'The current password is incorrect.');
             }
         // Prevent using the same password
         if (Hash::check($request->password, $User->first()->password)) 
             {
-                return redirect()->back()->with(['error_profile2' => 'The new password must be different from the old password.']);
+                return redirect()->back()->with(['error_profile2' => 'The new password must be different from the current password.']);
             }
         $NewPass = Hash::make($request->password);
         DB::table('users')->where('id', $userId)->update(['password' => $NewPass, 'updated_at' => Carbon::now()]);
@@ -50,6 +50,6 @@ class ProfileController extends Controller
         $userId = auth()->id();
         $NameSafety = $request->input('TextNameSafety');
         DB::table('users')->where('id', $userId)->update(['u_name_safety' => $NameSafety,'updated_at' => Carbon::now()]);
-        return redirect()->back()->with('success_profile3', 'Settings changed successfully .');
+        return redirect()->back()->with('success_profile3', 'Settings updated successfully.');
     }
 }
