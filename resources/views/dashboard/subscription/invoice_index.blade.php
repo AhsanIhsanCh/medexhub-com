@@ -3,6 +3,24 @@ use Carbon\Carbon;
 @endphp
 @extends('dashboard.layoutDashboard')
 @section('invoice')
+    <?php
+        $userId = auth()->id();
+        //Count the number of exams the user has subscribed to
+        $subscribes = DB::table('subscribes')->where('su_u_id', $userId)->get();
+        if($subscribes->count() == 0)
+        $ExamCount = "Browse Exams";
+        else
+        $ExamCount = $subscribes->count();
+        //Count Invoices
+        $Invoices = DB::table('invoice')->where('in_u_id', $userId)->get();
+        if($Invoices->count() == 0)
+        $InvoiceCount = "0";
+        else
+        $InvoiceCount = $Invoices->count();
+        //Count Total Spend 
+        $InvoiceToatl = DB::table('invoice')->select(DB::raw('SUM(in_pay) as total_amount'))->where('in_u_id', $userId)->get();
+        $TotalSpend = $InvoiceToatl->first()->total_amount ?? 0;         
+    ?>
     <section class="content-panel">
         <div class="title-row">
             <div>
@@ -17,19 +35,19 @@ use Carbon\Carbon;
                 <div class="quick-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-1.5Z"/><path d="M8 7h7"/></svg>
                 </div>
-                <div><strong>8</strong><span>Exam collections</span></div>
+                <div><strong>{{$ExamCount}}</strong><span>Exam collections</span></div>
             </div>
             <div class="quick-card">
                 <div class="quick-icon green">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
                 </div>
-                <div><strong>1,240</strong><span>Questions completed</span></div>
+                <div><strong>{{$InvoiceCount}}</strong><span>No. of invoice</span></div>
             </div>
             <div class="quick-card">
                 <div class="quick-icon pink">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
                 </div>
-                <div><strong>15</strong><span>Days left</span></div>
+                <div><strong>$ {{$TotalSpend}} AUD</strong><span>Total Spend</span></div>
             </div>
         </div>
         @if($Invoices->count() == 0)

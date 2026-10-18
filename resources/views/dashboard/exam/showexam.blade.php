@@ -4,10 +4,10 @@ use Carbon\Carbon;
 @extends('dashboard.layoutDashboard')
 @section('showtest')
     <?php
-        $Exams = DB::table('exams')->select('e_id','e_name')->where('e_id', $e_id)->get();
+        $Exams = DB::table('exams')->select('e_id','e_name','e_link')->where('e_id', $e_id)->get();
         $ExamsName = $Exams->first()->e_name ?? 'No Record';
         $ExamId = $Exams->first()->e_id ?? '0';
-
+        $ExamLinkName = $Exams->first()->e_link ?? '0';
         $userId = auth()->id();
         //Count the number of exams the user has subscribed to
         $subscribes = DB::table('subscribes')->where('su_u_id', $userId)->get();
@@ -60,7 +60,7 @@ use Carbon\Carbon;
             @if($ExamExpaired == "0")
                 <a href="/createnew/{{$ExamId}}" class=" btn db-btn btn-sm">+ Create New</a>
             @else
-                <a href="/exams" class=" btn db-btn btn-sm">Browse Exams</a>
+                <a href="/exams{{$ExamLinkName}}" class=" btn db-btn btn-sm" target="_blank">Renew Exams</a>
             @endif
         </div>
     </div>
@@ -135,14 +135,18 @@ use Carbon\Carbon;
                                 $testid = $Test->t_id;
                                 $examType = $Test->t_type;
                             @endphp
-                            @if($examType == 1)
-                                 @php
-                                    $linkData = array($testid, 2);
-                                    $linkDatastring = implode(",", $linkData);
-                                @endphp
-                                <td  style="text-align: center;"><a href="/workboard/{{$linkDatastring}}" class="btn start-btn btn-sm" target="_blank" >Start</a></td>
-                            @elseif($examType == 2)
-                                <td style="text-align: center;"><a href="/workboard_r/{{$testid}}" class=" btn start-btn revision btn-sm" target="_blank">Start_R</a></td>
+                            @if($ExamExpaired == "0")
+                                @if($examType == 1)
+                                    @php
+                                        $linkData = array($testid, 2);
+                                        $linkDatastring = implode(",", $linkData);
+                                    @endphp
+                                    <td  style="text-align: center;"><a href="/workboard/{{$linkDatastring}}" class="btn start-btn btn-sm" target="_blank" >Start</a></td>
+                                @elseif($examType == 2)
+                                    <td style="text-align: center;"><a href="/workboard_r/{{$testid}}" class=" btn start-btn revision btn-sm" target="_blank">Start_R</a></td>
+                                @endif
+                            @else
+                                <td  style="text-align: center;"><a href="/exams{{$ExamLinkName}}" class="btn start-btn btn-sm" target="_blank" >Renew</a></td>
                             @endif
                         </tr>
                     @endforeach   

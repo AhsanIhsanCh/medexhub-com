@@ -3,6 +3,25 @@ use Carbon\Carbon;
 @endphp
 @extends('dashboard.layoutDashboard')
 @section('conversation')
+<?php
+    $userId = auth()->id();
+    //Count the number of exams the user has subscribed to
+    $subscribes = DB::table('subscribes')->where('su_u_id', $userId)->get();
+    if($subscribes->count() == 0)
+    $ExamCount = "Browse Exams";
+    else
+    $ExamCount = $subscribes->count();
+    //Count conversation
+    $Conversation2s = DB::table('conversation')->where('co_u_id', $userId)->where('co_message_type', '1')->get();
+    $ConversationCount = $Conversation2s->count();
+    //Count conversation Reply
+    foreach($Conversation2s as $Conversation2)
+        {
+            $ConversationsReply = DB::table('conversation')->where('co_q_id', $Conversation2->co_q_id)->where('co_inner_q', $Conversation2->co_inner_q)->where('co_u_id', '!=', $userId)->get();
+            $ConversationReplyCount = $ConversationsReply->count();
+
+        }     
+?>
 <section class="content-panel">
     <div class="title-row">
         <div>
@@ -17,19 +36,19 @@ use Carbon\Carbon;
         <div class="quick-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-1.5Z"/><path d="M8 7h7"/></svg>
         </div>
-        <div><strong>8</strong><span>Exam collections</span></div>
+        <div><strong>{{$ExamCount}}</strong><span>Exam collections</span></div>
         </div>
         <div class="quick-card">
         <div class="quick-icon green">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
         </div>
-        <div><strong>1,240</strong><span>Questions completed</span></div>
+        <div><strong>{{$ConversationCount}}</strong><span>Conversation Start</span></div>
         </div>
         <div class="quick-card">
         <div class="quick-icon pink">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
         </div>
-        <div><strong>15</strong><span>Days left</span></div>
+        <div><strong>{{$ConversationReplyCount}}</strong><span>Conversation Reply</span></div>
         </div>
     </div>
     <div class="card-body">
