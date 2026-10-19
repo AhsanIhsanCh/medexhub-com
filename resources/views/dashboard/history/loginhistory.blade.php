@@ -10,27 +10,7 @@ use Carbon\Carbon;
                 <h1>Login History</h1>
                 <p class="title-subtitle">Prepare with structure, revise with purpose, and track every step of your exam journey.</p>
             </div>
-            <div class="db-actions"><a href="/createnew/" class=" btn db-btn btn-sm">+ Create New</a></div>
-        </div>
-        <div class="quick-row" aria-label="Quick stats">
-            <div class="quick-card">
-                <div class="quick-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-1.5Z"/><path d="M8 7h7"/></svg>
-                </div>
-                <div><strong>8</strong><span>Exam collections</span></div>
-            </div>
-            <div class="quick-card">
-                <div class="quick-icon green">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
-                </div>
-                <div><strong>1,240</strong><span>Questions completed</span></div>
-            </div>
-            <div class="quick-card">
-                <div class="quick-icon pink">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
-                </div>
-                <div><strong>15</strong><span>Days left</span></div>
-            </div>
+            <div class="db-actions"></div>
         </div>
         <div class="card-body">
             <div class="table-wrap">
@@ -59,7 +39,7 @@ use Carbon\Carbon;
                                 $StyleClass = "1";
                                 $StartTime = Carbon::parse($History->created_at)->format('F j, Y, g:i A');
                                 $EndTime = Carbon::parse($History->updated_at)->format('F j, Y, g:i A');
-                                echo $diff = abs(strtotime($EndTime) - strtotime($StartTime)); 
+                                $diff = abs(strtotime($EndTime) - strtotime($StartTime)); 
                                 $years   = floor($diff / (365*60*60*24)); 
                                 $months  = floor(($diff - $years * 365*60*60*24) / (30*60*60*24)); 
                                 $days    = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));

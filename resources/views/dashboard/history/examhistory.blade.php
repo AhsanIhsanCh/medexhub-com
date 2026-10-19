@@ -109,6 +109,7 @@ use Carbon\Carbon;
                                 $ExamExpaired = "0";
                                 $Exams4 = DB::table('exams')->select('e_link')->where('e_id', $Test->t_e_id)->get();
                                 $ExamLinkName = $Exams4->first()->e_link ?? '0';
+                                
                                 $subscribes2 = DB::table('subscribes')->where('su_u_id', $Test->t_u_id)->where('su_e_id', $Test->t_e_id)->first();
                                 if ($subscribes2) 
                                     {
