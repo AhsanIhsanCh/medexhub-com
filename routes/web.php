@@ -57,7 +57,7 @@ Route::post('/forgotpassword', [ForgotPasswordController::class,'sendResetLink']
 Route::get('/reset-password/{token}', function ($token) { return view('login.resetpassword', [ 'token' => $token, 'email' => request('email'),]);})->name('password.reset');
 Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
 Route::get('/google/auth', [GoogleMailController::class, 'redirect']);
-Route::get('/google/callback', [GoogleMailController::class, 'callback']);
+Route::get('/google/callback', [GoogleMailController::class, 'callback'])->middleware(['auth'])->name('google.callback');
 // Route::get('/test-gmail', [GoogleMailController::class, 'sendTest']);
 //Route::get('testmail', [LoginController::class, 'testMailRequest']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
