@@ -48,4 +48,12 @@ return [
         'sitekey' => env('NOCAPTCHA_SITEKEY'),
     ],
 
+    'paypal' => [
+    'mode' => env('PAYPAL_MODE', 'sandbox'),
+    'client_id' => env('PAYPAL_CLIENT_ID'),
+    'client_secret' => env('PAYPAL_CLIENT_SECRET'),
+    'currency' => env('PAYPAL_CURRENCY', 'AUD'),
+    'webhook_id' => env('PAYPAL_WEBHOOK_ID'),
+    ],
+
 ];

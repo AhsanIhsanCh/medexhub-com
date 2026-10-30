@@ -2,6 +2,10 @@
 use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+
+use App\Http\Controllers\PayPalController;
+
+
 use App\Http\Controllers\AdminAccountController;
 use App\Http\Controllers\AdminAddOnController;
 use App\Http\Controllers\AdminArchivesController;
@@ -115,6 +119,33 @@ Route::get('profile', [ProfileController::class, 'profile'])->middleware(['auth'
 Route::post('/SaveAccountDetails', [ProfileController::class, 'SaveAccountDetails'])->name('saveprofile1')->middleware(['auth']);
 Route::post('/UpdatePassword', [ProfileController::class, 'UpdatePassword'])->name('saveprofile2')->middleware(['auth']);
 Route::post('/UpdateSettings', [ProfileController::class, 'UpdateSettings'])->name('saveprofile3')->middleware(['auth']);
+
+
+
+
+
+
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/paypal/checkout',
+        [PayPalController::class, 'checkout']
+    )->name('paypal.checkout');
+
+    Route::post('/paypal/pay',
+        [PayPalController::class, 'pay']
+    )->name('paypal.pay');
+
+    Route::get('/paypal/success',
+        [PayPalController::class, 'success']
+    )->name('paypal.success');
+
+    Route::get('/paypal/cancel',
+        [PayPalController::class, 'cancel']
+    )->name('paypal.cancel');
+
+});
+
 
 
 // //Admin Route
