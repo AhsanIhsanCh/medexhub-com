@@ -64,18 +64,18 @@ class PayPalWebhookController extends Controller
 
         if ($type === 'PAYMENT.CAPTURE.COMPLETED') {
             $amount = number_format(
-                $payment->amount_minor / 100,
+                $payment->pay_amount_minor / 100,
                 2,
                 '.',
                 ''
             );
 
-            if (($resource['status'] ?? null) !== 'COMPLETED'
+            if (($resource['pay_status'] ?? null) !== 'COMPLETED'
                 || empty($resource['id'])
                 || ($resource['amount']['value'] ?? null)
                     !== $amount
                 || ($resource['amount']['currency_code'] ?? null)
-                    !== $payment->currency) {
+                    !== $payment->pay_currency) {
                 return response()->json([
                     'message' => 'Capture mismatch',
                 ], 422);
@@ -94,7 +94,7 @@ class PayPalWebhookController extends Controller
                 }
 
                 $locked->update([
-                    'status' => 'completed',
+                    'pay_status' => 'completed',
                     'paypal_capture_id' => $resource['id'],
                     'paid_at' => now(),
                 ]);
