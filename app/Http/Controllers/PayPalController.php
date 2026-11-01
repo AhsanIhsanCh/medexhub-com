@@ -20,7 +20,7 @@ class PayPalController extends Controller
     {
         // Demo price. In production, retrieve this
         // from your database rather than the browser.
-        // $amountMinor = 4999;
+         $amountMinor = 4999;
         $currency = config('services.paypal.currency');
         
         $payment = Payment::create([
