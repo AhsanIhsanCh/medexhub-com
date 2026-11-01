@@ -30,11 +30,15 @@
                 </div>
             @endif
 
-            <form action="{{ route('paypal.pay') }}"
-                  method="POST">
-
+            <form action="{{ route('paypal.pay') }}" method="POST">
                 @csrf
-
+                <input type="hidden" name="InvoiceId" value="2"> 
+                <input type="hidden" name="ExamId" value="3"> 
+                <input type="hidden" name="PayFor" value="2"> 
+                <input type="hidden" name="PurchaseType" value="2"> 
+                <input type="hidden" name="AmountTotal" value="40.00"> 
+                <input type="hidden" name="AmountDiscount" value="5.00"> 
+                <input type="hidden" name="AmountPayable" value="35.00"> 
                 <button type="submit"
                         class="btn btn-primary w-100">
                     Pay securely with PayPal

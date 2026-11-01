@@ -19,15 +19,22 @@ class PayPalController extends Controller
     {
         // Demo price. In production, retrieve this
         // from your database rather than the browser.
-        $amountMinor = 4999;
+        // $amountMinor = 4999;
         $currency = config('services.paypal.currency');
-
+        
         $payment = Payment::create([
-            'user_id' => auth()->id(),
-            'description' => 'MedexHub Exam Access',
-            'amount_minor' => $amountMinor,
-            'currency' => $currency,
-            'status' => 'pending',
+            // 'user_id' => auth()->id(),
+            'pay_u_id' => auth()->id(),
+            'pay_in_id' => $request->input('InvoiceId'),
+            'pay_e_id' => $request->input('ExamId'),
+            'pay_for' => $request->input('PayFor'),
+            'pay_purchase_type' => $request->input('PurchaseType'),
+            'pay_amount_total' => $request->input('AmountTotal'),
+            'pay_amount_minor' => $request->input('AmountPayable'),
+            'pay_amount_discount' => $request->input('AmountDiscount'),
+            'pay_description' => 'MedexHub Exam Access',
+            'pay_currency' => $currency,
+            'pay_status' => 'pending',
         ]);
 
         try {
@@ -39,7 +46,7 @@ class PayPalController extends Controller
 
             $payment->update([
                 'paypal_order_id' => $order['id'],
-                'status' => 'created',
+                'pay_status' => 'created',
             ]);
 
             $approvalUrl = collect($order['links'] ?? [])
@@ -62,7 +69,7 @@ class PayPalController extends Controller
         } catch (\Throwable $e) {
             report($e);
 
-            $payment->update(['status' => 'failed']);
+            $payment->update(['pay_status' => 'failed']);
 
             return back()->withErrors([
                 'paypal' => 'Unable to initialise payment.',
@@ -81,10 +88,10 @@ class PayPalController extends Controller
         $orderId = $request->query('token');
 
         $payment = Payment::where('paypal_order_id', $orderId)
-            ->where('user_id', auth()->id())
+            ->where('pay_u_id', auth()->id())
             ->firstOrFail();
 
-        if ($payment->status === 'completed') {
+        if ($payment->pay_status === 'completed') {
             return view('payments.success');
         }
 
@@ -92,7 +99,7 @@ class PayPalController extends Controller
             // Confirm approval and transaction identity.
             $order = $paypal->getOrder($orderId);
 
-            if (($order['status'] ?? null) !== 'APPROVED') {
+            if (($order['pay_status'] ?? null) !== 'APPROVED') {
                 return redirect()->route('paypal.checkout')
                     ->withErrors([
                         'paypal' => 'Payment not yet approved.',
@@ -108,16 +115,11 @@ class PayPalController extends Controller
                 );
             }
 
-            $amount = number_format(
-                $payment->amount_minor / 100,
-                2,
-                '.',
-                ''
-            );
+            $amount = number_format($payment->pay_amount_minor / 100,2,'.','');
 
             if (($unit['amount']['value'] ?? null) !== $amount
                 || ($unit['amount']['currency_code'] ?? null)
-                    !== $payment->currency) {
+                    !== $payment->pay_currency) {
                 throw new \RuntimeException(
                     'Payment amount or currency mismatch.'
                 );
@@ -131,12 +133,12 @@ class PayPalController extends Controller
             $capture = $result['purchase_units'][0]
                 ['payments']['captures'][0] ?? [];
 
-            if (($result['status'] ?? null) !== 'COMPLETED'
-                || ($capture['status'] ?? null) !== 'COMPLETED'
+            if (($result['pay_status'] ?? null) !== 'COMPLETED'
+                || ($capture['pay_status'] ?? null) !== 'COMPLETED'
                 || empty($capture['id'])
                 || ($capture['amount']['value'] ?? null) !== $amount
                 || ($capture['amount']['currency_code'] ?? null)
-                    !== $payment->currency) {
+                    !== $payment->pay_currency) {
                 throw new \RuntimeException(
                     'Payment capture not confirmed.'
                 );
@@ -150,10 +152,10 @@ class PayPalController extends Controller
                     ->lockForUpdate()
                     ->firstOrFail();
 
-                if ($locked->status !== 'completed') {
+                if ($locked->pay_status !== 'completed') {
                     $locked->update([
                         'paypal_capture_id' => $capture['id'],
-                        'status' => 'completed',
+                        'pay_status' => 'completed',
                         'paid_at' => now(),
                     ]);
 
