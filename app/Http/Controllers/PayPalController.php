@@ -31,7 +31,7 @@ class PayPalController extends Controller
             'pay_for' => $request->input('PayFor'),
             'pay_purchase_type' => $request->input('PurchaseType'),
             'pay_amount_total' => $request->input('AmountTotal'),
-            'pay_amount_minor' => $request->input('AmountPayable'),
+            'pay_amount_minor' => $amountMinor,
             'pay_amount_discount' => $request->input('AmountDiscount'),
             'pay_description' => 'MedexHub Exam Access',
             'pay_currency' => $currency,
