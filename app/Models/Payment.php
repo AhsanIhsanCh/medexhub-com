@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     protected $fillable = [
-        'u_id',
+        'user_id',
         'paypal_order_id',
         'paypal_capture_id',
         'description',
