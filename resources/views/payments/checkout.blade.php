@@ -38,7 +38,7 @@
                 <input type="hidden" name="PurchaseType" value="2"> 
                 <input type="hidden" name="AmountTotal" value="40.00"> 
                 <input type="hidden" name="AmountDiscount" value="5.00"> 
-                <input type="hidden" name="AmountPayable" value="35.00"> 
+                <input type="hidden" name="AmountPayable" value="35"> 
                 <button type="submit"
                         class="btn btn-primary w-100">
                     Pay securely with PayPal

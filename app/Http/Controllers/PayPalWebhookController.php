@@ -89,7 +89,7 @@ class PayPalWebhookController extends Controller
                     ->lockForUpdate()
                     ->firstOrFail();
 
-                if ($locked->status === 'completed') {
+                if ($locked->pay_status === 'completed') {
                     return;
                 }
 
