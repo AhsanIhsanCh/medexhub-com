@@ -20,8 +20,8 @@ class PayPalController extends Controller
     {
         // Demo price. In production, retrieve this
         // from your database rather than the browser.
-        //$amountMinor = $request->input('AmountPayable');
-        $amountMinor = '49.00';
+        $amountMinor = $request->input('AmountPayable');
+        //$amountMinor = '49.00';
         $currency = config('services.paypal.currency');
         
         $payment = Payment::create([
@@ -36,7 +36,7 @@ class PayPalController extends Controller
             'pay_amount_discount' => $request->input('AmountDiscount'),
             'pay_description' => 'MedexHub Exam Access',
             'pay_currency' => $currency,
-            'pay_status' => 'pending',
+            'status' => 'pending',
         ]);
 
         try {
@@ -48,7 +48,7 @@ class PayPalController extends Controller
 
             $payment->update([
                 'paypal_order_id' => $order['id'],
-                'pay_status' => 'created',
+                'status' => 'created',
             ]);
 
             $approvalUrl = collect($order['links'] ?? [])
@@ -71,7 +71,7 @@ class PayPalController extends Controller
         } catch (\Throwable $e) {
             report($e);
 
-            $payment->update(['pay_status' => 'failed']);
+            $payment->update(['status' => 'failed']);
 
             return back()->withErrors([
                 'paypal' => 'Unable to initialise payment.',
@@ -93,7 +93,7 @@ class PayPalController extends Controller
             ->where('pay_u_id', auth()->id())
             ->firstOrFail();
 
-        if ($payment->pay_status === 'completed') {
+        if ($payment->status === 'completed') {
             return view('payments.success');
         }
 
@@ -101,7 +101,7 @@ class PayPalController extends Controller
             // Confirm approval and transaction identity.
             $order = $paypal->getOrder($orderId);
 
-            if (($order['pay_status'] ?? null) !== 'APPROVED') {
+            if (($order['status'] ?? null) !== 'APPROVED') {
                 return redirect()->route('paypal.checkout')
                     ->withErrors([
                         'paypal' => 'Payment not yet approved.',
@@ -135,8 +135,8 @@ class PayPalController extends Controller
             $capture = $result['purchase_units'][0]
                 ['payments']['captures'][0] ?? [];
 
-            if (($result['pay_status'] ?? null) !== 'COMPLETED'
-                || ($capture['pay_status'] ?? null) !== 'COMPLETED'
+            if (($result['status'] ?? null) !== 'COMPLETED'
+                || ($capture['status'] ?? null) !== 'COMPLETED'
                 || empty($capture['id'])
                 || ($capture['amount']['value'] ?? null) !== $amount
                 || ($capture['amount']['currency_code'] ?? null)
@@ -154,10 +154,10 @@ class PayPalController extends Controller
                     ->lockForUpdate()
                     ->firstOrFail();
 
-                if ($locked->pay_status !== 'completed') {
+                if ($locked->status !== 'completed') {
                     $locked->update([
                         'paypal_capture_id' => $capture['id'],
-                        'pay_status' => 'completed',
+                        'status' => 'completed',
                         'paid_at' => now(),
                     ]);
 

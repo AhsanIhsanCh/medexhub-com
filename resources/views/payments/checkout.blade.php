@@ -36,9 +36,9 @@
                 <input type="hidden" name="ExamId" value="3"> 
                 <input type="hidden" name="PayFor" value="2"> 
                 <input type="hidden" name="PurchaseType" value="2"> 
-                <input type="hidden" name="AmountTotal" value="40.00"> 
-                <input type="hidden" name="AmountDiscount" value="5.00"> 
-                <input type="hidden" name="AmountPayable" value="35"> 
+                <input type="hidden" name="AmountTotal" value="4000.00"> 
+                <input type="hidden" name="AmountDiscount" value="500.00"> 
+                <input type="hidden" name="AmountPayable" value="3500"> 
                 <button type="submit"
                         class="btn btn-primary w-100">
                     Pay securely with PayPal

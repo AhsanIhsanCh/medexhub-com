@@ -65,7 +65,7 @@ class PayPalWebhookController extends Controller
         if ($type === 'PAYMENT.CAPTURE.COMPLETED') {
             $amount = number_format($payment->pay_amount_minor / 100,2,'.','');
 
-            if (($resource['pay_status'] ?? null) !== 'COMPLETED'
+            if (($resource['status'] ?? null) !== 'COMPLETED'
                 || empty($resource['id'])
                 || ($resource['amount']['value'] ?? null)
                     !== $amount
@@ -84,12 +84,12 @@ class PayPalWebhookController extends Controller
                     ->lockForUpdate()
                     ->firstOrFail();
 
-                if ($locked->pay_status === 'completed') {
+                if ($locked->status === 'completed') {
                     return;
                 }
 
                 $locked->update([
-                    'pay_status' => 'completed',
+                    'status' => 'completed',
                     'paypal_capture_id' => $resource['id'],
                     'paid_at' => now(),
                 ]);
