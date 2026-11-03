@@ -63,12 +63,7 @@ class PayPalWebhookController extends Controller
         }
 
         if ($type === 'PAYMENT.CAPTURE.COMPLETED') {
-            $amount = number_format(
-                $payment->pay_amount_minor / 100,
-                2,
-                '.',
-                ''
-            );
+            $amount = number_format($payment->pay_amount_minor / 100,2,'.','');
 
             if (($resource['pay_status'] ?? null) !== 'COMPLETED'
                 || empty($resource['id'])
