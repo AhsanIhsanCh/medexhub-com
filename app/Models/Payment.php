@@ -19,7 +19,7 @@ class Payment extends Model
         'pay_amount_discount',
         'pay_description',
         'pay_currency',
-        'pay_status',
+        'status',
         'paid_at',
     ];
 
