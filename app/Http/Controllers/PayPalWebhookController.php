@@ -89,7 +89,7 @@ class PayPalWebhookController extends Controller
                 }
 
                 $locked->update([
-                    'status' => 'completed',
+                    'status' => 'completed22',
                     'paypal_capture_id' => $resource['id'],
                     'paid_at' => now(),
                 ]);

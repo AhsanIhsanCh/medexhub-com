@@ -156,8 +156,8 @@ class PayPalController extends Controller
 
                 if ($locked->status !== 'completed') {
                     $locked->update([
-                        //'paypal_capture_id' => $capture['id'],
-                        'status' => 'completed',
+                        'paypal_capture_id' => $capture['id'],
+                        'status' => 'completed33',
                         'paid_at' => now(),
                     ]);
 
