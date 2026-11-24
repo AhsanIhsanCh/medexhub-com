@@ -24,8 +24,9 @@ class SubscribeController extends Controller
             $in_id = $in_id;
             $Invoices = DB::table('invoice')->where('in_id', $in_id)->get();
             $Users = DB::table('users')->where('id', $u_id)->get();
+            $UsersProfiles = DB::table('users_profiles')->where('up_u_id', $u_id)->get();
             $InvoicesDatas = DB::table('invoice_data')->where('ind_in_id', $in_id)->get();
-            return view('dashboard/subscription/invoice',['Invoices' => $Invoices, 'Users' => $Users, 'InvoicesDatas' => $InvoicesDatas]);
+            return view('dashboard/subscription/invoice',['Invoices' => $Invoices, 'Users' => $Users, 'InvoicesDatas' => $InvoicesDatas, 'UsersProfiles' => $UsersProfiles]);
         }
 }
             

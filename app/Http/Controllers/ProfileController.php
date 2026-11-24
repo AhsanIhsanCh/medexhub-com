@@ -18,7 +18,8 @@ class ProfileController extends Controller
         $Lname = $request->input('TextLname');
         $Gender = $request->input('TextGender');
         $Dob = $request->input('TextDob');
-        DB::table('users')->where('id', $userId)->update(['u_fname' => $FName,'u_lname' => $Lname,'u_gender' => $Gender,'u_dob' => $Dob, 'updated_at' => Carbon::now()]);
+        DB::table('users')->where('id', $userId)->update(['u_fname' => $FName,'u_lname' => $Lname, 'updated_at' => Carbon::now()]);
+        DB::table('users_profiles')->where('up_u_id', $userId)->update(['up_gender' => $Gender,'up_dob' => $Dob, 'updated_at' => Carbon::now()]);
         return redirect()->back()->with('success_profile1', 'Account details updated successfully.');
     }
     function UpdatePassword(Request $request){
@@ -49,7 +50,7 @@ class ProfileController extends Controller
     function UpdateSettings(Request $request){
         $userId = auth()->id();
         $NameSafety = $request->input('TextNameSafety');
-        DB::table('users')->where('id', $userId)->update(['u_name_safety' => $NameSafety,'updated_at' => Carbon::now()]);
+        DB::table('users_profiles')->where('up_u_id', $userId)->update(['up_name_safety' => $NameSafety, 'updated_at' => Carbon::now()]);
         return redirect()->back()->with('success_profile3', 'Settings updated successfully.');
     }
 }

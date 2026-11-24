@@ -33,6 +33,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\GoogleMailController;
 use App\Http\Controllers\ForgotPasswordController;
+
+use App\Http\Controllers\MoveDataController;
+
 use App\Http\Middleware\ValidUser;
 use Illuminate\Support\Facades\Route;
 
@@ -224,3 +227,10 @@ Route::post('adminEditUEMQOption', [AdminQuestionController::class, 'adminEditUE
 Route::post('adminEditUEMQ', [AdminQuestionController::class, 'adminEditUEMQ'])->name('adminEditUEMQ')->middleware(['auth']);
 Route::post('adminEditUFCOption', [AdminQuestionController::class, 'adminEditUFCOption'])->name('adminEditUFCOption')->middleware(['auth']);
 Route::post('adminEditUFC', [AdminQuestionController::class, 'adminEditUFC'])->name('adminEditUFC')->middleware(['auth']);
+
+
+
+Route::get('movedata', [MoveDataController::class, 'movedata'])->name('movedata')->middleware(['auth']);
+
+
+

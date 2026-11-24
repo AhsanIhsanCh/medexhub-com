@@ -56,7 +56,8 @@ use Carbon\Carbon;
         <div class="db-actions"></div>
     </div>
     @php
-        $User = DB::table('users')->select('email','u_fname','u_lname','u_dob','u_gender','u_name_safety')->where('id', $u_id)->get();
+        $User = DB::table('users')->select('email','u_fname','u_lname')->where('id', $u_id)->get();
+        $UserProfiles = DB::table('users_profiles')->select('up_u_id','up_dob','up_gender','up_address','up_city','up_country','up_image','up_name_safety')->where('up_u_id', $u_id)->get();
     @endphp
     <div class="card-body" style="margin-top:30px;">
         <div class="table-wrap">
@@ -81,27 +82,27 @@ use Carbon\Carbon;
                             <label for="gender">Gender</label>
                             <select name="TextGender" style="height: 54px;b";>
                                 @switch(true)
-                                    @case($User->first()->u_gender == 0)
+                                    @case($UserProfiles->first()->up_gender == 0)
                                         <option value="0" selected>Select Gender</option>
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
                                         <option value="3">Other</option>
                                         @break
 
-                                    @case($User->first()->u_gender == 1)
+                                    @case($UserProfiles->first()->up_gender == 1)
                                         <option value="0">Select Gender</option>
                                         <option value="1" selected>Male</option>
                                         <option value="2">Female</option>
                                         <option value="3">Other</option>
                                         @break
 
-                                    @case($User->first()->u_gender == 2)
+                                    @case($UserProfiles->first()->up_gender == 2)
                                         <option value="0">Select Gender</option>
                                         <option value="1">Male</option>
                                         <option value="2" selected>Female</option>
                                         <option value="3">Other</option>
                                         @break
-                                    @case($User->first()->u_gender == 3)
+                                    @case($UserProfiles->first()->up_gender == 3)
                                         <option value="0">Select Gender</option>
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
@@ -111,7 +112,7 @@ use Carbon\Carbon;
                         </div>
                         <div class="form-group">
                             <label for="birthday">Birthday</label>
-                            <input type="date" name="TextDob" value="{{ $User->first()->u_dob }}" >
+                            <input type="date" name="TextDob" value="{{ $UserProfiles->first()->up_dob }}" >
                         </div>
                     </div>
                     <div style="text-align:center;">
@@ -141,7 +142,7 @@ use Carbon\Carbon;
                 <form class="signin-form" action="{{ route('saveprofile3') }}" method="post">
                 @csrf
                     <div class="radio-option">
-                        @if($User->first()->u_name_safety == 1)
+                        @if($UserProfiles->first()->up_name_safety == 1)
                             <input type="checkbox" name="TextNameSafety2" value="0"  checked>
                             <input type="hidden" name="TextNameSafety" value="0">
                         @else

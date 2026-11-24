@@ -45,7 +45,7 @@ $SubTotal = "0";
                                                     <ul class="list-unstyled text-right" style="float:right;text-align: right;padding-right: 20px;padding-top: 5px;">
                                                         <li><strong>Invoiced To</strong></li>
                                                         <li>{{$Users->first()->u_fname}} {{$Users->first()->u_lname}} </li>
-                                                        <li style=" max-width: 250px;text-align:right;float: right;">{{$Users->first()->u_address}}</li>
+                                                        <li style=" max-width: 250px;text-align:right;float: right;">{{$UsersProfiles->first()->up_address}}</li>
                                                     </ul>
                                                 </div>
                                             </div>

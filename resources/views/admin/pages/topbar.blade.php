@@ -306,9 +306,10 @@ use App\Models\User;
 					<?php
 					 $userId = auth()->id();
 					 $user = User::where('id', $userId)->first();
+					 $UserProfiles = DB::table('users_profiles')->select('up_image')->where('up_u_id', $userId)->get();
 					 $FName = $user ? $user->u_fname : 'Mr';
 					 $LName = $user ? $user->u_lname : 'User';
-					 echo $Userimage = $user ? $user->u_image : 'noimage.png';
+					 echo $Userimage = $UserProfiles->isNotEmpty() ? $UserProfiles->first()->up_image : 'noimage.png';
 					?>
 					<li class="nav-item dropdown has-arrow main-drop profile-nav">
 						<a href="javascript:void(0);" class="nav-link userset" data-bs-toggle="dropdown">
