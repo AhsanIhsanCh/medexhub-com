@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\Baskets;
+use App\Models\BasketsData;
 use App\Services\PayPalService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -152,6 +154,11 @@ class PayPalController extends Controller
                         'paypal_capture_id' => $capture['id'],
                         'status' => 'completed22',
                         'paid_at' => now(),
+                    ]);
+                    
+                    $BasketsData = BasketsData::create([
+                    'bad_ba_id' => '23',
+                    
                     ]);
 
                     // Grant purchased exam/course access here.
