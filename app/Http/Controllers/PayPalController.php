@@ -155,6 +155,25 @@ class PayPalController extends Controller
                         'status' => 'completed22',
                         'paid_at' => now(),
                     ]);
+
+                    DB::table('invoice')->insert([
+                        'in_u_id' => $userId,
+                        'in_paypal_order_id' => $order['id'],
+                        'in_paypal_capture_id' => $capture['id'],
+                        'in_total' => $amountMinor,
+                        'in_discount' => $TotalDiscount,
+                        'in_pay' => $PassTotalPrice,
+                        'in_remarks' => 'Dummy Payment',
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ]);
+                    $LastAddInvoiceId = DB::getPdo()->lastInsertId();
+
+
+
+
+
+
                     
                     $BasketsData = BasketsData::create([
                     'bad_ba_id' => '23',
