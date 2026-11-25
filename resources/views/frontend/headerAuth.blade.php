@@ -41,7 +41,7 @@
             </style>
             <?php
                 $userId = auth()->id();
-                $Baskets = DB::table('baskets')->where('ba_u_id', $userId)->where('ba_status', '0')->orderBy('created_at', 'desc')->get();
+                $Baskets = DB::table('baskets_data')->where('bad_u_id', $userId)->where('bad_status', '0')->orderBy('created_at', 'desc')->get();
                 $Items = $Baskets->count();
             ?>
             @if($Items > 0)

@@ -14,8 +14,6 @@ class PayPalController extends Controller
     {
         return view('payments.checkout');
     }
-
-    
     public function pay(Request $request, PayPalService $paypal)
     {
         // Demo price. In production, retrieve this

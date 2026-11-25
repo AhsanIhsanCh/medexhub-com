@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\subscribe;
+use App\Models\Baskets;
+use App\Models\BasketsData;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -11,60 +13,78 @@ class BasketController extends Controller
     function userbasketdata()
     {
         $userId = auth()->id();
-        $Baskets = DB::table('baskets')->where('ba_u_id', $userId)->where('ba_status', '0')->orderBy('created_at', 'desc')->get();
-        return view('dashboard/subscription/basket',['u_id' => $userId, 'Baskets' => $Baskets]);
+        $Baskets = Baskets::where('ba_u_id', $userId)->where('ba_status', '0')->orderBy('created_at', 'desc')->get();
+        $BasketsDatas = BasketsData::where('bad_u_id', $userId)->where('bad_status', '0')->orderBy('created_at', 'desc')->get();
+        return view('dashboard/subscription/basket',['u_id' => $userId, 'Baskets' => $Baskets, 'BasketsDatas' => $BasketsDatas]);
     }
-
     function buyexam($e_id)
     {
         $userId = auth()->id();
         $Exams = DB::table('exams')->select('e_inner_level','e_price1y')->where('e_id', $e_id)->get();
         $JionDate = date("Y-m-d H:i:s" , time());
-        $ExpDate = date("Y-m-d H:i:s", strtotime("+12 months"));
-        $BasketsC = DB::table('baskets')->where('ba_e_id', $e_id)->where('ba_u_id', $userId)->where('ba_status', '0')->get();
-        echo $BasketsCount = $BasketsC->count();
-        if($BasketsCount > 0)
+        $ExpDate = date("Y-m-d H:i:s", strtotime("+12 months"));        
+        $exist = BasketsData::where('bad_e_id', $e_id)->where('bad_u_id', $userId)->where('bad_status', '0')->exists();
+        if($exist)
             {
                 return redirect()->back()->with('error3s', 'Exam already added in basket.');
             }
         else
             {
-                DB::table('baskets')->insert([
-                'ba_e_inner_level' => $Exams->first()->e_inner_level,
-                'ba_e_id' => $e_id,
-                'ba_u_id' => auth()->id(),
-                'ba_for' => 12,
-                'ba_jiondate' => $JionDate,
-                'ba _expdate' => $ExpDate,
-                'ba_price' => $Exams->first()->e_price1y,
-                'ba_coupon' => 0,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                $existA = Baskets::where('ba_u_id', $userId)->where('ba_status', '0')->exists();
+                if($existA)
+                    {
+                        $BasketIDs = Baskets::where('ba_u_id', $userId)->where('ba_status', '0')->get();
+                        $BasketID = $BasketIDs->first()->ba_id;
+                    }
+                else
+                    {
+                        $BasketID = Baskets::insertGetId([
+                            'ba_u_id'    => auth()->id(),
+                            'ba_status'  => '0',
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now(),
+                        ]);
+                    }
+                $BasketsData = BasketsData::create([
+                    'bad_ba_id' => $BasketID,
+                    'bad_u_id' => $userId,
+                    'bad_e_id' => $e_id,
+                    'bad_for' => 12,
+                    'bad_jiondate' => $JionDate,
+                    'bad_expdate' => $ExpDate,
+                    'bad_price' => $Exams->first()->e_price1y,
+                    'bad_discount_price' => '0.00',
+                    'bad_coupon' => 0,
+                    'bad_status' => '0',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
                 ]);
-            $Baskets = DB::table('baskets')->where('ba_u_id', $userId)->where('ba_status', '0')->orderBy('created_at', 'desc')->get();
+            // $Baskets = DB::table('baskets')->where('ba_u_id', $userId)->where('ba_status', '0')->orderBy('created_at', 'desc')->get();
             return redirect()->back()->with('success3s', 'Exam added successfully.');
             }
     }
-
-    function basketremoveitem($ba_id)
+    function basketremoveitem($bad_id)
     {
-        DB::table('baskets')->where('ba_id', $ba_id)->delete();
+        $BasketsData = BasketsData::where('bad_id', $bad_id)->delete();
         return redirect()->back()->with('success3s', 'Exam removed successfully.');
     }
-
     function basketupdateitem(Request $request)
     {
         $for = $request->query('for');
-        $ba_Id = $request->query('ba_id');
-        $Baskets = DB::table('baskets')->select('ba_e_id')->where('ba_id', $ba_Id)->get();
-        $Exams = DB::table('exams')->select('e_price3m','e_price6m','e_price1y')->where('e_id', $Baskets->first()->ba_e_id)->get();
+        $bad_Id = $request->query('bad_id');
+        $BasketsData = BasketsData::select('bad_e_id')->where('bad_id', $bad_Id)->get();
+        $Exams = DB::table('exams')->select('e_price3m','e_price6m','e_price1y')->where('e_id', $BasketsData->first()->bad_e_id)->get();
         if($for == 3) $ExamPrice = $Exams->first()->e_price3m;
         if($for == 6) $ExamPrice = $Exams->first()->e_price6m;
         if($for == 12) $ExamPrice = $Exams->first()->e_price1y;
-        DB::table('baskets')->where('ba_id', $ba_Id)->update(['ba_for' => $for, 'ba_price' => $ExamPrice, 'ba_discount_price' => '0.00']);
+        $BasketsDatasU = BasketsData::where('bad_id', $bad_Id)->update([
+            'bad_for' => $for,
+            'bad_price' => $ExamPrice,
+            'bad_discount_price' => '0.00',
+            'updated_at' => Carbon::now(),
+        ]);
         return redirect()->back()->with('success3s', 'Exam updated successfully.');
     }
-
     function basketaddcoupon(Request $request)
     {
         $userId = auth()->id();
@@ -85,14 +105,14 @@ class BasketController extends Controller
         $DiscountType = $Coupon->first()->coup_discount_type;
         $DiscountValue = $Coupon->first()->coup_discount;
         $MessageArr = "";
-        $Baskets = DB::table('baskets')->select('ba_price','ba_id','ba_e_id')->where([['ba_u_id', $userId], ['ba_status', '0']])->get();
-        foreach($Baskets as $Basket)
+        $BasketsDatas = BasketsData::select('bad_price','bad_id','bad_e_id')->where([['bad_u_id', $userId], ['bad_status', '0']])->get();
+        foreach($BasketsDatas as $BasketsData)
             {
-                $Exams = DB::table('exams')->select('e_name')->where('e_id', $Basket->ba_e_id)->get();
-                if($Coupon->first()->coup_e_id == $Basket->ba_e_id)
+                $Exams = DB::table('exams')->select('e_name')->where('e_id', $BasketsData->bad_e_id)->get();
+                if($Coupon->first()->coup_e_id == $BasketsData->bad_e_id)
                     {
-                        $ba_Id = $Basket->ba_id;
-                        $FullPrice = $Basket->ba_price;
+                        $bad_Id = $BasketsData->bad_id;
+                        $FullPrice = $BasketsData->bad_price;
                         if($DiscountType == '1')
                             {
                                 $DiscountAmount = $FullPrice * ($DiscountValue / 100);
@@ -102,7 +122,7 @@ class BasketController extends Controller
                             {
                                 $DiscountPrice = $FullPrice - $DiscountValue;
                             }
-                        DB::table('baskets')->where('ba_id', $ba_Id)->update(['ba_discount_price' => $DiscountPrice]);
+                        $BasketsDatasU = BasketsData::where('bad_id', $bad_Id)->update(['bad_discount_price' => $DiscountPrice,'updated_at' => Carbon::now(),]); 
                         $NewCouponUsage = $Coupon->first()->coup_usage + 1;
                         DB::table('coupon')->where('coup_id', $Coupon->first()->coup_id)->update(['coup_usage' => $NewCouponUsage]);
                         $MessageArr .= '<span style="color: green;">Coupon applied successfully to the <strong>' . $Exams->first()->e_name . '</strong>.</span><br>';

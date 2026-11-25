@@ -104,7 +104,7 @@ Route::get('submitrafc/{linkData}', [WorkboardController::class, 'submitrafc'])-
 Route::post('makeexam', [ExamController::class, 'makeexam'])->name('makeexam')->middleware(['auth']);
 Route::get('buyexam/{e_id}', [BasketController::class, 'buyexam'])->middleware(['auth']);
 Route::get('basket', [BasketController::class, 'userbasketdata'])->middleware(['auth']);
-Route::get('basketremoveitem/{ba_id}', [BasketController::class, 'basketremoveitem'])->middleware(['auth']);
+Route::get('basketremoveitem/{bad_id}', [BasketController::class, 'basketremoveitem'])->middleware(['auth']);
 Route::get('basketupdateitem', [BasketController::class, 'basketupdateitem'])->name('basketupdateitem')->middleware(['auth']);
 Route::post('basketaddcoupon', [BasketController::class, 'basketaddcoupon'])->name('basketaddcoupon')->middleware(['auth']);
 
