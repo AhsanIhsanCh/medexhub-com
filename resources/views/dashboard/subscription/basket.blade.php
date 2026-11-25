@@ -113,13 +113,14 @@ $PassUserEmail = $User->first()->email;
                         @endif
                         <?php
                         $YouPayAmount = $ExamTotal * 100;
+                        $PurchaseType = "1";
                         ?>
                         <form action="{{ route('paypal.pay') }}" method="POST">
                             @csrf
                             <input type="hidden" name="InvoiceId" value="2"> 
                             <input type="hidden" name="basketId" value="3"> 
-                            <input type="hidden" name="PurchaseType" value="2"> 
-                            <input type="hidden" name="AmountPayable" value="3500"> 
+                            <input type="hidden" name="PurchaseType" value="{{$PurchaseType}}"> 
+                            <input type="hidden" name="AmountPayable" value="{{$YouPayAmount}}"> 
                             <button type="submit" class="btn btn-primary w-100"> Pay securely with PayPal</button>
                         </form>
 
