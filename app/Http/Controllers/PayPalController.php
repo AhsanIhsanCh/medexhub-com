@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Payment;
 use App\Models\Baskets;
 use App\Models\BasketsData;
+use App\Models\Invoice;
+use App\Models\InvoiceData;
 use App\Services\PayPalService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class PayPalController extends Controller
 {
@@ -155,19 +158,41 @@ class PayPalController extends Controller
                         'status' => 'completed22',
                         'paid_at' => now(),
                     ]);
-
-                    DB::table('invoice')->insert([
-                        'in_u_id' => $userId,
+                    $Invoice = Invoice::create([
+                        'in_u_id' => auth()->id(),
                         'in_paypal_order_id' => $order['id'],
                         'in_paypal_capture_id' => $capture['id'],
-                        'in_total' => $amountMinor,
-                        'in_discount' => $TotalDiscount,
-                        'in_pay' => $PassTotalPrice,
-                        'in_remarks' => 'Dummy Payment',
+                        'in_amount_minor' => $amountMinor,
+                        'in_remarks' => 'PayPal payment',
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
                     ]);
-                    $LastAddInvoiceId = DB::getPdo()->lastInsertId();
+                    $LastInvoiceid = DB::getPdo()->lastInsertId();
+                    $BasketsDatas = BasketsData::where([['bad_ba_id', $request->input('basketId')], ['bad_status', '0']])->get();
+                     foreach ($BasketsDatas as $BasketsData)
+                        {
+                            $TotalDiscount = $BasketsData->bad_price - $BasketsData->bad_discount_price;       
+                            InvoiceData::create([
+                                'ind_in_id' => $LastInvoiceid,
+                                'ind_e_id' => $BasketsData->bad_e_id,
+                                'ind_for' => $BasketsData->bad_for,
+                                'ind_total' => $BasketsData->bad_price,
+                                'ind_discount' => $TotalDiscount,
+                                'ind_amount_minor' => $amountMinor,
+                                'ind_coupon' => $BasketsData->bad_coupon,
+                                'created_at' => Carbon::now(),
+                                'updated_at' => Carbon::now(),
+                            ]);
+
+                        }
+            
+                    
+
+
+
+
+                  
+                    
 
 
 
@@ -175,10 +200,8 @@ class PayPalController extends Controller
 
 
                     
-                    $BasketsData = BasketsData::create([
-                    'bad_ba_id' => '23',
+                   
                     
-                    ]);
 
                     // Grant purchased exam/course access here.
                     // This must be idempotent.
