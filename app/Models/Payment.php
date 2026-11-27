@@ -18,9 +18,28 @@ class Payment extends Model
         'pay_currency',
         'status',
         'paid_at',
+        'created_at',
+        'updated_at',
     ];
 
     protected $casts = [
         'paid_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
