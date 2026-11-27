@@ -114,6 +114,7 @@ $PassUserEmail = $User->first()->email;
                         @endif
                         <?php
                         $YouPayAmount = $ExamTotal * 100;
+                        $YouPayAmount = 200;
                         $PurchaseType = "1";
                         ?>
                         <form action="{{ route('paypal.pay') }}" method="POST">
