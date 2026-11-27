@@ -44,7 +44,7 @@ $PassUserEmail = $User->first()->email;
                                 <th class='text-center' style='width: 180px;'>Total</th>
                             </tr>
                             @foreach ($BasketsDatas as $BasketsData)
-                                @php
+                                <?php
                                     $BasketID = $BasketsData->bad_ba_id;
                                     $Exams = DB::table('exams')->select('e_name','e_price1y')->where('e_id', $BasketsData->bad_e_id)->get();
                                     if($loop->index == 0) $PassLoopCount = $loop->count;
@@ -52,7 +52,7 @@ $PassUserEmail = $User->first()->email;
                                         $PassExamName = $Exams->first()->e_name;
                                     else
                                         $PassExamName = "Medexhub Exams";
-                                @endphp
+                                ?>
                                 <tr class='normal' >
                                     <td class='text-center text-danger' ><a href="/basketremoveitem/{{ $BasketsData->bad_id }}" class='text-danger'  title='remove' ><svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512"><!--!Font Awesome Free v5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(189, 35, 42)" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"/></svg></a></td>
                                     <td class='text-center'>{{ $loop->iteration }}</td>

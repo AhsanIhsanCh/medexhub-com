@@ -24,7 +24,7 @@ class PayPalController extends Controller
         // Demo price. In production, retrieve this
         // from your database rather than the browser.
         $amountMinor = $request->input('AmountPayable');
-        //$amountMinor = '49.00';
+        
         $currency = config('services.paypal.currency');
         $payment = Payment::create([
             'pay_u_id' => auth()->id(),
@@ -155,36 +155,36 @@ class PayPalController extends Controller
                 if ($locked->status !== 'completed') {
                     $locked->update([
                         'paypal_capture_id' => $capture['id'],
-                        'status' => 'completed22',
+                        'status' => 'completed',
                         'paid_at' => now(),
                     ]);
-                    $Invoice = Invoice::create([
-                        'in_u_id' => auth()->id(),
-                        'in_paypal_order_id' => $order['id'],
-                        'in_paypal_capture_id' => $capture['id'],
-                        'in_amount_minor' => $amountMinor,
-                        'in_remarks' => 'PayPal payment',
-                        'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now(),
-                    ]);
-                    $LastInvoiceid = DB::getPdo()->lastInsertId();
-                    $BasketsDatas = BasketsData::where([['bad_ba_id', $request->input('basketId')], ['bad_status', '0']])->get();
-                     foreach ($BasketsDatas as $BasketsData)
-                        {
-                            $TotalDiscount = $BasketsData->bad_price - $BasketsData->bad_discount_price;       
-                            InvoiceData::create([
-                                'ind_in_id' => $LastInvoiceid,
-                                'ind_e_id' => $BasketsData->bad_e_id,
-                                'ind_for' => $BasketsData->bad_for,
-                                'ind_total' => $BasketsData->bad_price,
-                                'ind_discount' => $TotalDiscount,
-                                'ind_amount_minor' => $amountMinor,
-                                'ind_coupon' => $BasketsData->bad_coupon,
-                                'created_at' => Carbon::now(),
-                                'updated_at' => Carbon::now(),
-                            ]);
+                    // $Invoice = Invoice::create([
+                    //     'in_u_id' => auth()->id(),
+                    //     'in_paypal_order_id' => $order['id'],
+                    //     'in_paypal_capture_id' => $capture['id'],
+                    //     'in_amount_minor' => $amountMinor,
+                    //     'in_remarks' => 'PayPal payment',
+                    //     'created_at' => Carbon::now(),
+                    //     'updated_at' => Carbon::now(),
+                    // ]);
+                    // $LastInvoiceid = DB::getPdo()->lastInsertId();
+                    // $BasketsDatas = BasketsData::where([['bad_ba_id', $request->input('basketId')], ['bad_status', '0']])->get();
+                    //  foreach ($BasketsDatas as $BasketsData)
+                    //     {
+                    //         $TotalDiscount = $BasketsData->bad_price - $BasketsData->bad_discount_price;       
+                    //         InvoiceData::create([
+                    //             'ind_in_id' => $LastInvoiceid,
+                    //             'ind_e_id' => $BasketsData->bad_e_id,
+                    //             'ind_for' => $BasketsData->bad_for,
+                    //             'ind_total' => $BasketsData->bad_price,
+                    //             'ind_discount' => $TotalDiscount,
+                    //             'ind_amount_minor' => $amountMinor,
+                    //             'ind_coupon' => $BasketsData->bad_coupon,
+                    //             'created_at' => Carbon::now(),
+                    //             'updated_at' => Carbon::now(),
+                    //         ]);
 
-                        }
+                    //     }
             
                     
 
