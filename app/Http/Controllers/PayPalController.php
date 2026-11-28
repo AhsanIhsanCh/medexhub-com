@@ -162,7 +162,7 @@ class PayPalController extends Controller
                     $PayCaptureID = $locked->paypal_capture_id;
                     $PayAmountMinor = $locked->pay_amount_minor;
                     $PayBasketID = $locked->pay_ba_id;
-                    $Invoice = Invoice::insert([
+                    $Invoice = Invoice::create([
                         'in_u_id' => auth()->id(),
                         'in_paypal_order_id' => $PayOrderID,
                         'in_paypal_capture_id' => $PayCaptureID,
