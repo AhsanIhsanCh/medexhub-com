@@ -159,10 +159,11 @@ class PayPalController extends Controller
                         'paid_at' => now(),
                     ]);
                     $PayOrderID = $locked->paypal_order_id;
+                    $PayCaptureID = $locked->paypal_capture_id;
                     $Invoice = Invoice::insert([
                         'in_u_id' => auth()->id(),
                         'in_paypal_order_id' => $PayOrderID,
-                        'in_paypal_capture_id' => '22',
+                        'in_paypal_capture_id' => $PayCaptureID,
                         // 'in_amount_minor' => $amountMinor,
                         // 'in_remarks' => 'PayPal payment',
                         // 'created_at' => Carbon::now(),
