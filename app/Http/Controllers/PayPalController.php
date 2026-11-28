@@ -162,8 +162,8 @@ class PayPalController extends Controller
                         'in_u_id' => auth()->id(),
                         'in_paypal_order_id' => $order['id'],
                         'in_paypal_capture_id' => $capture['id'],
-                        'in_amount_minor' => $amountMinor,
-                        'in_remarks' => 'PayPal payment',
+                        // 'in_amount_minor' => $amountMinor,
+                        // 'in_remarks' => 'PayPal payment',
                         // 'created_at' => Carbon::now(),
                         // 'updated_at' => Carbon::now(),
                     ]);
