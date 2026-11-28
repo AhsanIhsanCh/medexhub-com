@@ -171,7 +171,7 @@ class PayPalController extends Controller
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
                     ]);
-                    $LastInvoiceid = DB::getPdo()->lastInsertId();
+                    $LastInvoiceid = $Invoice->in_id;
                     $BasketsDatas = BasketsData::where([['bad_ba_id', $PayBasketID], ['bad_status', '0']])->get();
                     foreach ($BasketsDatas as $BasketsData)
                         {
