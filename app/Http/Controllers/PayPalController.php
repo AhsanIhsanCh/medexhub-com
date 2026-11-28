@@ -7,6 +7,7 @@ use App\Models\Baskets;
 use App\Models\BasketsData;
 use App\Models\Invoice;
 use App\Models\InvoiceData;
+use App\Models\Subscribes;
 use App\Services\PayPalService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -187,12 +188,34 @@ class PayPalController extends Controller
                                 'created_at' => Carbon::now(),
                                 'updated_at' => Carbon::now(),
                             ]);
-
+                            $dataExists = Subscribes::where('su_e_id', $BasketsData->bad_e_id)->where('su_u_id', auth()->id())->get();
+                            if ($dataExists)
+                                {
+                                    $dataExists->update(['su_for' => 522,'su_expdate' => now()->addMonths(12),]);
+                                }
+                            else
+                                {
+                                    Subscribes::create([
+                                        'su_e_id' => $BasketsData->bad_e_id,
+                                        'su_u_id' => auth()->id(),
+                                        'su_status' => 1,
+                                        'su_expiry_date' => now()->addMonths(12),
+                                        ]);
+                                }
                         }
             
                     
 
-
+Subscribes::insert([
+                        'su_e_id' => $BasketsData->bad_e_id,
+                        'su_u_id' => auth()->id(),
+                        'su_in_id' => $LastInvoiceid,
+                        'su_for' => $BasketsData->bad_for,
+                        'su_jiondate' => Carbon::now(),
+                        'su_expdate' => Carbon::now()->addDays(30),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ]);
 
 
                   
