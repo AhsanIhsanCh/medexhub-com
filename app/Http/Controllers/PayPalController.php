@@ -158,9 +158,10 @@ class PayPalController extends Controller
                         'status' => 'completed',
                         'paid_at' => now(),
                     ]);
+                    $PayOrderID = $locked->paypal_order_id;
                     $Invoice = Invoice::insert([
                         'in_u_id' => auth()->id(),
-                        'in_paypal_order_id' => '11',
+                        'in_paypal_order_id' => $PayOrderID,
                         //'in_paypal_capture_id' => $capture['id'],
                         // 'in_amount_minor' => $amountMinor,
                         // 'in_remarks' => 'PayPal payment',
