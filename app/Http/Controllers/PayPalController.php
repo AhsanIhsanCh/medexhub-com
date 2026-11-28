@@ -161,11 +161,11 @@ class PayPalController extends Controller
                     $Invoice = Invoice::insert([
                         'in_u_id' => auth()->id(),
                         'in_paypal_order_id' => '11',
-                        'in_paypal_capture_id' => '22',
-                        'in_amount_minor' => $amountMinor,
-                        'in_remarks' => 'PayPal payment',
-                        'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now(),
+                        // 'in_paypal_capture_id' => '22',
+                        // 'in_amount_minor' => $amountMinor,
+                        // 'in_remarks' => 'PayPal payment',
+                        // 'created_at' => Carbon::now(),
+                        // 'updated_at' => Carbon::now(),
                     ]);
 
                    
